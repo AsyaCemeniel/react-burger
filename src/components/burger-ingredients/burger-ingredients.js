@@ -14,13 +14,13 @@ const BurgerIngredients = ({ products }) => {
     <section className={styles.container}>
       <h1 className="text text_type_main-large mt-5 mb-3">Соберите бургер</h1>
       <Tabs titles={titles} />
-      <div className={styles.scroll_menu}>
+      <div className={`mt-5 ${styles.scroll_menu}`}>
         {titles.map(({ name, key, type }) => {
           const items = products.filter((product) => product.type === type);
 
           return (
             <div key={key}>
-              <h2 className="text text_type_main-medium mt-5">{name}</h2>
+              <h2 className="text text_type_main-medium ">{name}</h2>
               <div className={styles.menu}>
                 {items.map((item) => (
                   <MenuItem product={item} key={item._id} />

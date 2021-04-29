@@ -1,0 +1,58 @@
+.image img {
+  width: 80px !important;
+  height: 40px;
+  margin-right: 40px;
+}
+
+.main {
+  margin: 100px 16px 40px 16px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-end; */
+  align-items: center;
+}
+
+.scroll {
+  height: 50vh;
+  overflow-y: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.scroll::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
+}
+
+.item {
+  margin-bottom: 16px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.section {
+  margin-left: 20px;
+  width: 50%;
+}
+
+.total_order {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.total_order span {
+  display: flex;
+  align-items: center;
+  font-size: 48px;
+}
+.total_order svg {
+  margin-left: 9px;
+}

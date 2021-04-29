@@ -9,7 +9,7 @@ import styles from "./app-header.module.css";
 
 const AppHeader = () => {
   return (
-    <header style={{ backgroundColor: "#1C1C21" }} className="m-5 pt-3 pb-3">
+    <header style={{ backgroundColor: "#1C1C21" }} className=" pt-3 pb-3">
       <nav className={styles.menu}>
         <div className={styles.nav_div}>
           <a
@@ -25,7 +25,7 @@ const AppHeader = () => {
         <a href="#" className={styles.logo}>
           <Logo />
         </a>
-        <a href="#" className="text text_type_main-default">
+        <a href="#" className="text text_type_main-default mr-4">
           <ProfileIcon type="secondary" /> Личный кабинет
         </a>
       </nav>
