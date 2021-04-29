@@ -5,6 +5,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 
 const BurgerConstructor = ({ products }) => {
@@ -29,10 +30,9 @@ const BurgerConstructor = ({ products }) => {
           {ingredients
             .filter((item) => item.type !== "bun")
             .map((item) => (
-              <div className={styles.item}>
+              <div key={item._id} className={styles.item}>
                 <DragIcon type="primary" />
                 <ConstructorElement
-                  key={item._id}
                   text={item.name}
                   thumbnail={item.image_mobile}
                   price={item.price}
@@ -60,6 +60,16 @@ const BurgerConstructor = ({ products }) => {
       </div>
     </section>
   );
+};
+
+BurgerConstructor.propTypes = {
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      __v: PropTypes.number.isRequired,
+    }).isRequired
+  ).isRequired,
 };
 
 export default BurgerConstructor;

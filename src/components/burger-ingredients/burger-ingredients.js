@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import MenuItem from "./menu-item";
 import Tabs from "../tabs";
 import styles from "./burger-ingredients.module.css";
@@ -32,6 +33,15 @@ const BurgerIngredients = ({ products }) => {
       </div>
     </section>
   );
+};
+
+BurgerIngredients.propTypes = {
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 };
 
 export default BurgerIngredients;
