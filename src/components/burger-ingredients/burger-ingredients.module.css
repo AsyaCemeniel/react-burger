@@ -1,0 +1,27 @@
+.menu {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.container {
+  width: 50%;
+  margin-right: 20px;
+}
+
+.scroll_menu {
+  max-height: 68vh;
+  overflow-y: scroll;
+}
+
+.scroll_menu::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scroll_menu::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.scroll_menu::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
+}

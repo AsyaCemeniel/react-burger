@@ -1,0 +1,40 @@
+.menu {
+  width: 65%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-between;
+  list-style: none;
+  position: relative;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+  color: #8585ad;
+}
+
+.menu a:not(:last-child) {
+  margin-right: 50px;
+}
+
+.menu svg {
+  margin-right: 9px;
+}
+
+.menu .active {
+  color: #f2f2f3;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -25%);
+}
+
+.nav_div {
+  display: flex;
+}
