@@ -26,11 +26,11 @@ const BurgerConstructor = ({ products }) => {
           price={bun.price}
           isLocked={true}
         />
-        <div className={`mt-4 mb-2 ${styles.scroll}`}>
+        <ul className={`mt-4 mb-2 ${styles.scroll}`}>
           {ingredients
             .filter((item) => item.type !== "bun")
             .map((item) => (
-              <div key={item._id} className={styles.item}>
+              <li key={item._id} className={styles.item}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                   text={item.name}
@@ -39,9 +39,9 @@ const BurgerConstructor = ({ products }) => {
                   isLocked={false}
                   handleClose={handleClose}
                 />
-              </div>
+              </li>
             ))}
-        </div>
+        </ul>
         <ConstructorElement
           text={bun.name}
           type="bottom"

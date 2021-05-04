@@ -22,11 +22,13 @@ const BurgerIngredients = ({ products }) => {
           return (
             <div key={key}>
               <h2 className="text text_type_main-medium mt-2 mb-6">{name}</h2>
-              <div className={`mr-1 ml-1 ${styles.menu}`}>
+              <ul className={`mr-1 ml-1 ${styles.menu}`}>
                 {items.map((item) => (
-                  <MenuItem product={item} key={item._id} />
+                  <li key={item._id}>
+                    <MenuItem product={item} />
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           );
         })}

@@ -9,6 +9,8 @@
 .scroll {
   height: 47vh;
   overflow-y: scroll;
+  list-style-type: none;
+  padding: 0;
 }
 
 .scroll::-webkit-scrollbar {

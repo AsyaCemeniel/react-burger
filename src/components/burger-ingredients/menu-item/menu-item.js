@@ -8,7 +8,8 @@ import styles from "./menu-item.module.css";
 const MenuItem = ({ product }) => {
   return (
     <div className={` mr-3 ml-3 mb-8 ${styles.item}`}>
-      {product.__v > 0 && <Counter count={product.__v} size="small" />}
+      {/* {product.__v > 0 && <Counter count={product.__v} size="small" />} */}
+      <Counter count={product.__v} size="small" />
       <img src={product.image} alt={product.name} className="mr-4 mb-1 ml-4" />
       <p className={`text text_type_digits-default ${styles.price}`}>
         {product.price}
