@@ -17,9 +17,9 @@
   color: #8585ad;
 }
 
-.menu a:not(:last-child) {
+/* .menu a:not(:last-child) {
   margin-right: 50px;
-}
+} */
 
 .menu svg {
   margin-right: 9px;
@@ -32,7 +32,7 @@
 .logo {
   position: absolute;
   left: 50%;
-  transform: translate(-50%, -25%);
+  transform: translate(-50%, 50%);
 }
 
 .nav_div {

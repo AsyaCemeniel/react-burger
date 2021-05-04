@@ -17,7 +17,7 @@ const BurgerConstructor = ({ products }) => {
   const handleClose = () => {};
 
   return (
-    <section className={styles.section}>
+    <section className={`ml-5  ${styles.section}`}>
       <div className={styles.main}>
         <ConstructorElement
           text={bun.name}
@@ -26,7 +26,7 @@ const BurgerConstructor = ({ products }) => {
           price={bun.price}
           isLocked={true}
         />
-        <div className={`mt-2 mb-2 ${styles.scroll}`}>
+        <div className={`mt-4 mb-2 ${styles.scroll}`}>
           {ingredients
             .filter((item) => item.type !== "bun")
             .map((item) => (
@@ -50,8 +50,8 @@ const BurgerConstructor = ({ products }) => {
           isLocked={true}
         />
       </div>
-      <div className={`m-5 pr-3 ${styles.total_order}`}>
-        <span className="text text_type_digits-default pr-5">
+      <div className={`m-5 pr-4 ${styles.total_order}`}>
+        <span className="text text_type_digits-medium pr-10">
           {totalPrice} <CurrencyIcon type="primary" />
         </span>
         <Button type="primary" size="large">
