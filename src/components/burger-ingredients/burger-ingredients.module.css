@@ -1,11 +1,13 @@
 .menu {
   display: flex;
   flex-flow: row wrap;
+  list-style-type: none;
+  padding: 0;
 }
 
 .container {
-  width: 50%;
-  margin-right: 20px;
+  display: inline-block;
+  flex: 50%;
 }
 
 .scroll_menu {

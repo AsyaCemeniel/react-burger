@@ -12,21 +12,23 @@ const BurgerIngredients = ({ products }) => {
   ];
 
   return (
-    <section className={styles.container}>
-      <h1 className="text text_type_main-large mt-5 mb-3">Соберите бургер</h1>
+    <section className={`mr-5 ${styles.container}`}>
+      <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <Tabs titles={titles} />
-      <div className={`mt-5 ${styles.scroll_menu}`}>
+      <div className={`mt-8 ${styles.scroll_menu}`}>
         {titles.map(({ name, key, type }) => {
           const items = products.filter((product) => product.type === type);
 
           return (
             <div key={key}>
-              <h2 className="text text_type_main-medium ">{name}</h2>
-              <div className={styles.menu}>
+              <h2 className="text text_type_main-medium mt-2 mb-6">{name}</h2>
+              <ul className={`mr-1 ml-1 ${styles.menu}`}>
                 {items.map((item) => (
-                  <MenuItem product={item} key={item._id} />
+                  <li key={item._id}>
+                    <MenuItem product={item} />
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           );
         })}

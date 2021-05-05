@@ -1,0 +1,7 @@
+.main {
+  display: flex;
+  justify-content: center;
+  /* flex-flow: wrap row; */
+  max-width: 62%;
+  margin: auto;
+}

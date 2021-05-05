@@ -9,23 +9,29 @@ import styles from "./app-header.module.css";
 
 const AppHeader = () => {
   return (
-    <header style={{ backgroundColor: "#1C1C21" }} className=" pt-3 pb-3">
+    <header style={{ backgroundColor: "#1C1C21" }}>
       <nav className={styles.menu}>
         <div className={styles.nav_div}>
           <a
             href="#"
-            className={`text text_type_main-default ${styles.active}`}
+            className={`text text_type_main-default mt-4 mr-1 mb-4 ml-1 p-5 ${styles.active}`}
           >
             <BurgerIcon type="primary" /> Конструктор
           </a>
-          <a href="#" className="text text_type_main-default">
+          <a
+            href="#"
+            className="text text_type_main-default mt-4 mr-1 mb-4 ml-1 p-5"
+          >
             <ListIcon type="secondary" /> Лента заказов
           </a>
         </div>
         <a href="#" className={styles.logo}>
           <Logo />
         </a>
-        <a href="#" className="text text_type_main-default mr-4">
+        <a
+          href="#"
+          className="text text_type_main-default mt-4 mr-1 mb-4 ml-1 p-5"
+        >
           <ProfileIcon type="secondary" /> Личный кабинет
         </a>
       </nav>
