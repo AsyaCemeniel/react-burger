@@ -4,6 +4,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor";
 import { products } from "../../utils/data";
 import styles from "./app.module.css";
+import Modal from "../modal";
 
 function App() {
   const [data, setData] = useState({
@@ -45,6 +46,7 @@ function App() {
         {data.loaded && <BurgerIngredients products={data.ingredients} />}
         <BurgerConstructor products={products} />
       </div>
+      <Modal />
     </>
   );
 }
