@@ -4,7 +4,7 @@ import MenuItem from "./menu-item";
 import Tabs from "../tabs";
 import styles from "./burger-ingredients.module.css";
 
-const BurgerIngredients = ({ products }) => {
+const BurgerIngredients = ({ products, toggleModal }) => {
   const titles = [
     { name: "Булки", key: "1", type: "bun" },
     { name: "Соусы", key: "2", type: "sauce" },
@@ -25,7 +25,7 @@ const BurgerIngredients = ({ products }) => {
               <ul className={`mr-1 ml-1 ${styles.menu}`}>
                 {items.map((item) => (
                   <li key={item._id}>
-                    <MenuItem product={item} />
+                    <MenuItem product={item} toggleModal={toggleModal} />
                   </li>
                 ))}
               </ul>

@@ -4,7 +4,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor";
 import { products } from "../../utils/data";
 import styles from "./app.module.css";
-import Modal from "../modal";
+import Popup from "../popup";
 
 function App() {
   const [data, setData] = useState({
@@ -12,24 +12,32 @@ function App() {
     loaded: false,
   });
 
+  const [modalData, setModalData] = useState({
+    visible: false,
+    data: {},
+    title: "",
+  });
+
+  const toggleModal = (data = {}, title = "") => {
+    setModalData({
+      visible: !modalData.visible,
+      data,
+      title,
+    });
+  };
+
   const ingredientsURL = "https://norma.nomoreparties.space/api/ingredients";
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch(ingredientsURL).then(async (res) => {
-          const resData = await res.json();
-          if (res.ok) {
-            setData({
-              ...data,
-              ingredients: resData.data,
-              loaded: true,
-            });
-          } else {
-            throw resData;
-          }
+        const res = await fetch(ingredientsURL);
+        const resData = await res.json();
 
-          console.log(resData);
+        setData({
+          ...data,
+          ingredients: resData.data,
+          loaded: true,
         });
       } catch (error) {
         console.log(error);
@@ -40,14 +48,23 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div>
       <AppHeader />
       <div className={styles.main}>
-        {data.loaded && <BurgerIngredients products={data.ingredients} />}
+        {data.loaded && (
+          <BurgerIngredients
+            products={data.ingredients}
+            toggleModal={toggleModal}
+          />
+        )}
         <BurgerConstructor products={products} />
       </div>
-      <Modal />
-    </>
+      {modalData.visible && (
+        <Popup onClose={toggleModal} title={modalData.title}>
+          {modalData.data}
+        </Popup>
+      )}
+    </div>
   );
 }
 
