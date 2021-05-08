@@ -57,7 +57,7 @@ function App() {
             toggleModal={toggleModal}
           />
         )}
-        <BurgerConstructor products={products} />
+        <BurgerConstructor products={products} toggleModal={toggleModal} />
       </div>
       {modalData.visible && (
         <Popup onClose={toggleModal} title={modalData.title}>

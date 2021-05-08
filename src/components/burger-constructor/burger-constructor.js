@@ -7,14 +7,20 @@ import {
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
+import OrderDetails from "../order-details";
 
-const BurgerConstructor = ({ products }) => {
+const BurgerConstructor = ({ products, toggleModal }) => {
   const ingredients = products.filter((product) => product.__v > 0);
   const bun = ingredients.find((product) => product.type === "bun");
 
   const totalPrice = ingredients.reduce((total, item) => total + item.price, 0);
 
   const handleClose = () => {};
+
+  const order = <OrderDetails />;
+  const openModal = () => {
+    toggleModal(order);
+  };
 
   return (
     <section className={`ml-5  ${styles.section}`}>
@@ -54,7 +60,7 @@ const BurgerConstructor = ({ products }) => {
         <span className="text text_type_digits-medium pr-10">
           {totalPrice} <CurrencyIcon type="primary" />
         </span>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={openModal}>
           Оформить заказ
         </Button>
       </div>
