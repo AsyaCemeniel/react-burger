@@ -3,6 +3,7 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import PropTypes from "prop-types";
 import IngredientDetails from "../../ingredient-details";
 
 import styles from "./menu-item.module.css";
@@ -31,6 +32,14 @@ const MenuItem = ({ product, toggleModal }) => {
       </p>
     </div>
   );
+};
+
+MenuItem.propTypes = {
+  product: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    __v: PropTypes.number.isRequired,
+  }).isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 export default MenuItem;

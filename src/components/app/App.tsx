@@ -40,6 +40,10 @@ function App() {
           loaded: true,
         });
       } catch (error) {
+        setData({
+          ...data,
+          loaded: false,
+        });
         console.log(error);
       }
     };
