@@ -32,6 +32,10 @@ function App() {
     const getData = async () => {
       try {
         const res = await fetch(ingredientsURL);
+        if (!res.ok) {
+          throw new Error("Response status is not OK");
+        }
+
         const resData = await res.json();
 
         setData({
@@ -44,7 +48,10 @@ function App() {
           ...data,
           loaded: false,
         });
-        console.log(error);
+        console.log(
+          "There is a problem with your Fetch request",
+          error.message
+        );
       }
     };
 

@@ -38,7 +38,7 @@ const Popup = ({ children, onClose, title }) => {
 };
 
 Popup.propTypes = {
-  children: PropTypes.objectOf(PropTypes.element),
+  children: PropTypes.object,
   onClose: PropTypes.func.isRequired,
   title: PropTypes.string,
 };
