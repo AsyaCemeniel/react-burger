@@ -1,0 +1,28 @@
+.container {
+  background: #1c1c21;
+  /* width: 720px;
+  height: 643px; */
+  max-width: 720px;
+  border-radius: 40px;
+  display: inline-block;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.inside {
+  background: #1c1c21;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+}
+
+.inside svg {
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
