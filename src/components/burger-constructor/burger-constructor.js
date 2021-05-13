@@ -4,20 +4,32 @@ import {
   CurrencyIcon,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import OrderDetails from "../order-details";
+import ConstructorContext from "../../context/burger-constructor-context";
 
-const BurgerConstructor = ({ products, toggleModal }) => {
-  const ingredients = products.filter((product) => product.__v > 0);
-  const bun = ingredients.find((product) => product.type === "bun");
+const BurgerConstructor = ({ toggleModal }) => {
+  const { constructorState, constructorDispatcher } =
+    useContext(ConstructorContext);
 
-  const totalPrice = ingredients.reduce((total, item) => total + item.price, 0);
+  const bun = constructorState.data.find((product) => product.type === "bun");
 
-  const handleClose = () => {};
+  const totalPrice =
+    constructorState.data.reduce((total, item) => total + item.price, 0) +
+    bun.price;
 
-  const order = <OrderDetails />;
+  const ingredientsIds = constructorState.data.reduce((ids, item) => {
+    ids.push(item._id);
+    return ids;
+  }, []);
+
+  const handleClose = (item) => () => {
+    constructorDispatcher({ type: "DELETE", payload: item });
+  };
+
+  const order = <OrderDetails order={ingredientsIds} />;
   const openModal = () => {
     toggleModal(order);
   };
@@ -26,14 +38,14 @@ const BurgerConstructor = ({ products, toggleModal }) => {
     <section className={`ml-5  ${styles.section}`}>
       <div className={styles.main}>
         <ConstructorElement
-          text={bun.name}
+          text={`${bun.name} (верх)`}
           type="top"
           thumbnail={bun.image_mobile}
           price={bun.price}
           isLocked={true}
         />
         <ul className={`mt-4 mb-2 ${styles.scroll}`}>
-          {ingredients
+          {constructorState.data
             .filter((item) => item.type !== "bun")
             .map((item) => (
               <li key={item._id} className={styles.item}>
@@ -43,13 +55,13 @@ const BurgerConstructor = ({ products, toggleModal }) => {
                   thumbnail={item.image_mobile}
                   price={item.price}
                   isLocked={false}
-                  handleClose={handleClose}
+                  handleClose={handleClose(item)}
                 />
               </li>
             ))}
         </ul>
         <ConstructorElement
-          text={bun.name}
+          text={`${bun.name} (низ)`}
           type="bottom"
           thumbnail={bun.image_mobile}
           price={bun.price}
@@ -69,13 +81,7 @@ const BurgerConstructor = ({ products, toggleModal }) => {
 };
 
 BurgerConstructor.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      __v: PropTypes.number.isRequired,
-    }).isRequired
-  ).isRequired,
+  toggleModal: PropTypes.func,
 };
 
 export default BurgerConstructor;

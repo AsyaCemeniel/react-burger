@@ -1,6 +1,6 @@
 export const products = [
   {
-    _id: "60666c42cc7b410027a1a9b1",
+    _id: "609a337df07d7e0026403ac6",
     name: "Краторная булка N-200i",
     type: "bun",
     proteins: 80,
@@ -14,7 +14,7 @@ export const products = [
     __v: 1,
   },
   {
-    _id: "60666c42cc7b410027a1a9b5",
+    _id: "609a337df07d7e0026403aca",
     name: "Говяжий метеорит (отбивная)",
     type: "main",
     proteins: 800,
@@ -28,7 +28,7 @@ export const products = [
     __v: 0,
   },
   {
-    _id: "60666c42cc7b410027a1a9b6",
+    _id: "609a337df07d7e0026403acb",
     name: "Биокотлета из марсианской Магнолии",
     type: "main",
     proteins: 420,
@@ -42,7 +42,7 @@ export const products = [
     __v: 0,
   },
   {
-    _id: "60666c42cc7b410027a1a9b7",
+    _id: "609a337df07d7e0026403acc",
     name: "Соус Spicy-X",
     type: "sauce",
     proteins: 30,
@@ -56,7 +56,7 @@ export const products = [
     __v: 0,
   },
   {
-    _id: "60666c42cc7b410027a1a9b4",
+    _id: "609a337df07d7e0026403ac9",
     name: "Мясо бессмертных моллюсков Protostomia",
     type: "main",
     proteins: 433,
@@ -70,7 +70,7 @@ export const products = [
     __v: 1,
   },
   {
-    _id: "60666c42cc7b410027a1a9b9",
+    _id: "609a337df07d7e0026403ace",
     name: "Соус традиционный галактический",
     type: "sauce",
     proteins: 42,
@@ -84,7 +84,7 @@ export const products = [
     __v: 1,
   },
   {
-    _id: "60666c42cc7b410027a1a9b8",
+    _id: "609a337df07d7e0026403acd",
     name: "Соус фирменный Space Sauce",
     type: "sauce",
     proteins: 50,
@@ -98,7 +98,7 @@ export const products = [
     __v: 0,
   },
   {
-    _id: "60666c42cc7b410027a1a9bc",
+    _id: "609a337df07d7e0026403ad1",
     name: "Плоды Фалленианского дерева",
     type: "main",
     proteins: 20,
@@ -112,7 +112,7 @@ export const products = [
     __v: 1,
   },
   {
-    _id: "60666c42cc7b410027a1a9bb",
+    _id: "609a337df07d7e0026403ad0",
     name: "Хрустящие минеральные кольца",
     type: "main",
     proteins: 808,
@@ -128,7 +128,7 @@ export const products = [
     __v: 1,
   },
   {
-    _id: "60666c42cc7b410027a1a9ba",
+    _id: "609a337df07d7e0026403acf",
     name: "Соус с шипами Антарианского плоскоходца",
     type: "sauce",
     proteins: 101,
@@ -142,7 +142,7 @@ export const products = [
     __v: 0,
   },
   {
-    _id: "60666c42cc7b410027a1a9bd",
+    _id: "609a337df07d7e0026403ad2",
     name: "Кристаллы марсианских альфа-сахаридов",
     type: "main",
     proteins: 234,
@@ -156,7 +156,7 @@ export const products = [
     __v: 1,
   },
   {
-    _id: "60666c42cc7b410027a1a9be",
+    _id: "609a337df07d7e0026403ad3",
     name: "Мини-салат Экзо-Плантаго",
     type: "main",
     proteins: 1,
@@ -170,7 +170,7 @@ export const products = [
     __v: 1,
   },
   {
-    _id: "60666c42cc7b410027a1a9b3",
+    _id: "609a337df07d7e0026403ac8",
     name: "Филе Люминесцентного тетраодонтимформа",
     type: "main",
     proteins: 44,
@@ -181,10 +181,10 @@ export const products = [
     image: "https://code.s3.yandex.net/react/code/meat-03.png",
     image_mobile: "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
     image_large: "https://code.s3.yandex.net/react/code/meat-03-large.png",
-    __v: 0,
+    __v: 1,
   },
   {
-    _id: "60666c42cc7b410027a1a9bf",
+    _id: "609a337df07d7e0026403ad4",
     name: "Сыр с астероидной плесенью",
     type: "main",
     proteins: 84,
@@ -198,7 +198,7 @@ export const products = [
     __v: 0,
   },
   {
-    _id: "60666c42cc7b410027a1a9b2",
+    _id: "609a337df07d7e0026403ac7",
     name: "Флюоресцентная булка R2-D3",
     type: "bun",
     proteins: 44,
