@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import AppHeader from "../app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor";
-import { products } from "../../utils/data";
 import styles from "./app.module.css";
 import Popup from "../popup";
+import { BurgerConstructorProvider } from "../../context/burger-constructor-context";
 
 function App() {
   const [data, setData] = useState({
@@ -68,7 +68,9 @@ function App() {
             toggleModal={toggleModal}
           />
         )}
-        <BurgerConstructor products={products} toggleModal={toggleModal} />
+        <BurgerConstructorProvider>
+          <BurgerConstructor toggleModal={toggleModal} />
+        </BurgerConstructorProvider>
       </div>
       {modalData.visible && (
         <Popup onClose={toggleModal} title={modalData.title}>
