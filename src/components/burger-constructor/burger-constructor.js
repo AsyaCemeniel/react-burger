@@ -25,7 +25,7 @@ const BurgerConstructor = ({ toggleModal }) => {
     return ids;
   }, []);
 
-  const handleClose = (item) => () => {
+  const handleDeleteItem = (item) => () => {
     constructorDispatcher({ type: "DELETE", payload: item });
   };
 
@@ -38,10 +38,10 @@ const BurgerConstructor = ({ toggleModal }) => {
     <section className={`ml-5  ${styles.section}`}>
       <div className={styles.main}>
         <ConstructorElement
-          text={`${bun.name} (верх)`}
+          text={`${bun?.name} (верх)`}
           type="top"
-          thumbnail={bun.image_mobile}
-          price={bun.price}
+          thumbnail={bun?.image_mobile}
+          price={bun?.price}
           isLocked={true}
         />
         <ul className={`mt-4 mb-2 ${styles.scroll}`}>
@@ -55,16 +55,16 @@ const BurgerConstructor = ({ toggleModal }) => {
                   thumbnail={item.image_mobile}
                   price={item.price}
                   isLocked={false}
-                  handleClose={handleClose(item)}
+                  handleClose={handleDeleteItem(item)}
                 />
               </li>
             ))}
         </ul>
         <ConstructorElement
-          text={`${bun.name} (низ)`}
+          text={`${bun?.name} (низ)`}
           type="bottom"
-          thumbnail={bun.image_mobile}
-          price={bun.price}
+          thumbnail={bun?.image_mobile}
+          price={bun?.price}
           isLocked={true}
         />
       </div>

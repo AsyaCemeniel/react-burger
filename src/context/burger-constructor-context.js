@@ -5,15 +5,6 @@ const ConstructorContext = createContext();
 
 const ingredients = products.filter((product) => product.__v > 0);
 
-const deleteIngredient = (ingredient) => {
-  const index = ingredients.indexOf(ingredient);
-  if (index > 0) {
-    ingredients.splice(index, 1);
-  }
-
-  return ingredients;
-};
-
 const initialState = { data: ingredients };
 
 const reducer = (state, action) => {
@@ -21,7 +12,10 @@ const reducer = (state, action) => {
 
   switch (type) {
     case "DELETE":
-      return { data: deleteIngredient(payload) };
+      return {
+        ...state,
+        data: state.data.filter((item) => item._id !== payload._id),
+      };
     default:
       throw new Error(`Wrong type of action: ${type}`);
   }
