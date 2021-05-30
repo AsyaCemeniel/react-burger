@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import MenuItem from "./menu-item";
 import Tabs from "../tabs";
 import styles from "./burger-ingredients.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getBurgerIngredients } from "../../services/actions";
 
-const BurgerIngredients = ({ products, toggleModal }) => {
+const BurgerIngredients = ({ toggleModal }) => {
+  const ingredients = useSelector(
+    (store) => store.burgerIngredients.ingredients
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBurgerIngredients());
+  });
+
   const titles = [
     { name: "Булки", key: "1", type: "bun" },
     { name: "Соусы", key: "2", type: "sauce" },
@@ -17,8 +28,7 @@ const BurgerIngredients = ({ products, toggleModal }) => {
       <Tabs titles={titles} />
       <div className={`mt-8 ${styles.scroll_menu}`}>
         {titles.map(({ name, key, type }) => {
-          const items = products.filter((product) => product.type === type);
-
+          const items = ingredients.filter((product) => product.type === type);
           return (
             <div key={key}>
               <h2 className="text text_type_main-medium mt-2 mb-6">{name}</h2>
@@ -37,13 +47,13 @@ const BurgerIngredients = ({ products, toggleModal }) => {
   );
 };
 
-BurgerIngredients.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-    }).isRequired
-  ),
-};
+// BurgerIngredients.propTypes = {
+//   products: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       _id: PropTypes.string.isRequired,
+//       type: PropTypes.string.isRequired,
+//     }).isRequired
+//   ),
+// };
 
 export default BurgerIngredients;

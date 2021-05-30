@@ -26,48 +26,11 @@ function App() {
     });
   };
 
-  const ingredientsURL = "https://norma.nomoreparties.space/api/ingredients";
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const res = await fetch(ingredientsURL);
-        if (!res.ok) {
-          throw new Error("Response status is not OK");
-        }
-
-        const resData = await res.json();
-
-        setData({
-          ...data,
-          ingredients: resData.data,
-          loaded: true,
-        });
-      } catch (error) {
-        setData({
-          ...data,
-          loaded: false,
-        });
-        console.log(
-          "There is a problem with your Fetch request",
-          error.message
-        );
-      }
-    };
-
-    getData();
-  }, []);
-
   return (
     <div>
       <AppHeader />
       <div className={styles.main}>
-        {data.loaded && (
-          <BurgerIngredients
-            products={data.ingredients}
-            toggleModal={toggleModal}
-          />
-        )}
+        <BurgerIngredients toggleModal={toggleModal} />
         <BurgerConstructorProvider>
           <BurgerConstructor toggleModal={toggleModal} />
         </BurgerConstructorProvider>
