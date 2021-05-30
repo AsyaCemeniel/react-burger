@@ -7,10 +7,13 @@ import {
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
-import OrderDetails from "../order-details";
 import ConstructorContext from "../../context/burger-constructor-context";
+import { useDispatch } from "react-redux";
+import { getOrderDetails } from "../../services/actions";
 
-const BurgerConstructor = ({ toggleModal }) => {
+const BurgerConstructor = () => {
+  const dispatch = useDispatch();
+
   const { constructorState, constructorDispatcher } =
     useContext(ConstructorContext);
 
@@ -18,20 +21,16 @@ const BurgerConstructor = ({ toggleModal }) => {
 
   const totalPrice =
     constructorState.data.reduce((total, item) => total + item.price, 0) +
-    bun.price;
-
-  const ingredientsIds = constructorState.data.reduce((ids, item) => {
-    ids.push(item._id);
-    return ids;
-  }, []);
+    (bun?.price || 0);
 
   const handleDeleteItem = (item) => () => {
     constructorDispatcher({ type: "DELETE", payload: item });
   };
 
-  const order = <OrderDetails order={ingredientsIds} />;
   const openModal = () => {
-    toggleModal(order);
+    const isOrderValid = bun ? true : false;
+    const ingredientsIds = constructorState.data.map((item) => item._id);
+    dispatch(getOrderDetails(ingredientsIds, isOrderValid));
   };
 
   return (
@@ -80,8 +79,8 @@ const BurgerConstructor = ({ toggleModal }) => {
   );
 };
 
-BurgerConstructor.propTypes = {
-  toggleModal: PropTypes.func,
-};
+// BurgerConstructor.propTypes = {
+//   toggleModal: PropTypes.func,
+// };
 
 export default BurgerConstructor;

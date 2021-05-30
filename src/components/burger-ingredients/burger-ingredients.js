@@ -6,7 +6,7 @@ import styles from "./burger-ingredients.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getBurgerIngredients } from "../../services/actions";
 
-const BurgerIngredients = ({ toggleModal }) => {
+const BurgerIngredients = () => {
   const ingredients = useSelector(
     (store) => store.burgerIngredients.ingredients
   );
@@ -14,7 +14,7 @@ const BurgerIngredients = ({ toggleModal }) => {
 
   useEffect(() => {
     dispatch(getBurgerIngredients());
-  });
+  }, []);
 
   const titles = [
     { name: "Булки", key: "1", type: "bun" },
@@ -35,7 +35,7 @@ const BurgerIngredients = ({ toggleModal }) => {
               <ul className={`mr-1 ml-1 ${styles.menu}`}>
                 {items.map((item) => (
                   <li key={item._id}>
-                    <MenuItem product={item} toggleModal={toggleModal} />
+                    <MenuItem product={item} />
                   </li>
                 ))}
               </ul>

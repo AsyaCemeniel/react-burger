@@ -7,13 +7,19 @@ import PropTypes from "prop-types";
 import IngredientDetails from "../../ingredient-details";
 
 import styles from "./menu-item.module.css";
+import { useDispatch } from "react-redux";
+import { SET_CURRENT_INGREDIENT } from "../../../services/actions";
 
-const MenuItem = ({ product, toggleModal }) => {
-  const detailsComponent = <IngredientDetails product={product} />;
-  const title = "Детали ингредиента";
+const MenuItem = ({ product }) => {
+  // const detailsComponent = <IngredientDetails product={product} />;
+  // const title = "Детали ингредиента";
+  const dispatch = useDispatch();
 
   const openModal = () => {
-    toggleModal(detailsComponent, title);
+    dispatch({
+      type: SET_CURRENT_INGREDIENT,
+      payload: product,
+    });
   };
 
   return (
