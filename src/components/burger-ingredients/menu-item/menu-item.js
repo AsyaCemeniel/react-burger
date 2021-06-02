@@ -5,7 +5,7 @@ import {
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./menu-item.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SET_CURRENT_INGREDIENT } from "../../../services/actions";
 import { useDrag } from "react-dnd";
 
@@ -18,6 +18,21 @@ const MenuItem = ({ product }) => {
       payload: product,
     });
   };
+
+  const { burgerStuffing, bun } = useSelector(
+    (state) => state.burgerConstructor
+  );
+
+  const getItemCount = () => {
+    if (product.type === "bun") {
+      return bun._id === product._id ? 1 : 0;
+    }
+    return burgerStuffing.reduce((count, item) => {
+      return item.item._id === product._id ? ++count : count;
+    }, 0);
+  };
+
+  const count = getItemCount();
 
   const [{ isDrop }, dragRef] = useDrag({
     type: "ingredient",
@@ -33,7 +48,7 @@ const MenuItem = ({ product }) => {
       onClick={openModal}
       ref={dragRef}
     >
-      <Counter count={product.__v} size="small" />
+      {count > 0 && <Counter count={count} size="small" />}
       <img src={product.image} alt={product.name} className="mr-4 mb-1 ml-4" />
       <p className={`text text_type_digits-default ${styles.price}`}>
         {product.price}
