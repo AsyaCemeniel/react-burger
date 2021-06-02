@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import MenuItem from "./menu-item";
 import Tabs from "../tabs";
 import styles from "./burger-ingredients.module.css";
@@ -70,14 +69,5 @@ const BurgerIngredients = () => {
     </section>
   );
 };
-
-// BurgerIngredients.propTypes = {
-//   products: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       _id: PropTypes.string.isRequired,
-//       type: PropTypes.string.isRequired,
-//     }).isRequired
-//   ),
-// };
 
 export default BurgerIngredients;

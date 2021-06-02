@@ -21,8 +21,8 @@ const OrderDetails = ({ order }) => {
   );
 };
 
-// OrderDetails.propTypes = {
-//   order: PropTypes.arrayOf(PropTypes.string).isRequired,
-// };
+OrderDetails.propTypes = {
+  order: PropTypes.number.isRequired,
+};
 
 export default OrderDetails;
