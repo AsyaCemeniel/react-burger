@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import AppHeader from "../app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor";
 import styles from "./app.module.css";
 import Popup from "../popup";
-import { BurgerConstructorProvider } from "../../context/burger-constructor-context";
 import { useDispatch, useSelector } from "react-redux";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
 import IngredientDetails from "../ingredient-details";
 import {
   DELETE_ORDER_DETAILS,
@@ -35,7 +36,9 @@ function App() {
       {currentIngredient && <IngredientDetails product={currentIngredient} />}
       {order && !isOrderInvalid && <OrderDetails order={order} />}
       {isOrderInvalid && (
-        <div className="text text_type_main-large pb-6">
+        <div
+          className={`text text_type_main-medium pb-6  ${styles.error_text}`}
+        >
           <p> Ой! </p>
           <p> В бургере не хватает булки! </p>
         </div>
@@ -47,10 +50,10 @@ function App() {
     <div>
       <AppHeader />
       <div className={styles.main}>
-        <BurgerIngredients />
-        <BurgerConstructorProvider>
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients />
           <BurgerConstructor />
-        </BurgerConstructorProvider>
+        </DndProvider>
       </div>
       {(currentIngredient || order || isOrderInvalid) && popup}
     </div>

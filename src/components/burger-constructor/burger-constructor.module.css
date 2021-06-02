@@ -7,7 +7,7 @@
 }
 
 .scroll {
-  height: 47vh;
+  max-height: 47vh;
   overflow-y: scroll;
   list-style-type: none;
   padding: 0;
@@ -51,4 +51,32 @@
 
 .total_order svg {
   margin-left: 9px;
+}
+
+.constructor_item {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: center;
+  border-radius: 40px;
+  background: #2f2f37;
+  min-width: 488px;
+  min-height: 48px;
+  font-family: "Jet Brains Mono";
+  font-size: 16px;
+  line-height: 24px;
+  color: #f2f2f3;
+}
+
+.constructor_item_pos_top {
+  border-radius: 88px 88px 40px 40px;
+  margin-bottom: 20px;
+}
+
+.constructor_item_pos_bottom {
+  border-radius: 40px 40px 88px 88px;
+  margin-top: 20px;
+}
+
+.constructor_item__row {
+  margin: 10px 0 10px 0;
 }

@@ -37,10 +37,10 @@ const Popup = ({ children, onClose, title }) => {
   );
 };
 
-Popup.propTypes = {
-  children: PropTypes.object,
-  onClose: PropTypes.func.isRequired,
-  title: PropTypes.string,
-};
+// Popup.propTypes = {
+//   children: PropTypes.object,
+//   onClose: PropTypes.func.isRequired,
+//   title: PropTypes.string,
+// };
 
 export default Popup;
