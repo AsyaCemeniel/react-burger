@@ -4,8 +4,9 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import styles from "./user-form.module.css";
 
-const UserForm = ({ tittle, linkText, type }) => {
+const UserForm = ({ title, linkText, type }) => {
   let EmailValue = "";
   let passwordValue = "";
   let nameValue = "";
@@ -102,10 +103,10 @@ const UserForm = ({ tittle, linkText, type }) => {
   const content = createContent() || "";
 
   return (
-    <div>
-      <span className={`text text_type_main-medium`}>{tittle}</span>
-      <form>{content}</form>
-      <span className={`text text_type_main-default`}>{linkText}</span>
+    <div className={styles.main}>
+      <span className={`text text_type_main-medium mb-3`}>{title}</span>
+      <form className={styles.form}>{content}</form>
+      <div className={styles.link}>{linkText}</div>
     </div>
   );
 };

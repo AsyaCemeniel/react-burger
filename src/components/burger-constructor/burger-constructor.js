@@ -59,7 +59,7 @@ const BurgerConstructor = () => {
 
   const moveItem = useCallback(
     (key, fromIndex) => {
-      const { ingredient, index } = findItem(key);
+      const { index } = findItem(key);
       dispatch({
         type: REORDER_CONSTRUCTOR_ITEMS,
         payload: { toIndex: index, fromIndex },
