@@ -8,7 +8,7 @@ const FeedItem = ({ item, isStatus }) => {
   const maxAmount = 5;
 
   return (
-    <div className={`mt-4 mb-4 ${styles.feed_item}`}>
+    <div className={` mb-5 mr-2 ${styles.feed_item}`}>
       <div className={` p-6 ${styles.numbers}`}>
         <span className="text text_type_digits-default">#{number}</span>
         <span className="text text_type_main-default text_color_inactive">
