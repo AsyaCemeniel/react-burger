@@ -19,6 +19,7 @@ import LoginPage from "../../pages/login-page";
 import RegisterPage from "../../pages/register-page";
 import ForgotPasswordPage from "../../pages/forgot-password-page";
 import ResetPasswordPage from "../../pages/reset-password-page";
+import FeedPage from "../../pages/feed-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ function App() {
           exact={true}
           component={ResetPasswordPage}
         />
+        <Route path="/feed" exact={true} component={FeedPage} />
       </Switch>
       {(currentIngredient || order || isOrderInvalid) && popup}
     </div>
