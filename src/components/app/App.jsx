@@ -21,6 +21,8 @@ import ForgotPasswordPage from "../../pages/forgot-password-page";
 import ResetPasswordPage from "../../pages/reset-password-page";
 import FeedPage from "../../pages/feed-page";
 import NotFoundPage from "../../pages/not-found-page";
+import UserProfile from "../user-profile";
+import ProfilePage from "../../pages/profile-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,6 +74,7 @@ function App() {
           component={ResetPasswordPage}
         />
         <Route path="/feed" exact={true} component={FeedPage} />
+        <Route path="/profile" component={ProfilePage} />
         <Route component={NotFoundPage} />
       </Switch>
       {(currentIngredient || order || isOrderInvalid) && popup}

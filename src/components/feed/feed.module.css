@@ -1,6 +1,5 @@
 .main {
-  display: inline-block;
-  flex: 50%;
+  display: block;
 }
 
 .scroll {

@@ -10,7 +10,7 @@ const FeedPage = () => {
         Лента заказов
       </div>
       <div className={styles.container}>
-        <Feed />
+        <Feed isStatus={false} />
         <FeedInfo />
       </div>
     </div>
