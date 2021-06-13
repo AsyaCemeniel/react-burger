@@ -20,6 +20,7 @@ import RegisterPage from "../../pages/register-page";
 import ForgotPasswordPage from "../../pages/forgot-password-page";
 import ResetPasswordPage from "../../pages/reset-password-page";
 import FeedPage from "../../pages/feed-page";
+import NotFoundPage from "../../pages/not-found-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ function App() {
           component={ResetPasswordPage}
         />
         <Route path="/feed" exact={true} component={FeedPage} />
+        <Route component={NotFoundPage} />
       </Switch>
       {(currentIngredient || order || isOrderInvalid) && popup}
     </div>
