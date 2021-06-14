@@ -1,6 +1,10 @@
 .main {
   display: block;
 }
+.link {
+  text-decoration: none;
+  color: #f2f2f3;
+}
 
 .scroll {
   list-style-type: none;

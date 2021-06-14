@@ -1,0 +1,86 @@
+.order {
+  display: block;
+  flex: 1;
+  margin-top: 150px;
+  min-width: 700px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  max-width: 412px;
+}
+
+.info {
+  margin-top: 60px;
+}
+
+.ingredients {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  max-height: 338px;
+  overflow-y: scroll;
+}
+
+.ingredients::-webkit-scrollbar {
+  width: 12px;
+}
+
+.ingredients::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.ingredients::-webkit-scrollbar-thumb {
+  background: #8585ad;
+  border: 3px solid #2f2f37;
+  border-radius: 6px;
+}
+
+.ingredient {
+  border-style: solid;
+  border-radius: 50%;
+  border-color: rgb(101, 5, 190);
+  height: 64px;
+  width: 64px;
+  background: #0f0f11;
+}
+
+.ingredients img {
+  height: 64px;
+  width: 64px;
+  object-fit: cover;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

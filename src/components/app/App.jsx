@@ -23,6 +23,7 @@ import FeedPage from "../../pages/feed-page";
 import NotFoundPage from "../../pages/not-found-page";
 import UserProfile from "../user-profile";
 import ProfilePage from "../../pages/profile-page";
+import OrderPage from "../../pages/order-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -74,6 +75,13 @@ function App() {
           component={ResetPasswordPage}
         />
         <Route path="/feed" exact={true} component={FeedPage} />
+        <Route path="/feed/:orderNumber" exact={true} component={OrderPage} />
+
+        <Route
+          path="/profile/orders/:orderNumber"
+          exact={true}
+          component={OrderPage}
+        />
         <Route path="/profile" component={ProfilePage} />
         <Route component={NotFoundPage} />
       </Switch>

@@ -17,7 +17,6 @@ const ProfilePage = () => {
           Профиль
         </NavLink>
         <NavLink
-          exact
           to="/profile/orders"
           className={`text text_type_main-medium text_color_inactive ${styles.nav}`}
           activeClassName={styles.active}
