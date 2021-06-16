@@ -4,17 +4,65 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import { useState } from "react";
+import {
+  forgotPassword,
+  login,
+  register,
+  resetPassword,
+} from "../../utils/burger-api";
 import styles from "./user-form.module.css";
 
 const UserForm = ({ title, linkText, type }) => {
-  let EmailValue = "";
-  let passwordValue = "";
-  let nameValue = "";
-  const handleInputChange = () => {};
-  const handleLogin = () => {};
-  const handleRegister = () => {};
-  const handleCodSend = () => {};
-  const handlePasswordRenew = () => {};
+  const [emailValue, setEmailValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+  const [nameValue, setNameValue] = useState("");
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    login(nameValue, passwordValue)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleRegister = (event) => {
+    event.preventDefault();
+
+    console.log(emailValue, passwordValue, nameValue);
+    register(emailValue, passwordValue, nameValue)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleCodeSend = (event) => {
+    event.preventDefault();
+
+    forgotPassword(emailValue)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handlePasswordRenew = (event) => {
+    event.preventDefault();
+
+    resetPassword(passwordValue, nameValue)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const createContent = () => {
     switch (type) {
@@ -24,13 +72,13 @@ const UserForm = ({ title, linkText, type }) => {
             <Input
               type="email"
               placeholder="E-mail"
-              value={EmailValue}
-              onChange={handleInputChange}
+              value={emailValue}
+              onChange={(e) => setEmailValue(e.target.value)}
             />
             <PasswordInput
               value={passwordValue}
               name="password"
-              onChange={handleInputChange}
+              onChange={(e) => setPasswordValue(e.target.value)}
             />
             <Button type="primary" size="medium" onClick={handleLogin}>
               Войти
@@ -44,18 +92,18 @@ const UserForm = ({ title, linkText, type }) => {
               type="text"
               placeholder="Имя"
               value={nameValue}
-              onChange={handleInputChange}
+              onChange={(e) => setNameValue(e.target.value)}
             />
             <Input
               type="email"
               placeholder="E-mail"
-              value={EmailValue}
-              onChange={handleInputChange}
+              value={emailValue}
+              onChange={(e) => setEmailValue(e.target.value)}
             />
             <PasswordInput
               value={passwordValue}
               name="password"
-              onChange={handleInputChange}
+              onChange={(e) => setPasswordValue(e.target.value)}
             />
             <Button type="primary" size="medium" onClick={handleRegister}>
               Зарегистрироваться
@@ -68,10 +116,10 @@ const UserForm = ({ title, linkText, type }) => {
             <Input
               type="email"
               placeholder="Укажите e-mail"
-              value={EmailValue}
-              onChange={handleInputChange}
+              value={emailValue}
+              onChange={(e) => setEmailValue(e.target.value)}
             />
-            <Button type="primary" size="medium" onClick={handleCodSend}>
+            <Button type="primary" size="medium" onClick={handleCodeSend}>
               Восстановить
             </Button>
           </>
@@ -83,14 +131,14 @@ const UserForm = ({ title, linkText, type }) => {
               type="password"
               placeholder="Введите новый пароль"
               value={passwordValue}
-              onChange={handleInputChange}
+              onChange={(e) => setPasswordValue(e.target.value)}
               icon={"ShowIcon"}
             />
             <Input
               type="text"
               placeholder="Введите код из письма"
               value={nameValue}
-              onChange={handleInputChange}
+              onChange={(e) => setNameValue(e.target.value)}
             />
             <Button type="primary" size="medium" onClick={handlePasswordRenew}>
               Сохранить
