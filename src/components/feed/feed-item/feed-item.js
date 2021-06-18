@@ -2,6 +2,12 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import React from "react";
 import styles from "./feed-item.module.css";
 
+const textColor = {
+  Выполнен: "#F2F2F3",
+  Готовится: "#00CCCC",
+  Отменен: "#E52B1A",
+};
+
 const FeedItem = ({ item, isStatus }) => {
   const { number, date, name, status, data, price } = item;
 
@@ -18,13 +24,18 @@ const FeedItem = ({ item, isStatus }) => {
       <div className={` pl-6 pb-6 pr-6 ${styles.name}`}>
         <span className="text text_type_main-medium">{name}</span>
         {isStatus && (
-          <span className="text text_type_main-default">{status}</span>
+          <span
+            className="text text_type_main-default"
+            style={{ color: textColor[status] }}
+          >
+            {status}
+          </span>
         )}
       </div>
       <div className={`pl-6 pr-6 pb-6 ${styles.info}`}>
         <ul className={`${styles.ingredients}`}>
           {data.map((item, index) => {
-            let zIndex = maxAmount - index;
+            const zIndex = maxAmount - index;
             if (index < maxAmount) {
               return (
                 <li

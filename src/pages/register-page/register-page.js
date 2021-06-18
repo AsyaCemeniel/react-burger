@@ -4,7 +4,7 @@ import UserForm from "../../components/user-form";
 
 const RegisterPage = () => {
   const title = "Регистрация";
-  const linkText = (
+  const links = (
     <>
       <span className={`text text_type_main-default`}>
         Уже зарегистрированы?
@@ -13,7 +13,7 @@ const RegisterPage = () => {
     </>
   );
 
-  return <UserForm title={title} linkText={linkText} type="register" />;
+  return <UserForm title={title} links={links} type="register" />;
 };
 
 export default RegisterPage;

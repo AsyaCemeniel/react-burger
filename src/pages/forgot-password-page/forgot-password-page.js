@@ -4,7 +4,7 @@ import UserForm from "../../components/user-form";
 
 const ForgotPasswordPage = () => {
   const title = "Восстановление пароля";
-  const linkText = (
+  const links = (
     <>
       <span className={`text text_type_main-default`}>
         Вспомнили пароль?
@@ -13,7 +13,7 @@ const ForgotPasswordPage = () => {
     </>
   );
 
-  return <UserForm title={title} linkText={linkText} type="forgot-password" />;
+  return <UserForm title={title} links={links} type="forgot-password" />;
 };
 
 export default ForgotPasswordPage;

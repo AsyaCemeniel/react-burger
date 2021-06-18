@@ -13,7 +13,7 @@ import {
 } from "../../utils/burger-api";
 import styles from "./user-form.module.css";
 
-const UserForm = ({ title, linkText, type }) => {
+const UserForm = ({ title, links, type }) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [nameValue, setNameValue] = useState("");
@@ -154,7 +154,7 @@ const UserForm = ({ title, linkText, type }) => {
     <div className={styles.main}>
       <span className={`text text_type_main-medium mb-3`}>{title}</span>
       <form className={styles.form}>{content}</form>
-      <div className={styles.link}>{linkText}</div>
+      <div className={styles.link}>{links}</div>
     </div>
   );
 };

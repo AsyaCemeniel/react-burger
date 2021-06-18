@@ -3,19 +3,19 @@ import styles from "./order.module.css";
 import { feed } from "../../utils/feed-data";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
+const textColor = {
+  Выполнен: "#F2F2F3",
+  Готовится: "#00CCCC",
+  Отменен: "#E52B1A",
+};
+
 const Order = ({ orderNumber }) => {
-  const currentOrder = feed.filter(
+  const currentOrder = feed.find(
     (item) => item.number === parseInt(orderNumber)
-  )[0];
+  );
 
   const { name, number, price, date, status, data } = currentOrder;
 
-  const textColor =
-    status === "Выполнен"
-      ? "#F2F2F3"
-      : status === "Готовится"
-      ? "#00CCCC"
-      : "#E52B1A";
   return (
     <div className={` mb-5 mr-2 ${styles.order}`}>
       <div className={` pb-6 ${styles.number}`}>
@@ -25,7 +25,7 @@ const Order = ({ orderNumber }) => {
         <span className="text text_type_main-medium">{name}</span>
         <span
           className="text text_type_main-default mt-5"
-          style={{ textColor }}
+          style={{ color: textColor[status] }}
         >
           {status}
         </span>

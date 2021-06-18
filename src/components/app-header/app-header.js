@@ -5,7 +5,7 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { Link, NavLink, useRouteMatch } from "react-router-dom";
 import styles from "./app-header.module.css";
 
 const AppHeader = () => {
@@ -34,9 +34,9 @@ const AppHeader = () => {
             <ListIcon type={isFeed ? "primary" : "secondary"} /> Лента заказов
           </NavLink>
         </div>
-        <a href="#" className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           <Logo />
-        </a>
+        </Link>
         <NavLink
           to="/profile"
           activeClassName={styles.active}

@@ -4,7 +4,7 @@ import UserForm from "../../components/user-form";
 
 const LoginPage = () => {
   const title = "Вход";
-  const linkText = (
+  const links = (
     <>
       <span className={`text text_type_main-default`}>
         Вы — новый пользователь?
@@ -17,7 +17,7 @@ const LoginPage = () => {
     </>
   );
 
-  return <UserForm title={title} linkText={linkText} type="login" />;
+  return <UserForm title={title} links={links} type="login" />;
 };
 
 export default LoginPage;
