@@ -1,0 +1,64 @@
+.feed_item {
+  background: #1c1c21;
+  border-radius: 40px;
+  min-width: 550px;
+  cursor: pointer;
+}
+
+.ingredients {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+
+.ingredient {
+  border-style: solid;
+  border-radius: 50%;
+  border-color: rgb(101, 5, 190);
+  height: 64px;
+  width: 64px;
+  position: relative;
+  margin-right: -20px;
+  background: #0f0f11;
+}
+
+.ingredients img {
+  height: 64px;
+  width: 64px;
+  object-fit: cover;
+}
+
+.ingredient span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.numbers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}

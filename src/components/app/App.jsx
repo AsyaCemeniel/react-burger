@@ -1,4 +1,5 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 import AppHeader from "../app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor";
@@ -13,6 +14,16 @@ import {
   REMOVE_CURRENT_INGREDIENT,
 } from "../../services/actions";
 import OrderDetails from "../order-details";
+import HomePage from "../../pages/home-page";
+import LoginPage from "../../pages/login-page";
+import RegisterPage from "../../pages/register-page";
+import ForgotPasswordPage from "../../pages/forgot-password-page";
+import ResetPasswordPage from "../../pages/reset-password-page";
+import FeedPage from "../../pages/feed-page";
+import NotFoundPage from "../../pages/not-found-page";
+import UserProfile from "../user-profile";
+import ProfilePage from "../../pages/profile-page";
+import OrderPage from "../../pages/order-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,12 +60,31 @@ function App() {
   return (
     <div>
       <AppHeader />
-      <div className={styles.main}>
-        <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </DndProvider>
-      </div>
+      <Switch>
+        <Route path="/" exact={true} component={HomePage} />
+        <Route path="/login" exact={true} component={LoginPage} />
+        <Route path="/register" exact={true} component={RegisterPage} />
+        <Route
+          path="/forgot-password"
+          exact={true}
+          component={ForgotPasswordPage}
+        />
+        <Route
+          path="/reset-password"
+          exact={true}
+          component={ResetPasswordPage}
+        />
+        <Route path="/feed" exact={true} component={FeedPage} />
+        <Route path="/feed/:orderNumber" exact={true} component={OrderPage} />
+
+        <Route
+          path="/profile/orders/:orderNumber"
+          exact={true}
+          component={OrderPage}
+        />
+        <Route path="/profile" component={ProfilePage} />
+        <Route component={NotFoundPage} />
+      </Switch>
       {(currentIngredient || order || isOrderInvalid) && popup}
     </div>
   );

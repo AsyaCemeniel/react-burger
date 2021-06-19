@@ -1,0 +1,33 @@
+.main {
+  display: flex;
+  max-width: 62%;
+  margin: auto;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin-top: 120px;
+}
+
+.content {
+  margin-top: 40px;
+  flex: 1;
+}
+
+.nav {
+  text-decoration: none;
+  margin-bottom: 50px;
+}
+
+.active {
+  color: #f2f2f3;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  opacity: 0.4;
+  margin-top: 60px;
+}

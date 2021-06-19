@@ -16,7 +16,7 @@ const BurgerIngredients = () => {
 
   useEffect(() => {
     dispatch(getBurgerIngredients());
-  }, []);
+  }, [dispatch]);
 
   const titles = [
     { name: "Булки", key: "1", type: "bun" },

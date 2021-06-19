@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  justify-content: center;
+  max-width: 62%;
+  margin: auto;
+}
+
+.name {
+  max-width: 62%;
+  margin: 50px auto 10px auto;
+}

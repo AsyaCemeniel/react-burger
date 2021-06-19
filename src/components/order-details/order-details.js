@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Done from "../../images/done.png";
 import styles from "./order-details.module.css";
@@ -6,7 +6,11 @@ import styles from "./order-details.module.css";
 const OrderDetails = ({ order }) => {
   return (
     <div className={styles.main}>
-      <span className="text text_type_digits-large mt-4 mb-8">{order}</span>
+      <span
+        className={`text text_type_digits-large mt-4 mb-8 ${styles.shadow}`}
+      >
+        {order}
+      </span>
       <span className="text text_type_main-medium mb-5">
         идентификатор заказа
       </span>
