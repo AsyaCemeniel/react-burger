@@ -1,13 +1,9 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import AppHeader from "../app-header";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor";
 import styles from "./app.module.css";
 import Popup from "../popup";
 import { useDispatch, useSelector } from "react-redux";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { DndProvider } from "react-dnd";
 import IngredientDetails from "../ingredient-details";
 import {
   DELETE_ORDER_DETAILS,
@@ -21,7 +17,6 @@ import ForgotPasswordPage from "../../pages/forgot-password-page";
 import ResetPasswordPage from "../../pages/reset-password-page";
 import FeedPage from "../../pages/feed-page";
 import NotFoundPage from "../../pages/not-found-page";
-import UserProfile from "../user-profile";
 import ProfilePage from "../../pages/profile-page";
 import OrderPage from "../../pages/order-page";
 
