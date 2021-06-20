@@ -27,11 +27,11 @@ export const login = async (login, password) => {
   return await handleRequest(res);
 };
 
-export const forgotPassword = async (value) => {
+export const forgotPassword = async (email) => {
   const res = await fetch(`${baseUrl}/password-reset`, {
     method: "POST",
     headers: baseHeaders,
-    body: JSON.stringify({ email: value }),
+    body: JSON.stringify({ email }),
   });
   return await handleRequest(res);
 };
