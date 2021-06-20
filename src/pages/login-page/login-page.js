@@ -1,8 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 import UserForm from "../../components/user-form";
 
 const LoginPage = () => {
+  const userEmail = useSelector((store) => store.user.email);
+  const userToken = localStorage.getItem("refreshToken");
+
   const title = "Вход";
   const links = (
     <>
@@ -16,6 +20,10 @@ const LoginPage = () => {
       </span>
     </>
   );
+
+  if (userEmail || userToken) {
+    return <Redirect to={{ pathname: "/" }} />;
+  }
 
   return <UserForm title={title} links={links} type="login" />;
 };

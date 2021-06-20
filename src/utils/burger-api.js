@@ -18,11 +18,11 @@ export const register = async (email, password, name) => {
   return await handleRequest(res);
 };
 
-export const login = async (login, password) => {
-  const res = await fetch(`${baseUrl}/auth`, {
+export const login = async (email, password) => {
+  const res = await fetch(`${baseUrl}/auth/login`, {
     method: "POST",
     headers: baseHeaders,
-    body: JSON.stringify({ login, password }),
+    body: JSON.stringify({ email, password }),
   });
   return await handleRequest(res);
 };
@@ -55,7 +55,7 @@ export const logout = async () => {
 };
 
 export const refreshToken = async () => {
-  const res = await fetch(`${ServerConfig.baseUrl}/auth/token`, {
+  const res = await fetch(`${baseUrl}/auth/token`, {
     method: "POST",
     headers: baseHeaders,
     body: JSON.stringify({ token: localStorage.getItem("refreshToken") }),
@@ -82,7 +82,7 @@ export const fetchWithRefresh = async (url, options) => {
 };
 
 export const getUser = async () => {
-  return await fetchWithRefresh(`${ServerConfig.baseUrl}/auth/user`, {
+  return await fetchWithRefresh(`${baseUrl}/auth/user`, {
     method: "GET",
     headers: {
       ...baseHeaders,
@@ -92,7 +92,7 @@ export const getUser = async () => {
 };
 
 export const updateUser = async (data) => {
-  return await fetchWithRefresh(`${ServerConfig.baseUrl}/auth/user`, {
+  return await fetchWithRefresh(`${baseUrl}/auth/user`, {
     method: "PATCH",
     headers: {
       ...baseHeaders,

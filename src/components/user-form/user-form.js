@@ -12,12 +12,6 @@ import {
   userLogin,
   userRegister,
 } from "../../services/user-actions";
-import {
-  forgotPassword,
-  login,
-  register,
-  resetPassword,
-} from "../../utils/burger-api";
 import styles from "./user-form.module.css";
 
 const UserForm = ({ title, links, type }) => {
@@ -29,7 +23,7 @@ const UserForm = ({ title, links, type }) => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    dispatch(userLogin(nameValue, passwordValue));
+    dispatch(userLogin(emailValue, passwordValue));
   };
 
   const handleRegister = (event) => {

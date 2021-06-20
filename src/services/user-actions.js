@@ -1,4 +1,5 @@
 import { deleteCookie, setCookie } from "../utils";
+import { push } from "connected-react-router";
 import {
   register,
   login,
@@ -6,6 +7,8 @@ import {
   resetPassword,
   logout,
   refreshToken,
+  getUser,
+  updateUser,
 } from "../utils/burger-api";
 
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
@@ -20,14 +23,6 @@ export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 
-export const GET_USER_REQUEST = "GET_USER_REQUEST";
-export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
-export const GET_USER_FAILURE = "GET_USER_FAILURE";
-
-export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
-export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
-export const UPDATE_USER_FAILURE = "UPDATE_USER_FAILURE";
-
 export const FORGOT_PASSWORD_REQUEST = "FORGOT_PASSWORD_REQUEST";
 export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
 export const FORGOT_PASSWORD_FAILURE = "FORGOT_PASSWORD_FAILURE";
@@ -39,6 +34,14 @@ export const RESET_PASSWORD_FAILURE = "RESET_PASSWORD_FAILURE";
 export const REFRESH_TOKEN_REQUEST = "REFRESH_TOKEN_REQUEST";
 export const REFRESH_TOKEN_SUCCESS = "REFRESH_TOKEN_SUCCESS";
 export const REFRESH_TOKEN_FAILURE = "REFRESH_TOKEN_FAILURE";
+
+export const GET_USER_REQUEST = "GET_USER_REQUEST";
+export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
+export const GET_USER_FAILURE = "GET_USER_FAILURE";
+
+export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAILURE = "UPDATE_USER_FAILURE";
 
 export const userRegister = (email, password, name) => {
   return async function (dispatch) {
@@ -70,14 +73,14 @@ export const userRegister = (email, password, name) => {
   };
 };
 
-export const userLogin = (name, password) => {
+export const userLogin = (email, password) => {
   return async function (dispatch) {
     dispatch({
       type: LOGIN_REQUEST,
     });
 
     try {
-      const res = await login(name, password);
+      const res = await login(email, password);
       if (res && res.success) {
         const authToken = res.accessToken.split("Bearer ")[1];
         const refreshToken = res.refreshToken;
@@ -192,6 +195,54 @@ export const refreshUserToken = () => {
     } catch (error) {
       dispatch({
         type: REFRESH_TOKEN_FAILURE,
+      });
+      console.log("There is a problem with your request: ", error.message);
+    }
+  };
+};
+
+export const getUserData = () => {
+  return async function (dispatch) {
+    dispatch({
+      type: GET_USER_REQUEST,
+    });
+    try {
+      const res = await getUser();
+      if (res && res.success) {
+        dispatch({
+          type: GET_USER_SUCCESS,
+          payload: { user: res.user },
+        });
+      } else {
+        throw new Error("Getting user is failed");
+      }
+    } catch (error) {
+      dispatch({
+        type: GET_USER_FAILURE,
+      });
+      console.log("There is a problem with your request: ", error.message);
+    }
+  };
+};
+
+export const updateUserData = (data) => {
+  return async function (dispatch) {
+    dispatch({
+      type: UPDATE_USER_REQUEST,
+    });
+    try {
+      const res = await updateUser(data);
+      if (res && res.success) {
+        dispatch({
+          type: UPDATE_USER_SUCCESS,
+          payload: { user: res.user },
+        });
+      } else {
+        throw new Error("Updating user is failed");
+      }
+    } catch (error) {
+      dispatch({
+        type: UPDATE_USER_FAILURE,
       });
       console.log("There is a problem with your request: ", error.message);
     }

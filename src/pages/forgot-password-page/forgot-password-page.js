@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import UserForm from "../../components/user-form";
 
 const ForgotPasswordPage = () => {
@@ -12,6 +12,10 @@ const ForgotPasswordPage = () => {
       </span>
     </>
   );
+
+  if (localStorage.getItem("refreshToken")) {
+    return <Redirect to={{ pathname: "/" }} />;
+  }
 
   return <UserForm title={title} links={links} type="forgot-password" />;
 };
