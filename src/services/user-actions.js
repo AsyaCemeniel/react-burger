@@ -225,13 +225,13 @@ export const getUserData = () => {
   };
 };
 
-export const updateUserData = (data) => {
+export const updateUserData = (name, email, password) => {
   return async function (dispatch) {
     dispatch({
       type: UPDATE_USER_REQUEST,
     });
     try {
-      const res = await updateUser(data);
+      const res = await updateUser(name, email, password);
       if (res && res.success) {
         dispatch({
           type: UPDATE_USER_SUCCESS,

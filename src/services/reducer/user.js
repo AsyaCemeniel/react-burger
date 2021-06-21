@@ -52,6 +52,7 @@ const initialState = {
   resetFailure: false,
 
   tokenRefreshRequest: false,
+  tokenRefreshSuccess: false,
   tokenRefreshFailure: false,
 };
 
@@ -201,18 +202,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         tokenRefreshRequest: true,
+        tokenRefreshSuccess: false,
         tokenRefreshFailure: false,
       };
     case REFRESH_TOKEN_SUCCESS:
       return {
         ...state,
         tokenRefreshRequest: false,
+        tokenRefreshSuccess: true,
         tokenRefreshFailure: false,
       };
     case REFRESH_TOKEN_FAILURE:
       return {
         ...state,
         tokenRefreshRequest: false,
+        tokenRefreshSuccess: false,
         tokenRefreshFailure: true,
       };
     default:

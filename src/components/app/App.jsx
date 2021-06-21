@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import AppHeader from "../app-header";
 import styles from "./app.module.css";
 import Popup from "../popup";
@@ -19,9 +19,11 @@ import FeedPage from "../../pages/feed-page";
 import NotFoundPage from "../../pages/not-found-page";
 import ProfilePage from "../../pages/profile-page";
 import OrderPage from "../../pages/order-page";
+import ProtectedRoute from "../protected-route";
 
 function App() {
   const dispatch = useDispatch();
+  let location = useLocation();
   const { currentIngredient } = useSelector((store) => store.burgerIngredients);
   const { order, isOrderInvalid } = useSelector((store) => store.order);
 
@@ -55,7 +57,7 @@ function App() {
   return (
     <div>
       <AppHeader />
-      <Switch>
+      <Switch location={location}>
         <Route path="/" exact={true} component={HomePage} />
         <Route path="/login" exact={true} component={LoginPage} />
         <Route path="/register" exact={true} component={RegisterPage} />
@@ -71,13 +73,12 @@ function App() {
         />
         <Route path="/feed" exact={true} component={FeedPage} />
         <Route path="/feed/:orderNumber" exact={true} component={OrderPage} />
-
-        <Route
-          path="/profile/orders/:orderNumber"
-          exact={true}
-          component={OrderPage}
-        />
-        <Route path="/profile" component={ProfilePage} />
+        <ProtectedRoute path="/profile/orders/:orderNumber" exact={true}>
+          <OrderPage />
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile">
+          <ProfilePage />
+        </ProtectedRoute>
         <Route component={NotFoundPage} />
       </Switch>
       {(currentIngredient || order || isOrderInvalid) && popup}

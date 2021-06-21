@@ -72,7 +72,7 @@ export const fetchWithRefresh = async (url, options) => {
       const refreshData = await refreshToken();
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       setCookie("accessToken", refreshData.accessToken.split("Bearer ")[1]);
-      options.headers.Authorization = refreshData.accessToken;
+      options.headers.authorization = refreshData.accessToken;
       const res = await fetch(url, options);
       return await handleRequest(res);
     } else {
@@ -86,18 +86,18 @@ export const getUser = async () => {
     method: "GET",
     headers: {
       ...baseHeaders,
-      Authorization: "Bearer " + getCookie("token"),
+      authorization: "Bearer " + getCookie("token"),
     },
   });
 };
 
-export const updateUser = async (data) => {
+export const updateUser = async (name, email, password) => {
   return await fetchWithRefresh(`${baseUrl}/auth/user`, {
     method: "PATCH",
     headers: {
       ...baseHeaders,
-      Authorization: "Bearer " + getCookie("token"),
+      authorization: "Bearer " + getCookie("token"),
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({ name, email, password }),
   });
 };
