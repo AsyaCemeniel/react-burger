@@ -64,4 +64,6 @@ const Order = ({ orderNumber }) => {
   );
 };
 
+//TODO propsTypes
+
 export default Order;

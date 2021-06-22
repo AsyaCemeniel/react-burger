@@ -21,21 +21,6 @@ function App() {
   let location = useLocation();
   const history = useHistory();
 
-  // const popup = (
-  //   <Popup title={currentIngredient ? "Детали ингредиента" : ""}>
-  //     {currentIngredient && <IngredientDetails product={currentIngredient} />}
-  //     {order && !isOrderInvalid && <OrderDetails order={order} />}
-  //     {isOrderInvalid && (
-  //       <div
-  //         className={`text text_type_main-medium pb-6  ${styles.error_text}`}
-  //       >
-  //         <p> Ой! </p>
-  //         <p> В бургере не хватает булки! </p>
-  //       </div>
-  //     )}
-  //   </Popup>
-  // );
-
   let background =
     (history.action === "PUSH" || history.action === "REPLACE") &&
     location.state &&

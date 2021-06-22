@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,13 +53,5 @@ const IngredientDetails = () => {
     </>
   );
 };
-
-// IngredientDetails.propTypes = {
-//   product: PropTypes.shape({
-//     _id: PropTypes.string.isRequired,
-//     name: PropTypes.string,
-//     image_large: PropTypes.string,
-//   }).isRequired,
-// };
 
 export default IngredientDetails;
