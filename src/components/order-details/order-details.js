@@ -1,9 +1,30 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Done from "../../images/done.png";
 import styles from "./order-details.module.css";
+import { useSelector } from "react-redux";
 
-const OrderDetails = ({ order }) => {
+const OrderDetails = () => {
+  const { order, isOrderInvalid } = useSelector((store) => store.order);
+  const { burgerStuffing } = useSelector((store) => store.burgerConstructor);
+
+  if (burgerStuffing.length === 0) {
+    return (
+      <div className={`text text_type_main-medium pb-6  ${styles.error_text}`}>
+        <p> Ой! </p>
+        <p> Вы забыли сделать заказ! </p>
+      </div>
+    );
+  }
+
+  if (isOrderInvalid) {
+    return (
+      <div className={`text text_type_main-medium pb-6  ${styles.error_text}`}>
+        <p> Ой! </p>
+        <p> В бургере не хватает булки! </p>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.main}>
       <span
@@ -23,10 +44,6 @@ const OrderDetails = ({ order }) => {
       </span>
     </div>
   );
-};
-
-OrderDetails.propTypes = {
-  order: PropTypes.number.isRequired,
 };
 
 export default OrderDetails;

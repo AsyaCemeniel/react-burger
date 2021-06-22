@@ -10,17 +10,17 @@ const ProtectedRoute = ({ children, ...rest }) => {
   const { tokenRefreshSuccess } = useSelector((store) => store.user);
   const isToken = !!localStorage.getItem("refreshToken");
 
-  useEffect(() => {
-    if (!tokenRefreshSuccess && isToken) {
-      dispatch(refreshUserToken());
-    }
-  }, [dispatch, tokenRefreshSuccess, isToken]);
+  // useEffect(() => {
+  //   if (isToken) {
+  //     dispatch(refreshUserToken());
+  //   }
+  // }, []);
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        tokenRefreshSuccess && isToken ? (
+        isToken ? (
           children
         ) : (
           <Redirect to={{ pathname: "/login", state: { from: location } }} />

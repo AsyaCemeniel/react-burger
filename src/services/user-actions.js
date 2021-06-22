@@ -60,7 +60,7 @@ export const userRegister = (email, password, name) => {
           type: REGISTER_SUCCESS,
           payload: { user: res.user },
         });
-        dispatch(push("/"));
+        // dispatch(push("/"));
       } else {
         throw new Error("User registration failed");
       }

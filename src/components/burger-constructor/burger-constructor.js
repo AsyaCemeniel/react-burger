@@ -13,9 +13,13 @@ import {
 } from "../../services/actions";
 import { useDrop } from "react-dnd";
 import ConstructorItem from "./constructor-item/constructor-item";
+import { useHistory } from "react-router-dom";
+import { push } from "connected-react-router";
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ location }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const isToken = localStorage.getItem("refreshToken");
 
   const { bun, burgerStuffing } = useSelector(
     (state) => state.burgerConstructor
@@ -39,9 +43,19 @@ const BurgerConstructor = () => {
   };
 
   const openModal = () => {
-    const isOrderValid = Object.keys(bun).length ? true : false;
-    const stuffingIds = stuffingIngredients.map((item) => item._id);
-    dispatch(getOrderDetails(stuffingIds, isOrderValid));
+    if (isToken) {
+      const isOrderValid = Object.keys(bun).length ? true : false;
+      const stuffingIds = stuffingIngredients.map((item) => item._id);
+      dispatch(getOrderDetails(stuffingIds, isOrderValid));
+      history.push({
+        pathname: "/order",
+        state: {
+          background: location,
+        },
+      });
+    } else {
+      dispatch(push("/login"));
+    }
   };
 
   //======================= * DND hooks and functions * ===============================================
