@@ -15,8 +15,6 @@ const Popup = ({ children, title }) => {
     history.goBack();
   };
 
-  const modalDiv = document.createElement("div");
-
   const exitOnEsc = (event) => {
     if (event.keyCode === 27) {
       onClose();
@@ -24,11 +22,9 @@ const Popup = ({ children, title }) => {
   };
 
   useEffect(() => {
-    modalRoot.appendChild(modalDiv);
     document.addEventListener("keydown", exitOnEsc);
 
     return () => {
-      modalRoot.removeChild(modalDiv);
       document.removeEventListener("keydown", exitOnEsc);
     };
   }, []);
@@ -40,7 +36,7 @@ const Popup = ({ children, title }) => {
       </Modal>
       <ModalOverlay onClose={onClose} />
     </div>,
-    modalDiv
+    modalRoot
   );
 };
 
