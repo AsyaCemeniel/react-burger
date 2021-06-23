@@ -12,7 +12,7 @@ const initialState = {
   orderFailure: false,
 };
 
-export default (state = initialState, action) => {
+const Order = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -35,13 +35,15 @@ export default (state = initialState, action) => {
         orderRequest: false,
         orderFailure: true,
       };
-    case DELETE_ORDER_DETAILS:
-      return {
-        ...state,
-        order: null,
-        isOrderInvalid: false,
-      };
+    // case DELETE_ORDER_DETAILS:
+    //   return {
+    //     ...state,
+    //     order: null,
+    //     isOrderInvalid: false,
+    //   };
     default:
       return state;
   }
 };
+
+export default Order;

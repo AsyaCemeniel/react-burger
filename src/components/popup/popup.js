@@ -44,9 +44,9 @@ const Popup = ({ children, title }) => {
   );
 };
 
-// Popup.propTypes = {
-//   children: PropTypes.object,
-//   title: PropTypes.string,
-// };
+Popup.propTypes = {
+  children: PropTypes.element,
+  title: PropTypes.string,
+};
 
 export default Popup;

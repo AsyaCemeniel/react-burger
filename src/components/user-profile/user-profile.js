@@ -43,7 +43,7 @@ const UserProfile = () => {
     passwordValue.length > 0;
 
   return (
-    <form className={`${styles.main}`}>
+    <form className={`${styles.main}`} onSubmit={handleSave}>
       <div className={`mb-6 `}>
         <Input
           type="text"
@@ -85,7 +85,7 @@ const UserProfile = () => {
           <Button type="secondary" size="medium" onClick={handleCancel}>
             Отмена
           </Button>
-          <Button type="primary" size="medium" onClick={handleSave}>
+          <Button type="primary" size="medium">
             Сохранить
           </Button>
         </div>

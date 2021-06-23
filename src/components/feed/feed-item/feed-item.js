@@ -1,5 +1,6 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./feed-item.module.css";
 
 const textColor = {
@@ -77,6 +78,11 @@ const FeedItem = ({ item, isStatus }) => {
       </div>
     </div>
   );
+};
+
+FeedItem.propTypes = {
+  item: PropTypes.object,
+  isStatus: PropTypes.bool,
 };
 
 export default FeedItem;

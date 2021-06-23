@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useRouteMatch, Link, useLocation } from "react-router-dom";
 import { feed } from "../../utils/feed-data";
 import FeedItem from "./feed-item";
@@ -27,6 +28,10 @@ const Feed = ({ isStatus }) => {
       </ul>
     </section>
   );
+};
+
+Feed.propTypes = {
+  isStatus: PropTypes.bool,
 };
 
 export default Feed;

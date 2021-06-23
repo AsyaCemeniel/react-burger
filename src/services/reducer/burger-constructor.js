@@ -1,6 +1,7 @@
 import {
   ADD_CONSTRUCTOR_ITEM,
   DELETE_CONSTRUCTOR_ITEM,
+  DELETE_ORDER_DETAILS,
   REORDER_CONSTRUCTOR_ITEMS,
 } from "../actions";
 import { v4 as uuidv4 } from "uuid";
@@ -10,7 +11,7 @@ const initialState = {
   bun: {},
 };
 
-export default (state = initialState, action) => {
+const BurgerConstructor = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -45,7 +46,15 @@ export default (state = initialState, action) => {
         burgerStuffing,
       };
     }
+    case DELETE_ORDER_DETAILS:
+      return {
+        ...state,
+        burgerStuffing: [],
+        bun: {},
+      };
     default:
       return state;
   }
 };
+
+export default BurgerConstructor;

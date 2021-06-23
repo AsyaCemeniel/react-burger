@@ -7,7 +7,9 @@ import { getBurgerIngredients } from "../../services/actions";
 import { useInView } from "react-intersection-observer";
 import { useLocation, Link } from "react-router-dom";
 
-const BurgerIngredients = ({ location }) => {
+const BurgerIngredients = () => {
+  const location = useLocation();
+
   const [current, setCurrent] = useState("bun");
 
   const ingredients = useSelector(

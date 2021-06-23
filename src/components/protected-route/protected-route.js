@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Redirect, Route } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { refreshUserToken } from "../../services/user-actions";
+import { useEffect } from "react"; // eslint-disable-line
+import { useDispatch } from "react-redux"; // eslint-disable-line
+import { refreshUserToken } from "../../services/user-actions"; // eslint-disable-line
 
 const ProtectedRoute = ({ children, ...rest }) => {
   // const dispatch = useDispatch();
@@ -29,6 +30,8 @@ const ProtectedRoute = ({ children, ...rest }) => {
   );
 };
 
-//TODO propsTypes
+ProtectedRoute.propTypes = {
+  children: PropTypes.element,
+};
 
 export default ProtectedRoute;

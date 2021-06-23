@@ -8,16 +8,18 @@ import styles from "./burger-constructor.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_CONSTRUCTOR_ITEM,
+  DELETE_ORDER_DETAILS,
   getOrderDetails,
   REORDER_CONSTRUCTOR_ITEMS,
 } from "../../services/actions";
 import { useDrop } from "react-dnd";
 import ConstructorItem from "./constructor-item/constructor-item";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { push } from "connected-react-router";
 
-const BurgerConstructor = ({ location }) => {
+const BurgerConstructor = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const history = useHistory();
   const isToken = localStorage.getItem("refreshToken");
 
@@ -56,6 +58,10 @@ const BurgerConstructor = ({ location }) => {
     } else {
       dispatch(push("/login"));
     }
+  };
+
+  const ClearBurgerConstructor = () => {
+    dispatch({ type: DELETE_ORDER_DETAILS });
   };
 
   //======================= * DND hooks and functions * ===============================================

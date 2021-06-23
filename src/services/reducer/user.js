@@ -56,7 +56,7 @@ const initialState = {
   tokenRefreshFailure: false,
 };
 
-export default (state = initialState, action) => {
+const User = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case REGISTER_REQUEST:
@@ -223,3 +223,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default User;

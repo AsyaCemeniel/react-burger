@@ -4,6 +4,7 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -136,6 +137,10 @@ const UserForm = ({ title, links, type }) => {
   );
 };
 
-//TODO propsTypes
+UserForm.propType = {
+  title: PropTypes.string,
+  links: PropTypes.element,
+  type: PropTypes.string.isRequired,
+};
 
 export default UserForm;

@@ -1,7 +1,6 @@
 import React from "react";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import AppHeader from "../app-header";
-import styles from "./app.module.css";
 import Popup from "../popup";
 import IngredientDetails from "../ingredient-details";
 import OrderDetails from "../order-details";
@@ -18,7 +17,7 @@ import ProtectedRoute from "../protected-route";
 import ingredientDetails from "../ingredient-details";
 
 function App() {
-  let location = useLocation();
+  const location = useLocation();
   const history = useHistory();
 
   let background =

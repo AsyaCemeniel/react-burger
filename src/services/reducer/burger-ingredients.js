@@ -11,15 +11,10 @@ const initialState = {
   ingredientsRequest: false,
   ingredientsFailure: false,
 
-  // constructorItems: [],
   currentIngredient: null,
-
-  // order: null,
-  // orderRequest: false,
-  // orderFailure: false,
 };
 
-export default (state = initialState, action) => {
+const BurgerIngredients = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -55,3 +50,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default BurgerIngredients;
