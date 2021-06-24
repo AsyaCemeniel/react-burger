@@ -3,6 +3,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import PropTypes from "prop-types";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { DELETE_CONSTRUCTOR_ITEM } from "../../../services/actions";
@@ -67,6 +68,13 @@ const ConstructorItem = ({ item, id, findItem, moveItem }) => {
       />
     </li>
   );
+};
+
+ConstructorItem.propTypes = {
+  item: PropTypes.object,
+  id: PropTypes.string.isRequired,
+  findItem: PropTypes.func,
+  moveItem: PropTypes.func,
 };
 
 export default ConstructorItem;

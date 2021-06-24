@@ -1,12 +1,13 @@
 import React from "react";
-import { useRouteMatch, Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { useRouteMatch, Link, useLocation } from "react-router-dom";
 import { feed } from "../../utils/feed-data";
 import FeedItem from "./feed-item";
 import styles from "./feed.module.css";
 
 const Feed = ({ isStatus }) => {
   const match = useRouteMatch();
-  console.log(match.url);
+  const location = useLocation();
 
   return (
     <section className={`${styles.main}`}>
@@ -14,7 +15,10 @@ const Feed = ({ isStatus }) => {
         {feed.map((item, index) => (
           <li key={index}>
             <Link
-              to={{ pathname: `${match.url}/${item.number}` }}
+              to={{
+                pathname: `${match.url}/${item.number}`,
+                state: { background: location },
+              }}
               className={styles.link}
             >
               <FeedItem item={item} isStatus={isStatus} />
@@ -24,6 +28,10 @@ const Feed = ({ isStatus }) => {
       </ul>
     </section>
   );
+};
+
+Feed.propTypes = {
+  isStatus: PropTypes.bool,
 };
 
 export default Feed;

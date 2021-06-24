@@ -1,31 +1,71 @@
 import {
-  EmailInput,
+  Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserData } from "../../services/user-actions";
 import styles from "./user-profile.module.css";
 
 const UserProfile = () => {
-  const [emailValue, setEmailValue] = useState("");
+  const dispatch = useDispatch();
+
+  const currentName = useSelector((store) => store.user.name);
+  const currentEmail = useSelector((store) => store.user.email);
+
+  const [emailValue, setEmailValue] = useState(currentEmail);
   const [passwordValue, setPasswordValue] = useState("");
-  const [nameValue, setNameValue] = useState("");
+  const [nameValue, setNameValue] = useState(currentName);
+
+  const [isFocusEmail, setEmailFocus] = useState(false);
+  const [isFocusPassword, setPasswordFocus] = useState(false);
+  const [isFocusName, setNameFocus] = useState(false);
+
+  const handleCancel = (event) => {
+    event.preventDefault();
+    setNameValue(currentName);
+    setEmailValue(currentEmail);
+    setPasswordValue("");
+  };
+
+  const handleSave = (event) => {
+    event.preventDefault();
+    dispatch(updateUserData(nameValue, emailValue, passwordValue));
+  };
+
+  const nameIcon = isFocusName ? "CloseIcon" : "EditIcon";
+  const emailIcon = isFocusEmail ? "CloseIcon" : "EditIcon";
+  const passwordIcon = isFocusPassword ? "CloseIcon" : "EditIcon";
+
+  const isDataChanged =
+    nameValue !== currentName ||
+    emailValue !== currentEmail ||
+    passwordValue.length > 0;
 
   return (
-    <form className={`${styles.main}`}>
+    <form className={`${styles.main}`} onSubmit={handleSave}>
       <div className={`mb-6 `}>
         <Input
           type="text"
           placeholder="Имя"
           value={nameValue}
           onChange={(e) => setNameValue(e.target.value)}
-          icon="EditIcon"
+          onFocus={() => setNameFocus(true)}
+          onBlur={() => setNameFocus(false)}
+          onIconClick={() => setNameValue(currentName)}
+          icon={nameIcon}
         />
       </div>
       <div className={`mb-6 `}>
-        <EmailInput
+        <Input
+          type="email"
+          placeholder="Email"
           value={emailValue}
-          name="email"
           onChange={(e) => setEmailValue(e.target.value)}
+          onFocus={() => setEmailFocus(true)}
+          onBlur={() => setEmailFocus(false)}
+          onIconClick={() => setEmailValue(currentEmail)}
+          icon={emailIcon}
         />
       </div>
       <div>
@@ -34,9 +74,22 @@ const UserProfile = () => {
           placeholder="Пароль"
           value={passwordValue}
           onChange={(e) => setPasswordValue(e.target.value)}
-          icon="EditIcon"
+          onFocus={() => setPasswordFocus(true)}
+          onBlur={() => setPasswordFocus(false)}
+          onIconClick={() => setPasswordValue("")}
+          icon={passwordIcon}
         />
       </div>
+      {isDataChanged ? (
+        <div className="mt-6">
+          <Button type="secondary" size="medium" onClick={handleCancel}>
+            Отмена
+          </Button>
+          <Button type="primary" size="medium">
+            Сохранить
+          </Button>
+        </div>
+      ) : null}
     </form>
   );
 };

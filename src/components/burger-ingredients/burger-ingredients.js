@@ -5,8 +5,11 @@ import styles from "./burger-ingredients.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getBurgerIngredients } from "../../services/actions";
 import { useInView } from "react-intersection-observer";
+import { useLocation, Link } from "react-router-dom";
 
 const BurgerIngredients = () => {
+  const location = useLocation();
+
   const [current, setCurrent] = useState("bun");
 
   const ingredients = useSelector(
@@ -16,7 +19,7 @@ const BurgerIngredients = () => {
 
   useEffect(() => {
     dispatch(getBurgerIngredients());
-  }, [dispatch]);
+  }, []);
 
   const titles = [
     { name: "Булки", key: "1", type: "bun" },
@@ -58,7 +61,15 @@ const BurgerIngredients = () => {
               <ul className={`mr-1 ml-1 ${styles.menu}`}>
                 {items.map((item) => (
                   <li key={item._id}>
-                    <MenuItem product={item} />
+                    <Link
+                      to={{
+                        pathname: `/ingredients/${item._id}`,
+                        state: { background: location },
+                      }}
+                      className={styles.link}
+                    >
+                      <MenuItem product={item} />
+                    </Link>
                   </li>
                 ))}
               </ul>

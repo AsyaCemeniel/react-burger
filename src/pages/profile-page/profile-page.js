@@ -3,8 +3,27 @@ import styles from "./profile-page.module.css";
 import { NavLink, Switch, Route } from "react-router-dom";
 import UserProfile from "../../components/user-profile";
 import Feed from "../../components/feed";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUserData, userLogout } from "../../services/user-actions";
+import Loader from "../../components/loader";
 
 const ProfilePage = () => {
+  const dispatch = useDispatch();
+  const { getUserRequest } = useSelector((store) => store.user);
+
+  useEffect(() => {
+    dispatch(getUserData());
+  }, [dispatch]);
+
+  if (getUserRequest) {
+    return <Loader />;
+  }
+
+  const handleLogout = () => {
+    dispatch(userLogout());
+  };
+
   return (
     <div className={`${styles.main}`}>
       <div className={`pt-6 mr-10 ${styles.menu}`}>
@@ -25,9 +44,10 @@ const ProfilePage = () => {
         </NavLink>
         <NavLink
           exact
-          to="/"
+          to="/login"
           className={`text text_type_main-medium text_color_inactive ${styles.nav}`}
           activeClassName={styles.active}
+          onClick={handleLogout}
         >
           Выход
         </NavLink>

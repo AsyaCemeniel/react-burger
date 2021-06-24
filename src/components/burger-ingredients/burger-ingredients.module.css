@@ -10,6 +10,11 @@
   flex: 50%;
 }
 
+.link {
+  text-decoration: none;
+  color: #f2f2f3;
+}
+
 .scroll_menu {
   max-height: 68vh;
   overflow-y: scroll;

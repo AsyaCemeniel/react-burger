@@ -4,64 +4,42 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from "react";
+import PropTypes from "prop-types";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
-  forgotPassword,
-  login,
-  register,
-  resetPassword,
-} from "../../utils/burger-api";
+  resetUserPassword,
+  userForgotPassword,
+  userLogin,
+  userRegister,
+} from "../../services/user-actions";
 import styles from "./user-form.module.css";
 
 const UserForm = ({ title, links, type }) => {
+  const dispatch = useDispatch();
+
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [nameValue, setNameValue] = useState("");
 
   const handleLogin = (event) => {
     event.preventDefault();
-
-    login(nameValue, passwordValue)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(userLogin(emailValue, passwordValue));
   };
+
   const handleRegister = (event) => {
     event.preventDefault();
-
-    console.log(emailValue, passwordValue, nameValue);
-    register(emailValue, passwordValue, nameValue)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(userRegister(emailValue, passwordValue, nameValue));
   };
+
   const handleCodeSend = (event) => {
     event.preventDefault();
-
-    forgotPassword(emailValue)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(userForgotPassword(emailValue));
   };
+
   const handlePasswordRenew = (event) => {
     event.preventDefault();
-
-    resetPassword(passwordValue, nameValue)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(resetUserPassword(passwordValue, nameValue));
   };
 
   const createContent = () => {
@@ -157,6 +135,12 @@ const UserForm = ({ title, links, type }) => {
       <div className={styles.link}>{links}</div>
     </div>
   );
+};
+
+UserForm.propType = {
+  title: PropTypes.string,
+  links: PropTypes.element,
+  type: PropTypes.string.isRequired,
 };
 
 export default UserForm;
