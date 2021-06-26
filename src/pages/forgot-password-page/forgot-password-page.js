@@ -1,8 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import UserForm from "../../components/user-form";
 
 const ForgotPasswordPage = () => {
+  const userEmail = useSelector((store) => store.user.email);
+
   const title = "Восстановление пароля";
   const links = (
     <>
@@ -13,7 +16,7 @@ const ForgotPasswordPage = () => {
     </>
   );
 
-  if (localStorage.getItem("refreshToken")) {
+  if (userEmail && localStorage.getItem("refreshToken")) {
     return <Redirect to={{ pathname: "/" }} />;
   }
 

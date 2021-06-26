@@ -5,7 +5,7 @@ import UserForm from "../../components/user-form";
 
 const LoginPage = () => {
   const userEmail = useSelector((store) => store.user.email);
-  const userToken = localStorage.getItem("refreshToken");
+  // const userToken = localStorage.getItem("refreshToken");
 
   const title = "Вход";
   const links = (
@@ -21,7 +21,7 @@ const LoginPage = () => {
     </>
   );
 
-  if (userEmail || userToken) {
+  if (userEmail) {
     return <Redirect to={{ pathname: "/" }} />;
   }
 

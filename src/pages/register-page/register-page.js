@@ -1,8 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import UserForm from "../../components/user-form";
 
 const RegisterPage = () => {
+  const userEmail = useSelector((store) => store.user.email);
+
   const title = "Регистрация";
   const links = (
     <>
@@ -13,7 +16,7 @@ const RegisterPage = () => {
     </>
   );
 
-  if (localStorage.getItem("refreshToken")) {
+  if (userEmail && localStorage.getItem("refreshToken")) {
     return <Redirect to={{ pathname: "/" }} />;
   }
 
