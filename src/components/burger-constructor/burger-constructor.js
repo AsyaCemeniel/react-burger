@@ -55,13 +55,14 @@ const BurgerConstructor = () => {
           background: location,
         },
       });
+      ClearBurgerConstructor();
     } else {
       dispatch(push("/login"));
     }
   };
 
   const ClearBurgerConstructor = () => {
-    dispatch({ type: DELETE_ORDER_DETAILS });
+    dispatch({ type: DELETE_ORDER_DETAILS, payload: true });
   };
 
   //======================= * DND hooks and functions * ===============================================

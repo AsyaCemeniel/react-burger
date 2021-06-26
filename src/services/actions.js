@@ -14,6 +14,7 @@ export const GET_ORDER_DETAILS_SUCCESS = "GET_ORDER_DETAILS_SUCCESS";
 export const GET_ORDER_DETAILS_FAILURE = "GET_ORDER_DETAILS_FAILURE";
 
 export const DELETE_ORDER_DETAILS = "DELETE_ORDER_DETAILS";
+export const DELETE_ORDER = "DELETE_ORDER";
 
 export function getBurgerIngredients() {
   return async function (dispatch) {
