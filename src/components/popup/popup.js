@@ -38,7 +38,7 @@ const Popup = ({ children, title }) => {
   }, []);
 
   return ReactDOM.createPortal(
-    <div className={styles.popup}>
+    <div className={styles.popup} id="popup">
       <Modal onClose={onClose} title={title}>
         {children}
       </Modal>

@@ -2,16 +2,12 @@ import {
   GET_INGREDIENTS_FAILURE,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
-  REMOVE_CURRENT_INGREDIENT,
-  SET_CURRENT_INGREDIENT,
 } from "../actions";
 
 const initialState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailure: false,
-
-  currentIngredient: null,
 };
 
 const BurgerIngredients = (state = initialState, action) => {
@@ -35,16 +31,6 @@ const BurgerIngredients = (state = initialState, action) => {
         ...state,
         ingredientsRequest: false,
         ingredientsFailure: true,
-      };
-    case SET_CURRENT_INGREDIENT:
-      return {
-        ...state,
-        currentIngredient: payload,
-      };
-    case REMOVE_CURRENT_INGREDIENT:
-      return {
-        ...state,
-        currentIngredient: null,
       };
     default:
       return state;
