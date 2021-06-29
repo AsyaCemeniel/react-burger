@@ -3,33 +3,31 @@ import PropTypes from "prop-types";
 import { Redirect, Route } from "react-router-dom";
 import { useEffect } from "react"; // eslint-disable-line
 import { useDispatch, useSelector } from "react-redux"; // eslint-disable-line
-import { refreshUserToken } from "../../services/user-actions"; // eslint-disable-line
+import { getUserData, refreshUserToken } from "../../services/user-actions"; // eslint-disable-line
 import Loader from "../loader";
 
 const ProtectedRoute = ({ children, ...rest }) => {
   const dispatch = useDispatch();
-
-  const isToken = !!localStorage.getItem("refreshToken");
   const userEmail = useSelector((store) => store.user.email);
-  const tokenRefreshSuccess = useSelector(
-    (store) => store.user.tokenRefreshSuccess
-  );
+  const isToken = !!localStorage.getItem("refreshToken");
+
+  const getUserRequest = useSelector((store) => store.user.getUserRequest);
 
   useEffect(() => {
-    if (!userEmail && isToken) {
-      dispatch(refreshUserToken());
+    if (isToken) {
+      dispatch(getUserData());
     }
   }, []);
 
-  // if (isToken && !userEmail) {
-  //   return <Loader />;
-  // }
+  if (getUserRequest && isToken && !userEmail) {
+    return <Loader />;
+  }
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        isToken && tokenRefreshSuccess ? (
+        isToken ? (
           children
         ) : (
           <Redirect to={{ pathname: "/login", state: { from: location } }} />

@@ -10,15 +10,15 @@ import Loader from "../../components/loader";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-  const { getUserRequest } = useSelector((store) => store.user);
+  // const { getUserRequest } = useSelector((store) => store.user);
 
-  useEffect(() => {
-    dispatch(getUserData());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getUserData());
+  // }, []);
 
-  if (getUserRequest) {
-    return <Loader />;
-  }
+  // if (getUserRequest) {
+  //   return <Loader />;
+  // }
 
   const handleLogout = () => {
     dispatch(userLogout());

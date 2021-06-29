@@ -22,7 +22,7 @@ const ResetPasswordPage = () => {
     return <Redirect to={{ pathname: "/" }} />;
   }
 
-  if (!userToken && !forgotSuccess) {
+  if (!forgotSuccess) {
     return <Redirect to={{ pathname: "/forgot-password" }} />;
   }
 
