@@ -97,7 +97,7 @@ describe("User reducer", () => {
     );
   });
 
-  it("should set user email and name", () => {
+  it("should set user email and name for login", () => {
     expect(
       user(state, { type: LOGIN_SUCCESS, payload: { user: userData } })
     ).toEqual(expect.objectContaining(userData));
@@ -115,7 +115,7 @@ describe("User reducer", () => {
     );
   });
 
-  it("should delete user name and email", () => {
+  it("should delete name and email after logout", () => {
     expect(user(state, { type: LOGOUT_SUCCESS })).toEqual(
       expect.objectContaining({ email: "", name: "" })
     );
@@ -133,7 +133,7 @@ describe("User reducer", () => {
     );
   });
 
-  it("should set user email and name", () => {
+  it("should set email and name after getting user", () => {
     expect(
       user(state, { type: GET_USER_SUCCESS, payload: { user: userData } })
     ).toEqual(expect.objectContaining(userData));
@@ -151,7 +151,7 @@ describe("User reducer", () => {
     );
   });
 
-  it("should set user email and name", () => {
+  it("should set email and name to update user", () => {
     expect(
       user(state, { type: UPDATE_USER_SUCCESS, payload: { user: userData } })
     ).toEqual(expect.objectContaining(userData));
