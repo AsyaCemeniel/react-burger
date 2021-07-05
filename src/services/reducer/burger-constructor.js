@@ -1,7 +1,7 @@
 import {
   ADD_CONSTRUCTOR_ITEM,
   DELETE_CONSTRUCTOR_ITEM,
-  DELETE_ORDER_DETAILS,
+  DELETE_ORDER,
   REORDER_CONSTRUCTOR_ITEMS,
 } from "../actions";
 import { v4 as uuidv4 } from "uuid";
@@ -46,7 +46,7 @@ const BurgerConstructor = (state = initialState, action) => {
         burgerStuffing,
       };
     }
-    case DELETE_ORDER_DETAILS:
+    case DELETE_ORDER:
       return {
         ...state,
         burgerStuffing: [],

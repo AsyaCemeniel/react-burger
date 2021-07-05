@@ -2,19 +2,26 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Redirect, Route } from "react-router-dom";
 import { useEffect } from "react"; // eslint-disable-line
-import { useDispatch } from "react-redux"; // eslint-disable-line
-import { refreshUserToken } from "../../services/user-actions"; // eslint-disable-line
+import { useDispatch, useSelector } from "react-redux"; // eslint-disable-line
+import { getUserData, refreshUserToken } from "../../services/user-actions"; // eslint-disable-line
+import Loader from "../loader";
 
 const ProtectedRoute = ({ children, ...rest }) => {
-  // const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
+  const userEmail = useSelector((store) => store.user.email);
   const isToken = !!localStorage.getItem("refreshToken");
 
-  // useEffect(() => {
-  //   if (isToken) {
-  //     dispatch(refreshUserToken());
-  //   }
-  // }, []);
+  const getUserRequest = useSelector((store) => store.user.getUserRequest);
+
+  useEffect(() => {
+    if (isToken) {
+      dispatch(getUserData());
+    }
+  }, []);
+
+  if (getUserRequest && isToken && !userEmail) {
+    return <Loader />;
+  }
 
   return (
     <Route

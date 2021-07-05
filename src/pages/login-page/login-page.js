@@ -1,11 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import UserForm from "../../components/user-form";
 
 const LoginPage = () => {
+  const location = useLocation();
   const userEmail = useSelector((store) => store.user.email);
-  const userToken = localStorage.getItem("refreshToken");
+  // const userToken = localStorage.getItem("refreshToken");
 
   const title = "Вход";
   const links = (
@@ -21,8 +22,10 @@ const LoginPage = () => {
     </>
   );
 
-  if (userEmail || userToken) {
-    return <Redirect to={{ pathname: "/" }} />;
+  if (userEmail) {
+    const { from } = location.state || { from: { pathname: "/" } };
+
+    return <Redirect to={from} />;
   }
 
   return <UserForm title={title} links={links} type="login" />;

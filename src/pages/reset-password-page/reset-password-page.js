@@ -6,6 +6,7 @@ import UserForm from "../../components/user-form";
 const ResetPasswordPage = () => {
   const forgotSuccess = useSelector((store) => store.user.forgotSuccess);
   const userToken = localStorage.getItem("refreshToken");
+  const userEmail = useSelector((store) => store.user.email);
 
   const title = "Восстановление пароля";
   const links = (
@@ -17,11 +18,11 @@ const ResetPasswordPage = () => {
     </>
   );
 
-  if (userToken) {
+  if (userEmail && userToken) {
     return <Redirect to={{ pathname: "/" }} />;
   }
 
-  if (!userToken && !forgotSuccess) {
+  if (!forgotSuccess) {
     return <Redirect to={{ pathname: "/forgot-password" }} />;
   }
 

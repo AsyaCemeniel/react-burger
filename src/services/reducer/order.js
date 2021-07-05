@@ -10,6 +10,7 @@ const initialState = {
   isOrderInvalid: false,
   orderRequest: false,
   orderFailure: false,
+  isOrdered: false,
 };
 
 const Order = (state = initialState, action) => {
@@ -35,12 +36,11 @@ const Order = (state = initialState, action) => {
         orderRequest: false,
         orderFailure: true,
       };
-    // case DELETE_ORDER_DETAILS:
-    //   return {
-    //     ...state,
-    //     order: null,
-    //     isOrderInvalid: false,
-    //   };
+    case DELETE_ORDER_DETAILS:
+      return {
+        ...state,
+        isOrdered: payload,
+      };
     default:
       return state;
   }

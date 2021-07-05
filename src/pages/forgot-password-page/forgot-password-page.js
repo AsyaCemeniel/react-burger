@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import UserForm from "../../components/user-form";
+import { getUserData } from "../../services/user-actions";
+import Loader from "../../components/loader";
 
 const ForgotPasswordPage = () => {
+  const dispatch = useDispatch();
+  const userEmail = useSelector((store) => store.user.email);
+  const { getUserRequest } = useSelector((store) => store.user);
+
+  useEffect(() => {
+    dispatch(getUserData());
+  }, []);
+
+  if (getUserRequest) {
+    return <Loader />;
+  }
+
   const title = "Восстановление пароля";
   const links = (
     <>
@@ -13,7 +28,7 @@ const ForgotPasswordPage = () => {
     </>
   );
 
-  if (localStorage.getItem("refreshToken")) {
+  if (userEmail && localStorage.getItem("refreshToken")) {
     return <Redirect to={{ pathname: "/" }} />;
   }
 

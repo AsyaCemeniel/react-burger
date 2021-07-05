@@ -55,13 +55,14 @@ const BurgerConstructor = () => {
           background: location,
         },
       });
+      ClearBurgerConstructor();
     } else {
       dispatch(push("/login"));
     }
   };
 
   const ClearBurgerConstructor = () => {
-    dispatch({ type: DELETE_ORDER_DETAILS });
+    dispatch({ type: DELETE_ORDER_DETAILS, payload: true });
   };
 
   //======================= * DND hooks and functions * ===============================================
@@ -130,7 +131,11 @@ const BurgerConstructor = () => {
   );
 
   return (
-    <section ref={dropTarget} className={`ml-5  ${styles.section}`}>
+    <section
+      ref={dropTarget}
+      className={`ml-5  ${styles.section}`}
+      id="container"
+    >
       <div className={styles.main}>
         {Object.keys(bun).length ? (
           <ConstructorElement
