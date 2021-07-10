@@ -33,7 +33,8 @@ const BurgerConstructor = () => {
   );
   const totalPrice = calculateTotalPrice(stuffingIngredients, bun);
 
-  stuffingIngredients.unshift(bun, bun);
+  stuffingIngredients.unshift(bun);
+  stuffingIngredients.push(bun);
 
   //======================== * functions for constructor elements * =======================
 
