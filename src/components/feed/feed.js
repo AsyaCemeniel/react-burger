@@ -1,37 +1,35 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useRouteMatch, Link, useLocation } from "react-router-dom";
-import { feed } from "../../utils/feed-data";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import FeedItem from "./feed-item";
 import styles from "./feed.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { ActionTypes } from "../../services/feed-actions";
 
-const Feed = ({ isStatus }) => {
-  const match = useRouteMatch();
+const Feed = () => {
   const location = useLocation();
+
+  const { orders } = useSelector((store) => store.wsFeed.messages);
 
   return (
     <section className={`${styles.main}`}>
       <ul className={`${styles.scroll}`}>
-        {feed.map((item, index) => (
-          <li key={index}>
-            <Link
-              to={{
-                pathname: `${match.url}/${item.number}`,
-                state: { background: location },
-              }}
-              className={styles.link}
-            >
-              <FeedItem item={item} isStatus={isStatus} />
-            </Link>
-          </li>
-        ))}
+        {orders &&
+          orders.map((item, index) => (
+            <li key={index}>
+              <Link
+                to={{
+                  pathname: `/feed/${item.number}`,
+                  state: { background: location },
+                }}
+                className={styles.link}
+              >
+                <FeedItem item={item} isStatus={false} />
+              </Link>
+            </li>
+          ))}
       </ul>
     </section>
   );
-};
-
-Feed.propTypes = {
-  isStatus: PropTypes.bool,
 };
 
 export default Feed;

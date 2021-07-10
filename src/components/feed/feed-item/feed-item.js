@@ -2,15 +2,32 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./feed-item.module.css";
+import {
+  calculateTotalPrice,
+  getOrderDate,
+  getOrderIngredients,
+} from "../../../utils";
+import { useSelector } from "react-redux";
 
 const textColor = {
-  Выполнен: "#F2F2F3",
-  Готовится: "#00CCCC",
-  Отменен: "#E52B1A",
+  done: "#00CCCC",
+  pending: "#F2F2F3",
+  cancel: "#E52B1A",
 };
 
 const FeedItem = ({ item, isStatus }) => {
-  const { number, date, name, status, data, price } = item;
+  const { ingredients, status, name, createdAt, number } = item;
+
+  const allIngredients = useSelector(
+    (store) => store.burgerIngredients.ingredients
+  );
+  console.log("allIngredients = ", allIngredients);
+
+  const itemIngredients = getOrderIngredients(allIngredients, ingredients);
+  console.log("INGREDIENTS", itemIngredients);
+
+  const date = getOrderDate(createdAt);
+  const price = calculateTotalPrice(itemIngredients);
 
   const maxAmount = 5;
 
@@ -35,7 +52,7 @@ const FeedItem = ({ item, isStatus }) => {
       </div>
       <div className={`pl-6 pr-6 pb-6 ${styles.info}`}>
         <ul className={`${styles.ingredients}`}>
-          {data.map((item, index) => {
+          {itemIngredients?.map((item, index) => {
             const zIndex = maxAmount - index;
             if (index < maxAmount) {
               return (
@@ -59,11 +76,12 @@ const FeedItem = ({ item, isStatus }) => {
                     src={item.image_mobile}
                     alt={item.name}
                     style={{
-                      opacity: data.length > maxAmount + 1 ? "0.4" : "1",
+                      opacity:
+                        itemIngredients.length > maxAmount + 1 ? "0.4" : "1",
                     }}
                   />
-                  {data.length > maxAmount + 1 && (
-                    <span>+{data.length - index - 1}</span>
+                  {itemIngredients.length > maxAmount + 1 && (
+                    <span>+{itemIngredients.length - index - 1}</span>
                   )}
                 </li>
               );

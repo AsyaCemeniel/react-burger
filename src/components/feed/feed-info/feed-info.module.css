@@ -11,10 +11,16 @@
 
 .numbers {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.numbers span {
+.numbers ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.numbers li {
   margin-bottom: 8px;
 }
 

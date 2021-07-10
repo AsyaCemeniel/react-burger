@@ -1,3 +1,10 @@
+import {
+  getIngredients,
+  getOrderNumber,
+  getOrderRequest,
+  getUserOrderRequest,
+} from "../utils/burger-api";
+
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
 export const GET_INGREDIENTS_FAILURE = "GET_INGREDIENTS_FAILURE";
@@ -11,6 +18,15 @@ export const GET_ORDER_DETAILS_SUCCESS = "GET_ORDER_DETAILS_SUCCESS";
 export const GET_ORDER_DETAILS_FAILURE = "GET_ORDER_DETAILS_FAILURE";
 
 export const DELETE_ORDER_DETAILS = "DELETE_ORDER_DETAILS";
+
+export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
+export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
+export const GET_ORDER_FAILURE = "GET_ORDER_FAILURE";
+
+export const GET_USER_ORDER_REQUEST = "GET_ORDER_REQUEST";
+export const GET_USER_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
+export const GET_USER_ORDER_FAILURE = "GET_ORDER_FAILURE";
+
 export const DELETE_ORDER = "DELETE_ORDER";
 
 export function getBurgerIngredients() {
@@ -20,18 +36,15 @@ export function getBurgerIngredients() {
     });
 
     try {
-      const res = await fetch(
-        "https://norma.nomoreparties.space/api/ingredients"
-      );
-      if (!res.ok) {
+      const res = await getIngredients();
+      if (res && res.success) {
+        dispatch({
+          type: GET_INGREDIENTS_SUCCESS,
+          payload: res.data,
+        });
+      } else {
         throw new Error("Response status is not OK");
       }
-
-      const resData = await res.json();
-      dispatch({
-        type: GET_INGREDIENTS_SUCCESS,
-        payload: resData.data,
-      });
     } catch (error) {
       dispatch({
         type: GET_INGREDIENTS_FAILURE,
@@ -42,33 +55,74 @@ export function getBurgerIngredients() {
 }
 
 export function getOrderDetails(orderData, isOrderValid) {
-  const postData = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ingredients: orderData }),
-  };
-
   return async function (dispatch) {
     dispatch({
       type: GET_ORDER_DETAILS_REQUEST,
     });
 
     try {
-      const res = await fetch(
-        "https://norma.nomoreparties.space/api/orders",
-        postData
-      );
-      if (!res.ok) {
+      const res = await getOrderNumber(orderData);
+      if (res && res.success) {
+        dispatch({
+          type: GET_ORDER_DETAILS_SUCCESS,
+          payload: { orderNumber: res.order.number, isInvalid: !isOrderValid },
+        });
+      } else {
         throw new Error("Response status is not OK");
       }
-      const resData = await res.json();
-      dispatch({
-        type: GET_ORDER_DETAILS_SUCCESS,
-        payload: { order: resData.order.number, isInvalid: !isOrderValid },
-      });
     } catch (error) {
       dispatch({
         type: GET_ORDER_DETAILS_FAILURE,
+      });
+      console.log("There is a problem with your Fetch request", error.message);
+    }
+  };
+}
+
+export function getOrder(orderNumber) {
+  return async function (dispatch) {
+    dispatch({
+      type: GET_ORDER_REQUEST,
+    });
+
+    try {
+      const res = await getOrderRequest(orderNumber);
+      if (res && res.success) {
+        dispatch({
+          type: GET_ORDER_SUCCESS,
+          payload: res.orders[0],
+        });
+      } else {
+        throw new Error("Response status is not OK");
+      }
+    } catch (error) {
+      dispatch({
+        type: GET_ORDER_FAILURE,
+      });
+      console.log("There is a problem with your Fetch request", error.message);
+    }
+  };
+}
+
+export function getUserOrder(orderNumber) {
+  return async function (dispatch) {
+    dispatch({
+      type: GET_USER_ORDER_REQUEST,
+    });
+
+    try {
+      const res = await getUserOrderRequest(orderNumber);
+      if (res && res.success) {
+        dispatch({
+          type: GET_USER_ORDER_SUCCESS,
+          payload: res.orders[0],
+        });
+      } else {
+        throw new Error("Response status is not OK");
+      }
+    } catch (error) {
+      dispatch({
+        type: GET_USER_ORDER_FAILURE,
       });
       console.log("There is a problem with your Fetch request", error.message);
     }

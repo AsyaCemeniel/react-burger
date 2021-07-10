@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import AppHeader from "../app-header";
 import Popup from "../popup";
@@ -15,10 +15,23 @@ import ProfilePage from "../../pages/profile-page";
 import OrderPage from "../../pages/order-page";
 import ProtectedRoute from "../protected-route";
 import ingredientDetails from "../ingredient-details";
+import { useDispatch, useSelector } from "react-redux";
+import { getBurgerIngredients } from "../../services/actions";
 
 function App() {
   const location = useLocation();
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const isIngredientsLoaded = useSelector(
+    (store) => store.burgerIngredients.isIngredientsLoaded
+  );
+
+  useEffect(() => {
+    if (!isIngredientsLoaded) {
+      dispatch(getBurgerIngredients());
+    }
+  }, [dispatch, isIngredientsLoaded]);
 
   let background =
     (history.action === "PUSH" || history.action === "REPLACE") &&

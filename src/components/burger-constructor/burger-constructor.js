@@ -30,6 +30,7 @@ const BurgerConstructor = () => {
   const stuffingIngredients = burgerStuffing.map(
     (ingredient) => ingredient.item
   );
+  stuffingIngredients.unshift(bun, bun);
 
   const totalPrice =
     stuffingIngredients.reduce((total, item) => total + item.price, 0) +

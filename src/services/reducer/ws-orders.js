@@ -31,7 +31,7 @@ const wsOrders = (state = initialState, action) => {
     case onMessage:
       return {
         ...state,
-        messages: payload,
+        messages: payload.data,
       };
     default:
       return state;
