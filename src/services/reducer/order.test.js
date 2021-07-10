@@ -1,6 +1,5 @@
 import {
   DELETE_ORDER_DETAILS,
-  GET_INGREDIENTS_SUCCESS,
   GET_ORDER_DETAILS_FAILURE,
   GET_ORDER_DETAILS_REQUEST,
   GET_ORDER_DETAILS_SUCCESS,
@@ -8,10 +7,15 @@ import {
 import order from "./order";
 
 const state = {
-  order: null,
+  orderNumber: null,
   isOrderInvalid: false,
+  orderNumberRequest: false,
+  orderNumberFailure: false,
+
+  currentOrder: {},
   orderRequest: false,
   orderFailure: false,
+
   isOrdered: false,
 };
 
@@ -22,13 +26,13 @@ describe("order reducer", () => {
 
   it("should set order request to true", () => {
     expect(order(state, { type: GET_ORDER_DETAILS_REQUEST })).toEqual(
-      expect.objectContaining({ orderRequest: true })
+      expect.objectContaining({ orderNumberRequest: true })
     );
   });
 
   it("should set order failure to true", () => {
     expect(order(state, { type: GET_ORDER_DETAILS_FAILURE })).toEqual(
-      expect.objectContaining({ orderFailure: true })
+      expect.objectContaining({ orderNumberFailure: true })
     );
   });
 
@@ -36,9 +40,11 @@ describe("order reducer", () => {
     expect(
       order(state, {
         type: GET_ORDER_DETAILS_SUCCESS,
-        payload: { order: 4444, isInvalid: false },
+        payload: { orderNumber: 4444, isInvalid: false },
       })
-    ).toEqual(expect.objectContaining({ order: 4444, isOrderInvalid: false }));
+    ).toEqual(
+      expect.objectContaining({ orderNumber: 4444, isOrderInvalid: false })
+    );
   });
 
   it("should set order status", () => {
