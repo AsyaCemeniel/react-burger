@@ -16,6 +16,7 @@ import { useDrop } from "react-dnd";
 import ConstructorItem from "./constructor-item/constructor-item";
 import { useHistory, useLocation } from "react-router-dom";
 import { push } from "connected-react-router";
+import { calculateTotalPrice } from "../../utils";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -30,11 +31,9 @@ const BurgerConstructor = () => {
   const stuffingIngredients = burgerStuffing.map(
     (ingredient) => ingredient.item
   );
-  stuffingIngredients.unshift(bun, bun);
+  const totalPrice = calculateTotalPrice(stuffingIngredients, bun);
 
-  const totalPrice =
-    stuffingIngredients.reduce((total, item) => total + item.price, 0) +
-    (bun?.price || 0) * 2;
+  stuffingIngredients.unshift(bun, bun);
 
   //======================== * functions for constructor elements * =======================
 
