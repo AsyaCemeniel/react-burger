@@ -60,7 +60,7 @@ const FeedInfo = () => {
           Выполнено за все время:
         </span>
         <span className={`text text_type_digits-large ${styles.light}`}>
-          {totalToday}
+          {total}
         </span>
       </div>
       <div className={`ml-4 mt-10 ${styles.total}`}>
@@ -68,7 +68,7 @@ const FeedInfo = () => {
           Выполнено за сегодня:
         </span>
         <span className={`text text_type_digits-large ${styles.light}`}>
-          {total}
+          {totalToday}
         </span>
       </div>
     </div>
