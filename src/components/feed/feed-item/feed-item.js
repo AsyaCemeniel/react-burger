@@ -21,10 +21,8 @@ const FeedItem = ({ item, isStatus }) => {
   const allIngredients = useSelector(
     (store) => store.burgerIngredients.ingredients
   );
-  console.log("allIngredients = ", allIngredients);
 
   const itemIngredients = getOrderIngredients(allIngredients, ingredients);
-  console.log("INGREDIENTS", itemIngredients);
 
   const date = getOrderDate(createdAt);
   const price = calculateTotalPrice(itemIngredients);

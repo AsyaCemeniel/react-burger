@@ -50,7 +50,7 @@ export const calculateTotalPrice = (ingredients, bun) => {
 export const getOrderIngredients = (ingredients, ids) => {
   if (!ingredients || ingredients.length === 0 || !ids || ids.length === 0)
     return;
-  return ids.map((id) => {
+  const result = ids.map((id) => {
     const ingredient = ingredients?.filter((item) => item._id === id)[0];
     const count = ids.filter((idForCount) => idForCount === id).length;
     if (ingredient) {
@@ -58,6 +58,7 @@ export const getOrderIngredients = (ingredients, ids) => {
     }
     return ingredient;
   });
+  return result.filter((item) => !!item);
 };
 
 const CurrentDay = (dayCount) =>
