@@ -17,15 +17,17 @@ export const GET_ORDER_DETAILS_REQUEST = "GET_ORDER_DETAILS_REQUEST";
 export const GET_ORDER_DETAILS_SUCCESS = "GET_ORDER_DETAILS_SUCCESS";
 export const GET_ORDER_DETAILS_FAILURE = "GET_ORDER_DETAILS_FAILURE";
 
+export const SET_ORDER_INVALID = "SET_ORDER_INVALID";
+
 export const DELETE_ORDER_DETAILS = "DELETE_ORDER_DETAILS";
 
-export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
-export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
-export const GET_ORDER_FAILURE = "GET_ORDER_FAILURE";
+// export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
+// export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
+// export const GET_ORDER_FAILURE = "GET_ORDER_FAILURE";
 
-export const GET_USER_ORDER_REQUEST = "GET_ORDER_REQUEST";
-export const GET_USER_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
-export const GET_USER_ORDER_FAILURE = "GET_ORDER_FAILURE";
+// export const GET_USER_ORDER_REQUEST = "GET_ORDER_REQUEST";
+// export const GET_USER_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
+// export const GET_USER_ORDER_FAILURE = "GET_ORDER_FAILURE";
 
 export const DELETE_ORDER = "DELETE_ORDER";
 
@@ -54,7 +56,7 @@ export function getBurgerIngredients() {
   };
 }
 
-export function getOrderDetails(orderData, isOrderValid) {
+export function getOrderDetails(orderData) {
   return async function (dispatch) {
     dispatch({
       type: GET_ORDER_DETAILS_REQUEST,
@@ -65,7 +67,7 @@ export function getOrderDetails(orderData, isOrderValid) {
       if (res && res.success) {
         dispatch({
           type: GET_ORDER_DETAILS_SUCCESS,
-          payload: { orderNumber: res.order.number, isInvalid: !isOrderValid },
+          payload: res.order.number,
         });
       } else {
         throw new Error("Response status is not OK");
@@ -79,52 +81,52 @@ export function getOrderDetails(orderData, isOrderValid) {
   };
 }
 
-export function getOrder(orderNumber) {
-  return async function (dispatch) {
-    dispatch({
-      type: GET_ORDER_REQUEST,
-    });
+// export function getOrder(orderNumber) {
+//   return async function (dispatch) {
+//     dispatch({
+//       type: GET_ORDER_REQUEST,
+//     });
 
-    try {
-      const res = await getOrderRequest(orderNumber);
-      if (res && res.success) {
-        dispatch({
-          type: GET_ORDER_SUCCESS,
-          payload: res.orders[0],
-        });
-      } else {
-        throw new Error("Response status is not OK");
-      }
-    } catch (error) {
-      dispatch({
-        type: GET_ORDER_FAILURE,
-      });
-      console.log("There is a problem with your Fetch request", error.message);
-    }
-  };
-}
+//     try {
+//       const res = await getOrderRequest(orderNumber);
+//       if (res && res.success) {
+//         dispatch({
+//           type: GET_ORDER_SUCCESS,
+//           payload: res.orders[0],
+//         });
+//       } else {
+//         throw new Error("Response status is not OK");
+//       }
+//     } catch (error) {
+//       dispatch({
+//         type: GET_ORDER_FAILURE,
+//       });
+//       console.log("There is a problem with your Fetch request", error.message);
+//     }
+//   };
+// }
 
-export function getUserOrder(orderNumber) {
-  return async function (dispatch) {
-    dispatch({
-      type: GET_USER_ORDER_REQUEST,
-    });
+// export function getUserOrder(orderNumber) {
+//   return async function (dispatch) {
+//     dispatch({
+//       type: GET_USER_ORDER_REQUEST,
+//     });
 
-    try {
-      const res = await getUserOrderRequest(orderNumber);
-      if (res && res.success) {
-        dispatch({
-          type: GET_USER_ORDER_SUCCESS,
-          payload: res.orders[0],
-        });
-      } else {
-        throw new Error("Response status is not OK");
-      }
-    } catch (error) {
-      dispatch({
-        type: GET_USER_ORDER_FAILURE,
-      });
-      console.log("There is a problem with your Fetch request", error.message);
-    }
-  };
-}
+//     try {
+//       const res = await getUserOrderRequest(orderNumber);
+//       if (res && res.success) {
+//         dispatch({
+//           type: GET_USER_ORDER_SUCCESS,
+//           payload: res.orders[0],
+//         });
+//       } else {
+//         throw new Error("Response status is not OK");
+//       }
+//     } catch (error) {
+//       dispatch({
+//         type: GET_USER_ORDER_FAILURE,
+//       });
+//       console.log("There is a problem with your Fetch request", error.message);
+//     }
+//   };
+// }

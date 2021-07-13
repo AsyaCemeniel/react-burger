@@ -11,6 +11,7 @@ import {
   DELETE_ORDER_DETAILS,
   getOrderDetails,
   REORDER_CONSTRUCTOR_ITEMS,
+  SET_ORDER_INVALID,
 } from "../../services/actions";
 import { useDrop } from "react-dnd";
 import ConstructorItem from "./constructor-item/constructor-item";
@@ -47,16 +48,26 @@ const BurgerConstructor = () => {
 
   const openModal = () => {
     if (isToken) {
-      const isOrderValid = Object.keys(bun).length ? true : false;
+      const isOrderValid = !!Object.keys(bun).length;
       const stuffingIds = stuffingIngredients.map((item) => item._id);
-      dispatch(getOrderDetails(stuffingIds, isOrderValid));
-      history.push({
-        pathname: "/order",
-        state: {
-          background: location,
-        },
-      });
-      ClearBurgerConstructor();
+      if (isOrderValid && stuffingIds.length > 2) {
+        dispatch(getOrderDetails(stuffingIds));
+        history.push({
+          pathname: "/order",
+          state: {
+            background: location,
+          },
+        });
+        ClearBurgerConstructor();
+      } else {
+        dispatch({ type: SET_ORDER_INVALID, payload: !isOrderValid });
+        history.push({
+          pathname: "/order",
+          state: {
+            background: location,
+          },
+        });
+      }
     } else {
       dispatch(push("/login"));
     }
