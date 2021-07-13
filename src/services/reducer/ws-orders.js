@@ -3,7 +3,7 @@ import { wsOrdersActions } from "../orders-actions";
 const initialState = {
   wsConnected: false,
   error: null,
-  messages: [],
+  messages: {},
 };
 
 const { onOpen, onClose, onError, onMessage } = wsOrdersActions;

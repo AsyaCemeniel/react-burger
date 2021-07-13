@@ -2,12 +2,8 @@ import React from "react";
 import styles from "./profile-page.module.css";
 import { NavLink, Switch, Route } from "react-router-dom";
 import UserProfile from "../../components/user-profile";
-import Feed from "../../components/feed";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getUserData, userLogout } from "../../services/user-actions";
-import Loader from "../../components/loader";
-import { ActionTypes } from "../../services/orders-actions";
+import { useDispatch } from "react-redux";
+import { userLogout } from "../../services/user-actions";
 import UserFeed from "../../components/feed/user-feed";
 
 const ProfilePage = () => {
@@ -64,7 +60,6 @@ const ProfilePage = () => {
         <Switch>
           <Route path="/profile" exact={true} component={UserProfile} />
           <Route path="/profile/orders" exact={true}>
-            {/* <Feed isStatus={true} /> */}
             <UserFeed />
           </Route>
         </Switch>

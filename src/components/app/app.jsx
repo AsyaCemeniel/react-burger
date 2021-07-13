@@ -57,17 +57,18 @@ function App() {
         />
         <Route path="/feed" exact={true} component={FeedPage} />
         <Route path="/feed/:orderNumber" exact={true} component={OrderPage} />
+        <Route
+          path="/ingredients/:id"
+          exact={true}
+          component={ingredientDetails}
+        />
         <ProtectedRoute path="/profile/orders/:orderNumber" exact={true}>
           <OrderPage />
         </ProtectedRoute>
         <ProtectedRoute path="/profile">
           <ProfilePage />
         </ProtectedRoute>
-        <Route
-          path="/ingredients/:id"
-          exact={true}
-          component={ingredientDetails}
-        />
+
         <Route component={NotFoundPage} />
       </Switch>
       {background && (
@@ -80,15 +81,6 @@ function App() {
               </Popup>
             }
           />
-          <ProtectedRoute
-            path="/profile/orders/:orderNumber"
-            children={
-              <Popup>
-                <OrderPage />
-              </Popup>
-            }
-          />
-
           <Route
             path="/feed/:orderNumber"
             children={
@@ -97,11 +89,21 @@ function App() {
               </Popup>
             }
           />
-          <ProtectedRoute
+          <Route
             path="/order"
+            exact={true}
             children={
               <Popup>
                 <OrderDetails />
+              </Popup>
+            }
+          />
+          <ProtectedRoute
+            path="/profile/orders/:orderNumber"
+            exact={true}
+            children={
+              <Popup>
+                <OrderPage />
               </Popup>
             }
           />

@@ -3,7 +3,7 @@ import { wsFeedActions } from "../feed-actions";
 const initialState = {
   wsConnected: false,
   error: null,
-  messages: [],
+  messages: {},
 };
 
 const { onOpen, onClose, onError, onMessage } = wsFeedActions;

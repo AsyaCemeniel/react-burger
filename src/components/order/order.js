@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./order.module.css";
-import { feed } from "../../utils/feed-data";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
-import { getOrder, getUserOrder } from "../../services/actions";
+
 import {
   calculateTotalPrice,
   getOrderDate,
@@ -19,16 +18,23 @@ const textColor = {
 };
 
 const Order = ({ orderNumber }) => {
-  const dispatch = useDispatch();
   const isFeed = !!useRouteMatch("/feed");
 
-  useEffect(() => {
-    dispatch(isFeed ? getOrder(orderNumber) : getUserOrder(orderNumber));
-  }, [dispatch, isFeed, orderNumber]);
+  let currentOrder;
 
-  const { currentOrder } = useSelector((store) => store.order);
+  const feedOrders = useSelector((state) => state.wsFeed.messages);
 
-  console.log("CURRENT_ORDER = ", currentOrder);
+  const userOrders = useSelector((state) => state.wsOrders.messages);
+
+  if (isFeed) {
+    currentOrder = feedOrders.orders?.find(
+      (order) => order.number === +orderNumber
+    );
+  } else {
+    currentOrder = userOrders.orders?.find(
+      (order) => order.number === +orderNumber
+    );
+  }
 
   const { name, number, createdAt, status, ingredients } = currentOrder;
 
