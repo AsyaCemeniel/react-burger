@@ -14,7 +14,7 @@ const ProtectedRoute = ({ children, ...rest }) => {
   const getUserRequest = useSelector((store) => store.user.getUserRequest);
 
   useEffect(() => {
-    if (isToken) {
+    if (isToken && !userEmail) {
       dispatch(getUserData());
     }
   }, []);
