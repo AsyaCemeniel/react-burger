@@ -2,19 +2,17 @@ import React from "react";
 import styles from "./profile-page.module.css";
 import { NavLink, Switch, Route } from "react-router-dom";
 import UserProfile from "../../components/user-profile";
-import Feed from "../../components/feed";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getUserData, userLogout } from "../../services/user-actions";
-import Loader from "../../components/loader";
+import { useDispatch } from "react-redux";
+import { userLogout } from "../../services/user-actions";
+import UserFeed from "../../components/feed/user-feed";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-  // const { getUserRequest } = useSelector((store) => store.user);
 
   // useEffect(() => {
-  //   dispatch(getUserData());
-  // }, []);
+  //   dispatch({ type: ActionTypes.INIT_CONNECTION });
+  //   return () => dispatch({ type: ActionTypes.CLOSE_CONNECTION });
+  // }, [dispatch]);
 
   // if (getUserRequest) {
   //   return <Loader />;
@@ -62,7 +60,7 @@ const ProfilePage = () => {
         <Switch>
           <Route path="/profile" exact={true} component={UserProfile} />
           <Route path="/profile/orders" exact={true}>
-            <Feed isStatus={true} />
+            <UserFeed />
           </Route>
         </Switch>
       </div>

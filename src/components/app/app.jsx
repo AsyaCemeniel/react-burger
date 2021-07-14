@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import AppHeader from "../app-header";
 import Popup from "../popup";
@@ -15,10 +15,23 @@ import ProfilePage from "../../pages/profile-page";
 import OrderPage from "../../pages/order-page";
 import ProtectedRoute from "../protected-route";
 import ingredientDetails from "../ingredient-details";
+import { useDispatch, useSelector } from "react-redux";
+import { getBurgerIngredients } from "../../services/actions";
 
 function App() {
   const location = useLocation();
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const isIngredientsLoaded = useSelector(
+    (store) => store.burgerIngredients.isIngredientsLoaded
+  );
+
+  useEffect(() => {
+    if (!isIngredientsLoaded) {
+      dispatch(getBurgerIngredients());
+    }
+  }, [dispatch, isIngredientsLoaded]);
 
   let background =
     (history.action === "PUSH" || history.action === "REPLACE") &&
@@ -44,17 +57,18 @@ function App() {
         />
         <Route path="/feed" exact={true} component={FeedPage} />
         <Route path="/feed/:orderNumber" exact={true} component={OrderPage} />
+        <Route
+          path="/ingredients/:id"
+          exact={true}
+          component={ingredientDetails}
+        />
         <ProtectedRoute path="/profile/orders/:orderNumber" exact={true}>
           <OrderPage />
         </ProtectedRoute>
         <ProtectedRoute path="/profile">
           <ProfilePage />
         </ProtectedRoute>
-        <Route
-          path="/ingredients/:id"
-          exact={true}
-          component={ingredientDetails}
-        />
+
         <Route component={NotFoundPage} />
       </Switch>
       {background && (
@@ -67,15 +81,6 @@ function App() {
               </Popup>
             }
           />
-          <ProtectedRoute
-            path="/profile/orders/:orderNumber"
-            children={
-              <Popup>
-                <OrderPage />
-              </Popup>
-            }
-          />
-
           <Route
             path="/feed/:orderNumber"
             children={
@@ -84,11 +89,21 @@ function App() {
               </Popup>
             }
           />
-          <ProtectedRoute
+          <Route
             path="/order"
+            exact={true}
             children={
               <Popup>
                 <OrderDetails />
+              </Popup>
+            }
+          />
+          <ProtectedRoute
+            path="/profile/orders/:orderNumber"
+            exact={true}
+            children={
+              <Popup>
+                <OrderPage />
               </Popup>
             }
           />

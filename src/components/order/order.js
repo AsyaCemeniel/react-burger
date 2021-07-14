@@ -1,20 +1,59 @@
 import React from "react";
 import styles from "./order.module.css";
-import { feed } from "../../utils/feed-data";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector } from "react-redux";
+import { useRouteMatch } from "react-router";
+
+import {
+  calculateTotalPrice,
+  getOrderDate,
+  getOrderIngredients,
+} from "../../utils";
+import Loader from "../loader";
 
 const textColor = {
-  Выполнен: "#F2F2F3",
-  Готовится: "#00CCCC",
-  Отменен: "#E52B1A",
+  done: "#F2F2F3",
+  pending: "#00CCCC",
+  cancel: "#E52B1A",
 };
 
 const Order = ({ orderNumber }) => {
-  const currentOrder = feed.find(
-    (item) => item.number === parseInt(orderNumber)
+  const isFeed = !!useRouteMatch("/feed");
+
+  let currentOrder;
+
+  const feedOrders = useSelector((state) => state.wsFeed.messages);
+
+  const userOrders = useSelector((state) => state.wsOrders.messages);
+
+  if (isFeed) {
+    currentOrder = feedOrders.orders?.find(
+      (order) => order.number === +orderNumber
+    );
+  } else {
+    currentOrder = userOrders.orders?.find(
+      (order) => order.number === +orderNumber
+    );
+  }
+
+  const { name, number, createdAt, status, ingredients } = currentOrder;
+
+  const allIngredients = useSelector(
+    (store) => store.burgerIngredients.ingredients
   );
 
-  const { name, number, price, date, status, data } = currentOrder;
+  const orderIngredients = getOrderIngredients(allIngredients, ingredients);
+
+  const date = getOrderDate(createdAt);
+  const price = calculateTotalPrice(orderIngredients);
+
+  const orderIngredientsSet = orderIngredients?.filter(
+    (ingredient, index) => orderIngredients.indexOf(ingredient) === index
+  );
+
+  if (!ingredients) {
+    return <Loader />;
+  }
 
   return (
     <div className={` mb-5 mr-2 ${styles.order}`}>
@@ -33,7 +72,7 @@ const Order = ({ orderNumber }) => {
       <div className={`${styles.info}`}>
         <span className="text text_type_main-medium ">Состав:</span>
         <ul className={`mt-6 ${styles.ingredients}`}>
-          {data.map((item, index) => (
+          {orderIngredientsSet?.map((item, index) => (
             <li key={index} className={`mb-4 ${styles.item}`}>
               <div className={`${styles.row}`}>
                 <div className={`mr-4 ${styles.ingredient}`}>
@@ -43,7 +82,7 @@ const Order = ({ orderNumber }) => {
               </div>
               <div className={`mr-6 ${styles.price}`}>
                 <div className={`text text_type_digits-default mr-2`}>
-                  {item.amount} x {item.price}
+                  {item.count} x {item.price}
                 </div>
                 <CurrencyIcon type="primary" />
               </div>

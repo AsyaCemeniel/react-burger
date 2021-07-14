@@ -1,39 +1,66 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { divideIntoColumns, sortByStatus } from "../../../utils";
 import styles from "./feed-info.module.css";
 
 const FeedInfo = () => {
+  const { orders, total, totalToday } = useSelector(
+    (store) => store.wsFeed.messages
+  );
+
+  const statusColumns = sortByStatus(orders);
+
+  const doneColumns = divideIntoColumns(statusColumns?.done);
+  const pendingColumns = divideIntoColumns(statusColumns?.pending);
+
   return (
     <div className={` mt-5 mr-5 mb-5 ml-10 ${styles.main}`}>
       <div className={`ml-4 ${styles.info}`}>
         <div className={` ${styles.ready}`}>
           <span className="text text_type_main-medium">Готовы:</span>
           <div
-            className={`text text_type_digits-default mt-6 ${styles.numbers} ${styles.color}`}
+            className={`text text_type_digits-default mt-2 ${styles.numbers} ${styles.color}`}
           >
-            <span>034533</span>
-            <span>034532</span>
-            <span>034530</span>
-            <span>034527</span>
-            <span>034525</span>
+            <ul>
+              {doneColumns &&
+                doneColumns.firstColumn.map((number, index) => (
+                  <li key={index}>{number}</li>
+                ))}
+            </ul>
+            <ul>
+              {doneColumns &&
+                doneColumns.secondColumn.map((number, index) => (
+                  <li key={index}>{number}</li>
+                ))}
+            </ul>
           </div>
         </div>
         <div className={` ml-8 ${styles.preparing}`}>
           <span className="text text_type_main-medium">В работе:</span>
           <div
-            className={`text text_type_digits-default mt-6 ${styles.numbers}`}
+            className={`text text_type_digits-default mt-2 ${styles.numbers}`}
           >
-            <span>034538</span>
-            <span>034541</span>
-            <span>034542</span>
+            <ul>
+              {pendingColumns &&
+                pendingColumns.firstColumn.map((number, index) => (
+                  <li key={index}>{number}</li>
+                ))}
+            </ul>
+            <ul>
+              {pendingColumns &&
+                pendingColumns.secondColumn.map((number, index) => (
+                  <li key={index}>{number}</li>
+                ))}
+            </ul>
           </div>
         </div>
       </div>
-      <div className={`ml-4 mt-10 ${styles.total}`}>
+      <div className={`ml-4 mt-3 ${styles.total}`}>
         <span className="text text_type_main-medium">
           Выполнено за все время:
         </span>
         <span className={`text text_type_digits-large ${styles.light}`}>
-          28 752
+          {total}
         </span>
       </div>
       <div className={`ml-4 mt-10 ${styles.total}`}>
@@ -41,7 +68,7 @@ const FeedInfo = () => {
           Выполнено за сегодня:
         </span>
         <span className={`text text_type_digits-large ${styles.light}`}>
-          127
+          {totalToday}
         </span>
       </div>
     </div>

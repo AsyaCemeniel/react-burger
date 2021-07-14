@@ -4,7 +4,7 @@ import styles from "./order-details.module.css";
 import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
-  const { order, isOrderInvalid } = useSelector((store) => store.order);
+  const { orderNumber, isOrderInvalid } = useSelector((store) => store.order);
   const { burgerStuffing } = useSelector((store) => store.burgerConstructor);
 
   if (burgerStuffing.length === 0) {
@@ -30,7 +30,7 @@ const OrderDetails = () => {
       <span
         className={`text text_type_digits-large mt-4 mb-8 ${styles.shadow}`}
       >
-        {order}
+        {orderNumber}
       </span>
       <span className="text text_type_main-medium mb-5">
         идентификатор заказа

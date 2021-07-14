@@ -11,11 +11,13 @@ import {
   DELETE_ORDER_DETAILS,
   getOrderDetails,
   REORDER_CONSTRUCTOR_ITEMS,
+  SET_ORDER_INVALID,
 } from "../../services/actions";
 import { useDrop } from "react-dnd";
 import ConstructorItem from "./constructor-item/constructor-item";
 import { useHistory, useLocation } from "react-router-dom";
 import { push } from "connected-react-router";
+import { calculateTotalPrice } from "../../utils";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -30,10 +32,10 @@ const BurgerConstructor = () => {
   const stuffingIngredients = burgerStuffing.map(
     (ingredient) => ingredient.item
   );
+  const totalPrice = calculateTotalPrice(stuffingIngredients, bun);
 
-  const totalPrice =
-    stuffingIngredients.reduce((total, item) => total + item.price, 0) +
-    (bun?.price || 0) * 2;
+  stuffingIngredients.unshift(bun);
+  stuffingIngredients.push(bun);
 
   //======================== * functions for constructor elements * =======================
 
@@ -46,16 +48,26 @@ const BurgerConstructor = () => {
 
   const openModal = () => {
     if (isToken) {
-      const isOrderValid = Object.keys(bun).length ? true : false;
+      const isOrderValid = !!Object.keys(bun).length;
       const stuffingIds = stuffingIngredients.map((item) => item._id);
-      dispatch(getOrderDetails(stuffingIds, isOrderValid));
-      history.push({
-        pathname: "/order",
-        state: {
-          background: location,
-        },
-      });
-      ClearBurgerConstructor();
+      if (isOrderValid && stuffingIds.length > 2) {
+        dispatch(getOrderDetails(stuffingIds));
+        history.push({
+          pathname: "/order",
+          state: {
+            background: location,
+          },
+        });
+        ClearBurgerConstructor();
+      } else {
+        dispatch({ type: SET_ORDER_INVALID, payload: !isOrderValid });
+        history.push({
+          pathname: "/order",
+          state: {
+            background: location,
+          },
+        });
+      }
     } else {
       dispatch(push("/login"));
     }

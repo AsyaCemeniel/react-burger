@@ -7,6 +7,7 @@ import {
 const initialState = {
   ingredients: [],
   ingredientsRequest: false,
+  isIngredientsLoaded: false,
   ingredientsFailure: false,
 };
 
@@ -24,6 +25,7 @@ const BurgerIngredients = (state = initialState, action) => {
         ...state,
         ingredients: payload,
         ingredientsRequest: false,
+        isIngredientsLoaded: true,
         ingredientsFailure: false,
       };
     case GET_INGREDIENTS_FAILURE:

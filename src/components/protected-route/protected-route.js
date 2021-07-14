@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Redirect, Route } from "react-router-dom";
 import { useEffect } from "react"; // eslint-disable-line
 import { useDispatch, useSelector } from "react-redux"; // eslint-disable-line
-import { getUserData, refreshUserToken } from "../../services/user-actions"; // eslint-disable-line
+import { getUserData } from "../../services/user-actions"; // eslint-disable-line
 import Loader from "../loader";
 
 const ProtectedRoute = ({ children, ...rest }) => {
@@ -14,7 +14,7 @@ const ProtectedRoute = ({ children, ...rest }) => {
   const getUserRequest = useSelector((store) => store.user.getUserRequest);
 
   useEffect(() => {
-    if (isToken) {
+    if (isToken && !userEmail) {
       dispatch(getUserData());
     }
   }, []);
