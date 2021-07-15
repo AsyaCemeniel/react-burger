@@ -1,5 +1,4 @@
 import { getCookie, setCookie } from ".";
-import { ResetPasswordType, UserDataType, UserType } from "../types";
 
 const baseUrl = "https://norma.nomoreparties.space/api";
 const baseHeaders = { "Content-Type": "application/json" };
