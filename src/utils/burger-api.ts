@@ -53,7 +53,11 @@ export const getUserOrderRequest = async (orderNumber: string) => {
   });
 };
 
-export const register = async ({ email, password, name }: UserType) => {
+export const register = async (
+  email: string,
+  password: string,
+  name: string
+) => {
   const res = await fetch(`${baseUrl}/auth/register`, {
     method: "POST",
     headers: baseHeaders,
@@ -62,7 +66,7 @@ export const register = async ({ email, password, name }: UserType) => {
   return await handleRequest(res);
 };
 
-export const login = async ({ email, password }: UserType) => {
+export const login = async (email: string, password: string) => {
   const res = await fetch(`${baseUrl}/auth/login`, {
     method: "POST",
     headers: baseHeaders,
@@ -80,7 +84,7 @@ export const forgotPassword = async (email: string) => {
   return await handleRequest(res);
 };
 
-export const resetPassword = async ({ password, token }: ResetPasswordType) => {
+export const resetPassword = async (password: string, token: string) => {
   const res = await fetch(`${baseUrl}/password-reset/reset`, {
     method: "POST",
     headers: baseHeaders,
@@ -136,7 +140,11 @@ export const getUser = async () => {
   });
 };
 
-export const updateUser = async ({ name, email, password }: UserDataType) => {
+export const updateUser = async (
+  name: string,
+  email: string,
+  password: string | undefined
+) => {
   return await fetchWithRefresh(`${baseUrl}/auth/user`, {
     method: "PATCH",
     headers: {

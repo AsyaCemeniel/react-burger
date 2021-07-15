@@ -35,22 +35,22 @@ export type OrderInfoType = {
   success: boolean;
 };
 
-export type UserType = {
-  email: string;
-  name?: string;
-  password: string;
-};
+// export type UserType = {
+//   email: string;
+//   name?: string;
+//   password: string;
+// };
 
-export type UserDataType = {
-  email: string;
-  name: string;
-  password?: string;
-};
+// export type UserDataType = {
+//   email: string;
+//   name: string;
+//   password?: string;
+// };
 
-export type ResetPasswordType = {
-  password: string;
-  token: string;
-};
+// export type ResetPasswordType = {
+//   password: string;
+//   token: string;
+// };
 
 export type CookiePropsType = {
   expires?: number | string;

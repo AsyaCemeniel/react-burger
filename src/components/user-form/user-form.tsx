@@ -19,9 +19,9 @@ import { FormType } from "./types";
 const UserForm: FC<FormType> = ({ title, links, type }) => {
   const dispatch = useDispatch();
 
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
-  const [nameValue, setNameValue] = useState("");
+  const [emailValue, setEmailValue] = useState<string>("");
+  const [passwordValue, setPasswordValue] = useState<string>("");
+  const [nameValue, setNameValue] = useState<string>("");
 
   const handleLogin = (event: SyntheticEvent) => {
     event.preventDefault();
@@ -47,7 +47,7 @@ const UserForm: FC<FormType> = ({ title, links, type }) => {
     switch (type) {
       case "login":
         return (
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleLogin} className={styles.form}>
             <Input
               type="email"
               placeholder="E-mail"
@@ -66,7 +66,7 @@ const UserForm: FC<FormType> = ({ title, links, type }) => {
         );
       case "register":
         return (
-          <form onSubmit={handleRegister}>
+          <form onSubmit={handleRegister} className={styles.form}>
             <Input
               type="text"
               placeholder="Имя"
@@ -91,7 +91,7 @@ const UserForm: FC<FormType> = ({ title, links, type }) => {
         );
       case "forgot-password":
         return (
-          <form onSubmit={handleCodeSend}>
+          <form onSubmit={handleCodeSend} className={styles.form}>
             <Input
               type="email"
               placeholder="Укажите e-mail"
@@ -105,7 +105,7 @@ const UserForm: FC<FormType> = ({ title, links, type }) => {
         );
       case "reset-password":
         return (
-          <form onSubmit={handlePasswordRenew}>
+          <form onSubmit={handlePasswordRenew} className={styles.form}>
             <Input
               type="password"
               placeholder="Введите новый пароль"
@@ -132,7 +132,7 @@ const UserForm: FC<FormType> = ({ title, links, type }) => {
   return (
     <div className={styles.main}>
       <span className={`text text_type_main-medium mb-3`}>{title}</span>
-      <div className={styles.form}>{content}</div>
+      <div>{content}</div>
       <div className={styles.link}>{links}</div>
     </div>
   );
