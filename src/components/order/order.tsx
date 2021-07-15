@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./order.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import {
   getOrderIngredients,
 } from "../../utils";
 import Loader from "../loader";
+import { OrderType } from "../../types";
 
 const textColor = {
   done: "#F2F2F3",
@@ -17,29 +18,29 @@ const textColor = {
   cancel: "#E52B1A",
 };
 
-const Order = ({ orderNumber }) => {
+const Order: FC<{ orderNumber: string }> = ({ orderNumber }) => {
   const isFeed = !!useRouteMatch("/feed");
 
   let currentOrder;
 
-  const feedOrders = useSelector((state) => state.wsFeed.messages);
+  const feedOrders = useSelector((store: any) => store.wsFeed.messages);
 
-  const userOrders = useSelector((state) => state.wsOrders.messages);
+  const userOrders = useSelector((store: any) => store.wsOrders.messages);
 
   if (isFeed) {
     currentOrder = feedOrders.orders?.find(
-      (order) => order.number === +orderNumber
+      (order: OrderType) => order.number === +orderNumber
     );
   } else {
     currentOrder = userOrders.orders?.find(
-      (order) => order.number === +orderNumber
+      (order: OrderType) => order.number === +orderNumber
     );
   }
 
   const { name, number, createdAt, status, ingredients } = currentOrder;
 
   const allIngredients = useSelector(
-    (store) => store.burgerIngredients.ingredients
+    (store: any) => store.burgerIngredients.ingredients
   );
 
   const orderIngredients = getOrderIngredients(allIngredients, ingredients);
@@ -64,7 +65,7 @@ const Order = ({ orderNumber }) => {
         <span className="text text_type_main-medium">{name}</span>
         <span
           className="text text_type_main-default mt-5"
-          style={{ color: textColor[status] }}
+          // style={{ color: textColor[status] }}
         >
           {status}
         </span>
@@ -102,7 +103,5 @@ const Order = ({ orderNumber }) => {
     </div>
   );
 };
-
-//TODO propsTypes
 
 export default Order;

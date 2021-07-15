@@ -1,6 +1,5 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
-import PropTypes from "prop-types";
+import React, { FC } from "react";
 import styles from "./feed-item.module.css";
 import {
   calculateTotalPrice,
@@ -8,6 +7,8 @@ import {
   getOrderIngredients,
 } from "../../../utils";
 import { useSelector } from "react-redux";
+import { FeedPropsType } from "./types";
+import { IngredientType } from "../../../types";
 
 const textColor = {
   done: "#00CCCC",
@@ -15,11 +16,11 @@ const textColor = {
   cancel: "#E52B1A",
 };
 
-const FeedItem = ({ item, isStatus }) => {
+const FeedItem: FC<FeedPropsType> = ({ item, isStatus }) => {
   const { ingredients, status, name, createdAt, number } = item;
 
   const allIngredients = useSelector(
-    (store) => store.burgerIngredients.ingredients
+    (store: any) => store.burgerIngredients.ingredients
   );
 
   const itemIngredients = getOrderIngredients(allIngredients, ingredients);
@@ -42,7 +43,7 @@ const FeedItem = ({ item, isStatus }) => {
         {isStatus && (
           <span
             className="text text_type_main-default"
-            style={{ color: textColor[status] }}
+            // style={{ color: textColor.status }}
           >
             {status}
           </span>
@@ -50,7 +51,7 @@ const FeedItem = ({ item, isStatus }) => {
       </div>
       <div className={`pl-6 pr-6 pb-6 ${styles.info}`}>
         <ul className={`${styles.ingredients}`}>
-          {itemIngredients?.map((item, index) => {
+          {itemIngredients?.map((item: IngredientType, index: number) => {
             const zIndex = maxAmount - index;
             if (index < maxAmount) {
               return (
@@ -94,11 +95,6 @@ const FeedItem = ({ item, isStatus }) => {
       </div>
     </div>
   );
-};
-
-FeedItem.propTypes = {
-  item: PropTypes.object,
-  isStatus: PropTypes.bool,
 };
 
 export default FeedItem;

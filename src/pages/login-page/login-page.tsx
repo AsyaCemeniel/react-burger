@@ -4,8 +4,8 @@ import { Link, Redirect, useLocation } from "react-router-dom";
 import UserForm from "../../components/user-form";
 
 const LoginPage = () => {
-  const location = useLocation();
-  const userEmail = useSelector((store) => store.user.email);
+  const location = useLocation<{ from: { pathname: string } }>();
+  const userEmail = useSelector((store: any) => store.user.email);
   // const userToken = localStorage.getItem("refreshToken");
 
   const title = "Вход";

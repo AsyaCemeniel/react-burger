@@ -3,16 +3,19 @@ import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getBurgerIngredients } from "../../services/actions";
+import { IngredientType } from "../../types";
 
 const IngredientDetails = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   const ingredients = useSelector(
-    (store) => store.burgerIngredients.ingredients
+    (store: any) => store.burgerIngredients.ingredients
   );
 
-  const product = ingredients.find((ingredient) => ingredient._id === id);
+  const product = ingredients.find(
+    (ingredient: IngredientType) => ingredient._id === id
+  );
 
   useEffect(() => {
     if (!product) {

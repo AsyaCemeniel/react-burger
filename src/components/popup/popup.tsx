@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import Modal from "./modal";
 import ModalOverlay from "./modal-overlay";
 import styles from "./popup.module.css";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { DELETE_ORDER, DELETE_ORDER_DETAILS } from "../../services/actions";
+import { PopupProps } from "./types";
 
-const modalRoot = document.getElementById("modal");
+const modalRoot = document.getElementById("modal") as Element;
 
-const Popup = ({ children, title }) => {
+const Popup: FC<PopupProps> = ({ children, title }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isOrdered } = useSelector((store) => store.order);
+  const { isOrdered } = useSelector((store: any) => store.order);
 
   const onClose = () => {
     history.goBack();
@@ -23,7 +23,7 @@ const Popup = ({ children, title }) => {
     }
   };
 
-  const exitOnEsc = (event) => {
+  const exitOnEsc = (event: KeyboardEvent) => {
     if (event.keyCode === 27) {
       onClose();
     }
@@ -46,11 +46,6 @@ const Popup = ({ children, title }) => {
     </div>,
     modalRoot
   );
-};
-
-Popup.propTypes = {
-  children: PropTypes.element,
-  title: PropTypes.string,
 };
 
 export default Popup;
