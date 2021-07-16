@@ -54,6 +54,7 @@ const BurgerConstructor = () => {
         (item: IngredientType) => item._id
       );
       if (isOrderValid && stuffingIds.length > 2) {
+        dispatch({ type: SET_ORDER_INVALID, payload: !isOrderValid });
         dispatch(getOrderDetails(stuffingIds));
         history.push({
           pathname: "/order",
