@@ -17,7 +17,7 @@ const UserFeed = () => {
     };
   }, [dispatch]);
 
-  const { orders } = useSelector((store: any) => store.wsOrders.messages);
+  const { orders } = useSelector((store: any) => store.wsOrders.messages || {});
 
   return (
     <section className={`${styles.main}`}>

@@ -8,7 +8,7 @@ import { OrderType } from "../../types";
 const Feed = () => {
   const location = useLocation();
 
-  const { orders } = useSelector((store: any) => store.wsFeed.messages);
+  const { orders } = useSelector((store: any) => store.wsFeed.messages || {});
 
   return (
     <section className={`${styles.main}`}>

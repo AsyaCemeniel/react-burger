@@ -5,7 +5,7 @@ import styles from "./feed-info.module.css";
 
 const FeedInfo = () => {
   const { orders, total, totalToday } = useSelector(
-    (store: any) => store.wsFeed.messages
+    (store: any) => store.wsFeed.messages || {}
   );
 
   const statusColumns = sortByStatus(orders);
