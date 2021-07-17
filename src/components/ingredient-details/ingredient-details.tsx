@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getBurgerIngredients } from "../../services/actions";
+import { useSelector } from "react-redux";
 import { IngredientType } from "../../types";
 
 const IngredientDetails = () => {
-  const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
 
   const ingredients = useSelector(
@@ -16,12 +14,6 @@ const IngredientDetails = () => {
   const product = ingredients.find(
     (ingredient: IngredientType) => ingredient._id === id
   );
-
-  useEffect(() => {
-    if (!product) {
-      dispatch(getBurgerIngredients());
-    }
-  }, []);
 
   return (
     <>
