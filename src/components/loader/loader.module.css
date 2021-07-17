@@ -1,5 +1,7 @@
 .loading {
   display: flex;
+  height: 80vh;
+  align-items: center;
 }
 .loading .dot {
   position: relative;

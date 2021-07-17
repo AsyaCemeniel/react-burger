@@ -2,7 +2,7 @@ import {
   Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserData } from "../../services/user-actions";
 import styles from "./user-profile.module.css";
@@ -10,8 +10,8 @@ import styles from "./user-profile.module.css";
 const UserProfile = () => {
   const dispatch = useDispatch();
 
-  const currentName = useSelector((store) => store.user.name);
-  const currentEmail = useSelector((store) => store.user.email);
+  const currentName = useSelector((store: any) => store.user.name);
+  const currentEmail = useSelector((store: any) => store.user.email);
 
   const [emailValue, setEmailValue] = useState(currentEmail);
   const [passwordValue, setPasswordValue] = useState("");
@@ -21,14 +21,14 @@ const UserProfile = () => {
   const [isFocusPassword, setPasswordFocus] = useState(false);
   const [isFocusName, setNameFocus] = useState(false);
 
-  const handleCancel = (event) => {
+  const handleCancel = (event: SyntheticEvent) => {
     event.preventDefault();
     setNameValue(currentName);
     setEmailValue(currentEmail);
     setPasswordValue("");
   };
 
-  const handleSave = (event) => {
+  const handleSave = (event: SyntheticEvent) => {
     event.preventDefault();
     dispatch(updateUserData(nameValue, emailValue, passwordValue));
   };
@@ -82,9 +82,9 @@ const UserProfile = () => {
       </div>
       {isDataChanged ? (
         <div className="mt-6">
-          <Button type="secondary" size="medium" onClick={handleCancel}>
+          <span className={styles.button} onClick={handleCancel}>
             Отмена
-          </Button>
+          </span>
           <Button type="primary" size="medium">
             Сохранить
           </Button>

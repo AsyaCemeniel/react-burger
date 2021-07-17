@@ -19,12 +19,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBurgerIngredients } from "../../services/actions";
 
 function App() {
-  const location = useLocation();
+  const location: any = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
 
   const isIngredientsLoaded = useSelector(
-    (store) => store.burgerIngredients.isIngredientsLoaded
+    (store: any) => store.burgerIngredients.isIngredientsLoaded
   );
 
   useEffect(() => {

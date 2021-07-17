@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { ActionTypes } from "../../../services/orders-actions";
+import { OrderType } from "../../../types";
 import FeedItem from "../feed-item";
 import styles from "./user-feed.module.css";
 
@@ -16,13 +17,13 @@ const UserFeed = () => {
     };
   }, [dispatch]);
 
-  const { orders } = useSelector((store) => store.wsOrders.messages);
+  const { orders } = useSelector((store: any) => store.wsOrders.messages || {});
 
   return (
     <section className={`${styles.main}`}>
       <ul className={`${styles.scroll}`}>
         {orders &&
-          orders.map((item, index) => (
+          orders.map((item: OrderType, index: number) => (
             <li key={index}>
               <Link
                 to={{

@@ -12,6 +12,10 @@ const state = {
   orderNumberRequest: false,
   orderNumberFailure: false,
 
+  currentOrder: null,
+  orderRequest: false,
+  orderFailure: false,
+
   isOrdered: false,
 };
 

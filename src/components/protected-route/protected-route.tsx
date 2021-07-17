@@ -1,17 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { FC } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { useEffect } from "react"; // eslint-disable-line
 import { useDispatch, useSelector } from "react-redux"; // eslint-disable-line
 import { getUserData } from "../../services/user-actions"; // eslint-disable-line
 import Loader from "../loader";
 
-const ProtectedRoute = ({ children, ...rest }) => {
+const ProtectedRoute: FC<{
+  path: string;
+  exact?: boolean;
+}> = ({ children, ...rest }) => {
   const dispatch = useDispatch();
-  const userEmail = useSelector((store) => store.user.email);
+  const userEmail = useSelector((store: any) => store.user.email);
   const isToken = !!localStorage.getItem("refreshToken");
 
-  const getUserRequest = useSelector((store) => store.user.getUserRequest);
+  const getUserRequest = useSelector((store: any) => store.user.getUserRequest);
 
   useEffect(() => {
     if (isToken && !userEmail) {
@@ -35,10 +37,6 @@ const ProtectedRoute = ({ children, ...rest }) => {
       }
     />
   );
-};
-
-ProtectedRoute.propTypes = {
-  children: PropTypes.element,
 };
 
 export default ProtectedRoute;

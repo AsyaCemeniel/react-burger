@@ -18,6 +18,7 @@ import ConstructorItem from "./constructor-item/constructor-item";
 import { useHistory, useLocation } from "react-router-dom";
 import { push } from "connected-react-router";
 import { calculateTotalPrice } from "../../utils";
+import { IngredientType, IngredientWithKeyType } from "../../types";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -26,11 +27,11 @@ const BurgerConstructor = () => {
   const isToken = localStorage.getItem("refreshToken");
 
   const { bun, burgerStuffing } = useSelector(
-    (state) => state.burgerConstructor
+    (store: any) => store.burgerConstructor
   );
 
   const stuffingIngredients = burgerStuffing.map(
-    (ingredient) => ingredient.item
+    (ingredient: IngredientWithKeyType) => ingredient.item
   );
   const totalPrice = calculateTotalPrice(stuffingIngredients, bun);
 
@@ -39,7 +40,7 @@ const BurgerConstructor = () => {
 
   //======================== * functions for constructor elements * =======================
 
-  const handlerDropItem = (item) => {
+  const handlerDropItem = (item: IngredientType) => {
     dispatch({
       type: ADD_CONSTRUCTOR_ITEM,
       payload: item,
@@ -49,8 +50,11 @@ const BurgerConstructor = () => {
   const openModal = () => {
     if (isToken) {
       const isOrderValid = !!Object.keys(bun).length;
-      const stuffingIds = stuffingIngredients.map((item) => item._id);
+      const stuffingIds = stuffingIngredients.map(
+        (item: IngredientType) => item._id
+      );
       if (isOrderValid && stuffingIds.length > 2) {
+        dispatch({ type: SET_ORDER_INVALID, payload: !isOrderValid });
         dispatch(getOrderDetails(stuffingIds));
         history.push({
           pathname: "/order",
@@ -81,7 +85,9 @@ const BurgerConstructor = () => {
 
   const findItem = useCallback(
     (key) => {
-      const ingredient = burgerStuffing.filter((item) => item.key === key)[0];
+      const ingredient = burgerStuffing.filter(
+        (item: IngredientWithKeyType) => item.key === key
+      )[0];
       return {
         ingredient,
         index: burgerStuffing.indexOf(ingredient),
@@ -103,7 +109,7 @@ const BurgerConstructor = () => {
 
   const [{ isHover }, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item: IngredientType) {
       handlerDropItem(item);
     },
     collect: (monitor) => ({
@@ -162,15 +168,15 @@ const BurgerConstructor = () => {
         )}
         {burgerStuffing.length ? (
           <ul ref={dropRef} className={`mt-4 mb-2 ${styles.scroll}`}>
-            {burgerStuffing.map((item) => (
-              <ConstructorItem
-                key={item.key}
-                id={item.key}
-                item={item}
-                findItem={findItem}
-                moveItem={moveItem}
-                className={styles.item}
-              />
+            {burgerStuffing.map((item: IngredientWithKeyType) => (
+              <div key={item.key} className={styles.item}>
+                <ConstructorItem
+                  id={item.key}
+                  item={item}
+                  findItem={findItem}
+                  moveItem={moveItem}
+                />
+              </div>
             ))}
           </ul>
         ) : (

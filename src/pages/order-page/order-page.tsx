@@ -4,7 +4,7 @@ import Order from "../../components/order";
 import styles from "./order-page.module.css";
 
 const OrderPage = () => {
-  const { orderNumber } = useParams();
+  const { orderNumber } = useParams<{ orderNumber: string }>();
   return (
     <div className={styles.main}>
       <Order orderNumber={orderNumber} />

@@ -1,10 +1,9 @@
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
-import PropTypes from "prop-types";
-
+import React, { FC } from "react";
+import { ModalProps } from "./types";
 import styles from "./modal.module.css";
 
-const Modal = ({ children, onClose, title }) => {
+const Modal: FC<ModalProps> = ({ children, onClose, title }) => {
   return (
     <div className={styles.container}>
       <div className={`p-10  ${styles.inside}`}>
@@ -16,12 +15,6 @@ const Modal = ({ children, onClose, title }) => {
       </div>
     </div>
   );
-};
-
-Modal.propTypes = {
-  children: PropTypes.element,
-  onClose: PropTypes.func.isRequired,
-  title: PropTypes.string,
 };
 
 export default Modal;

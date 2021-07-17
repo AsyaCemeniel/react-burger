@@ -2,31 +2,34 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
-import PropTypes from "prop-types";
+import React, { FC } from "react";
 import styles from "./menu-item.module.css";
 import { useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
+import { IngredientType, IngredientWithKeyType } from "../../../types";
 
-const MenuItem = ({ product }) => {
+const MenuItem: FC<IngredientType> = (menuItem) => {
   const { burgerStuffing, bun } = useSelector(
-    (state) => state.burgerConstructor
+    (store: any) => store.burgerConstructor
   );
 
   const getItemCount = () => {
-    if (product.type === "bun") {
-      return bun._id === product._id ? 1 : 0;
+    if (menuItem.type === "bun") {
+      return bun._id === menuItem._id ? 1 : 0;
     }
-    return burgerStuffing.reduce((count, item) => {
-      return item.item._id === product._id ? ++count : count;
-    }, 0);
+    return burgerStuffing.reduce(
+      (count: number, item: IngredientWithKeyType) => {
+        return item.item._id === menuItem._id ? ++count : count;
+      },
+      0
+    );
   };
 
   const count = getItemCount();
 
   const [{ isDrop }, dragRef] = useDrag({
     type: "ingredient",
-    item: product,
+    item: menuItem,
     collect: (monitor) => ({
       isDrop: monitor.didDrop(),
     }),
@@ -35,25 +38,22 @@ const MenuItem = ({ product }) => {
   return (
     <div className={` mr-3 ml-3 mb-8 ${styles.item}`} ref={dragRef}>
       {count > 0 && <Counter count={count} size="small" />}
-      <img src={product.image} alt={product.name} className="mr-4 mb-1 ml-4" />
+      <img
+        src={menuItem.image}
+        alt={menuItem.name}
+        className="mr-4 mb-1 ml-4"
+      />
       <p className={`text text_type_digits-default ${styles.price}`}>
-        {product.price}
+        {menuItem.price}
         <CurrencyIcon type="primary" />
       </p>
       <p
         className={`text text_type_main-default mt-1 pr-1 pb-6 pl-1 ${styles.title}`}
       >
-        {product.name}
+        {menuItem.name}
       </p>
     </div>
   );
-};
-
-MenuItem.propTypes = {
-  product: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
 export default MenuItem;

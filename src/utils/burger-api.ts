@@ -9,10 +9,10 @@ const BURGER_API_WSS_ORDERS = "wss://norma.nomoreparties.space/orders";
 
 export const getWssOrderUrlWithToken = () =>
   `${BURGER_API_WSS_ORDERS}?token=${
-    getCookie("token") ? getCookie("token").replace("Bearer ", "") : ""
+    getCookie("token") ? getCookie("token")?.replace("Bearer ", "") : ""
   }`;
 
-const handleRequest = (res) => {
+const handleRequest = (res: Response) => {
   return res.ok
     ? res.json()
     : res.json().then((error) => Promise.reject(error));
@@ -23,7 +23,7 @@ export const getIngredients = async () => {
   return await handleRequest(res);
 };
 
-export const getOrderNumber = async (orderData) => {
+export const getOrderNumber = async (orderData: string[]) => {
   return await fetchWithRefresh(`${baseUrl}/orders`, {
     method: "POST",
     headers: {
@@ -34,7 +34,7 @@ export const getOrderNumber = async (orderData) => {
   });
 };
 
-export const getOrderRequest = async (orderNumber) => {
+export const getOrderRequest = async (orderNumber: string) => {
   const res = await fetch(`${baseUrl}/orders/${orderNumber}`, {
     method: "GET",
     headers: baseHeaders,
@@ -42,7 +42,7 @@ export const getOrderRequest = async (orderNumber) => {
   return await handleRequest(res);
 };
 
-export const getUserOrderRequest = async (orderNumber) => {
+export const getUserOrderRequest = async (orderNumber: string) => {
   return await fetchWithRefresh(`${baseUrl}/orders/${orderNumber}`, {
     method: "GET",
     headers: {
@@ -52,7 +52,11 @@ export const getUserOrderRequest = async (orderNumber) => {
   });
 };
 
-export const register = async (email, password, name) => {
+export const register = async (
+  email: string,
+  password: string,
+  name: string
+) => {
   const res = await fetch(`${baseUrl}/auth/register`, {
     method: "POST",
     headers: baseHeaders,
@@ -61,7 +65,7 @@ export const register = async (email, password, name) => {
   return await handleRequest(res);
 };
 
-export const login = async (email, password) => {
+export const login = async (email: string, password: string) => {
   const res = await fetch(`${baseUrl}/auth/login`, {
     method: "POST",
     headers: baseHeaders,
@@ -70,7 +74,7 @@ export const login = async (email, password) => {
   return await handleRequest(res);
 };
 
-export const forgotPassword = async (email) => {
+export const forgotPassword = async (email: string) => {
   const res = await fetch(`${baseUrl}/password-reset`, {
     method: "POST",
     headers: baseHeaders,
@@ -79,7 +83,7 @@ export const forgotPassword = async (email) => {
   return await handleRequest(res);
 };
 
-export const resetPassword = async (password, token) => {
+export const resetPassword = async (password: string, token: string) => {
   const res = await fetch(`${baseUrl}/password-reset/reset`, {
     method: "POST",
     headers: baseHeaders,
@@ -106,7 +110,7 @@ export const refreshToken = async () => {
   return await handleRequest(res);
 };
 
-export const fetchWithRefresh = async (url, options) => {
+export const fetchWithRefresh = async (url: string, options: RequestInit) => {
   try {
     const res = await fetch(url, options);
     return await handleRequest(res);
@@ -115,7 +119,8 @@ export const fetchWithRefresh = async (url, options) => {
       const refreshData = await refreshToken();
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       setCookie("token", refreshData.accessToken.split("Bearer ")[1]);
-      options.headers.authorization = refreshData.accessToken;
+      (options.headers as { [key: string]: string }).authorization =
+        refreshData.accessToken;
       const res = await fetch(url, options);
       return await handleRequest(res);
     } else {
@@ -134,7 +139,11 @@ export const getUser = async () => {
   });
 };
 
-export const updateUser = async (name, email, password) => {
+export const updateUser = async (
+  name: string,
+  email: string,
+  password: string | undefined
+) => {
   return await fetchWithRefresh(`${baseUrl}/auth/user`, {
     method: "PATCH",
     headers: {

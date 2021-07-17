@@ -2,19 +2,19 @@ import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import FeedItem from "./feed-item";
 import styles from "./feed.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { ActionTypes } from "../../services/feed-actions";
+import { useSelector } from "react-redux";
+import { OrderType } from "../../types";
 
 const Feed = () => {
   const location = useLocation();
 
-  const { orders } = useSelector((store) => store.wsFeed.messages);
+  const { orders } = useSelector((store: any) => store.wsFeed.messages || {});
 
   return (
     <section className={`${styles.main}`}>
       <ul className={`${styles.scroll}`}>
         {orders &&
-          orders.map((item, index) => (
+          orders.map((item: OrderType, index: number) => (
             <li key={index}>
               <Link
                 to={{

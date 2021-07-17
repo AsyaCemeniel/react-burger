@@ -4,8 +4,12 @@ import styles from "./order-details.module.css";
 import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
-  const { orderNumber, isOrderInvalid } = useSelector((store) => store.order);
-  const { burgerStuffing } = useSelector((store) => store.burgerConstructor);
+  const { orderNumber, isOrderInvalid } = useSelector(
+    (store: any) => store.order
+  );
+  const { burgerStuffing } = useSelector(
+    (store: any) => store.burgerConstructor
+  );
 
   if (burgerStuffing.length === 0) {
     return (

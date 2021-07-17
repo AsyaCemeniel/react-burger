@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import MenuItem from "./menu-item";
 import Tabs from "../tabs";
 import styles from "./burger-ingredients.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { getBurgerIngredients } from "../../services/actions";
+import { useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import { useLocation, Link } from "react-router-dom";
+import { IngredientType } from "../../types";
 
 const BurgerIngredients = () => {
   const location = useLocation();
 
-  const [current, setCurrent] = useState("bun");
+  const [current, setCurrent] = useState<string>("bun");
 
   const ingredients = useSelector(
-    (store) => store.burgerIngredients.ingredients
+    (store: any) => store.burgerIngredients.ingredients
   );
 
   const titles = [
@@ -46,7 +46,9 @@ const BurgerIngredients = () => {
       <Tabs titles={titles} setCurrent={setCurrent} current={current} />
       <div className={`mt-8 ${styles.scroll_menu}`} onScroll={handleScroll}>
         {titles.map(({ name, key, type }) => {
-          const items = ingredients.filter((product) => product.type === type);
+          const items = ingredients.filter(
+            (product: IngredientType) => product.type === type
+          );
           return (
             <div
               key={key}
@@ -54,16 +56,16 @@ const BurgerIngredients = () => {
             >
               <h2 className="text text_type_main-medium mt-2 mb-6">{name}</h2>
               <ul className={`mr-1 ml-1 ${styles.menu}`}>
-                {items.map((item) => (
-                  <li key={item._id}>
+                {items.map((menuItem: IngredientType) => (
+                  <li key={menuItem._id}>
                     <Link
                       to={{
-                        pathname: `/ingredients/${item._id}`,
+                        pathname: `/ingredients/${menuItem._id}`,
                         state: { background: location },
                       }}
                       className={styles.link}
                     >
-                      <MenuItem product={item} />
+                      <MenuItem {...menuItem} />
                     </Link>
                   </li>
                 ))}

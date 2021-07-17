@@ -3,7 +3,7 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from "react";
+import React, { FC, SyntheticEvent } from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -14,30 +14,31 @@ import {
   userRegister,
 } from "../../services/user-actions";
 import styles from "./user-form.module.css";
+import { FormType } from "./types";
 
-const UserForm = ({ title, links, type }) => {
+const UserForm: FC<FormType> = ({ title, links, type }) => {
   const dispatch = useDispatch();
 
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
-  const [nameValue, setNameValue] = useState("");
+  const [emailValue, setEmailValue] = useState<string>("");
+  const [passwordValue, setPasswordValue] = useState<string>("");
+  const [nameValue, setNameValue] = useState<string>("");
 
-  const handleLogin = (event) => {
+  const handleLogin = (event: SyntheticEvent) => {
     event.preventDefault();
     dispatch(userLogin(emailValue, passwordValue));
   };
 
-  const handleRegister = (event) => {
+  const handleRegister = (event: SyntheticEvent) => {
     event.preventDefault();
     dispatch(userRegister(emailValue, passwordValue, nameValue));
   };
 
-  const handleCodeSend = (event) => {
+  const handleCodeSend = (event: SyntheticEvent) => {
     event.preventDefault();
     dispatch(userForgotPassword(emailValue));
   };
 
-  const handlePasswordRenew = (event) => {
+  const handlePasswordRenew = (event: SyntheticEvent) => {
     event.preventDefault();
     dispatch(resetUserPassword(passwordValue, nameValue));
   };
@@ -46,7 +47,7 @@ const UserForm = ({ title, links, type }) => {
     switch (type) {
       case "login":
         return (
-          <>
+          <form onSubmit={handleLogin} className={styles.form}>
             <Input
               type="email"
               placeholder="E-mail"
@@ -58,14 +59,14 @@ const UserForm = ({ title, links, type }) => {
               name="password"
               onChange={(e) => setPasswordValue(e.target.value)}
             />
-            <Button type="primary" size="medium" onClick={handleLogin}>
+            <Button type="primary" size="medium">
               Войти
             </Button>
-          </>
+          </form>
         );
       case "register":
         return (
-          <>
+          <form onSubmit={handleRegister} className={styles.form}>
             <Input
               type="text"
               placeholder="Имя"
@@ -83,28 +84,28 @@ const UserForm = ({ title, links, type }) => {
               name="password"
               onChange={(e) => setPasswordValue(e.target.value)}
             />
-            <Button type="primary" size="medium" onClick={handleRegister}>
+            <Button type="primary" size="medium">
               Зарегистрироваться
             </Button>
-          </>
+          </form>
         );
       case "forgot-password":
         return (
-          <>
+          <form onSubmit={handleCodeSend} className={styles.form}>
             <Input
               type="email"
               placeholder="Укажите e-mail"
               value={emailValue}
               onChange={(e) => setEmailValue(e.target.value)}
             />
-            <Button type="primary" size="medium" onClick={handleCodeSend}>
+            <Button type="primary" size="medium">
               Восстановить
             </Button>
-          </>
+          </form>
         );
       case "reset-password":
         return (
-          <>
+          <form onSubmit={handlePasswordRenew} className={styles.form}>
             <Input
               type="password"
               placeholder="Введите новый пароль"
@@ -118,10 +119,10 @@ const UserForm = ({ title, links, type }) => {
               value={nameValue}
               onChange={(e) => setNameValue(e.target.value)}
             />
-            <Button type="primary" size="medium" onClick={handlePasswordRenew}>
+            <Button type="primary" size="medium">
               Сохранить
             </Button>
-          </>
+          </form>
         );
     }
   };
@@ -131,16 +132,10 @@ const UserForm = ({ title, links, type }) => {
   return (
     <div className={styles.main}>
       <span className={`text text_type_main-medium mb-3`}>{title}</span>
-      <form className={styles.form}>{content}</form>
+      <div>{content}</div>
       <div className={styles.link}>{links}</div>
     </div>
   );
-};
-
-UserForm.propType = {
-  title: PropTypes.string,
-  links: PropTypes.element,
-  type: PropTypes.string.isRequired,
 };
 
 export default UserForm;
