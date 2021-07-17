@@ -19,6 +19,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { push } from "connected-react-router";
 import { calculateTotalPrice } from "../../utils";
 import { IngredientType, IngredientWithKeyType } from "../../types";
+import { FindCallback, MoveCallback } from "./types";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
@@ -83,7 +84,7 @@ const BurgerConstructor = () => {
 
   //======================= * DND hooks and functions * ===============================================
 
-  const findItem = useCallback(
+  const findItem = useCallback<FindCallback>(
     (key) => {
       const ingredient = burgerStuffing.filter(
         (item: IngredientWithKeyType) => item.key === key
@@ -96,7 +97,7 @@ const BurgerConstructor = () => {
     [burgerStuffing]
   );
 
-  const moveItem = useCallback(
+  const moveItem = useCallback<MoveCallback>(
     (key, fromIndex) => {
       const { index } = findItem(key);
       dispatch({
