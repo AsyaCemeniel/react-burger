@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import styles from "./order.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../hooks";
 import { useRouteMatch } from "react-router";
 import { getOrder } from "../../services/actions";
 import {
@@ -24,14 +24,14 @@ const Order: FC<{ orderNumber: string }> = ({ orderNumber }) => {
 
   let currentOrder;
 
-  const feedOrders = useSelector((store: any) => store.wsFeed.messages);
+  const feedOrders = useSelector((store) => store.wsFeed.messages);
 
-  const userOrders = useSelector((store: any) => store.wsOrders.messages);
+  const userOrders = useSelector((store) => store.wsOrders.messages);
 
-  const order = useSelector((store: any) => store.order.currentOrder);
+  const order = useSelector((store) => store.order.currentOrder);
 
   const allIngredients = useSelector(
-    (store: any) => store.burgerIngredients.ingredients
+    (store) => store.burgerIngredients.ingredients
   );
 
   currentOrder = (isFeed ? feedOrders : userOrders)?.orders?.find(

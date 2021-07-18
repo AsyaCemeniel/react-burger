@@ -1,3 +1,4 @@
+import { OrderType } from "../../types";
 import {
   DELETE_ORDER_DETAILS,
   GET_ORDER_DETAILS_FAILURE,
@@ -6,10 +7,24 @@ import {
   GET_ORDER_FAILURE,
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
+  OrderActions,
   SET_ORDER_INVALID,
 } from "../actions";
 
-const initialState = {
+type OrderState = {
+  orderNumber: number | null;
+  isOrderInvalid: boolean;
+  orderNumberRequest: boolean;
+  orderNumberFailure: boolean;
+
+  currentOrder: OrderType | null;
+  orderRequest: boolean;
+  orderFailure: boolean;
+
+  isOrdered: boolean;
+};
+
+const initialState: OrderState = {
   orderNumber: null,
   isOrderInvalid: false,
   orderNumberRequest: false,
@@ -22,10 +37,8 @@ const initialState = {
   isOrdered: false,
 };
 
-const Order = (state = initialState, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
+const Order = (state = initialState, action: OrderActions): OrderState => {
+  switch (action.type) {
     case GET_ORDER_DETAILS_REQUEST:
       return {
         ...state,
@@ -34,7 +47,7 @@ const Order = (state = initialState, action) => {
     case GET_ORDER_DETAILS_SUCCESS:
       return {
         ...state,
-        orderNumber: payload,
+        orderNumber: action.payload,
         orderNumberRequest: false,
         orderNumberFailure: false,
       };
@@ -47,12 +60,12 @@ const Order = (state = initialState, action) => {
     case DELETE_ORDER_DETAILS:
       return {
         ...state,
-        isOrdered: payload,
+        isOrdered: action.payload,
       };
     case SET_ORDER_INVALID:
       return {
         ...state,
-        isOrderInvalid: payload,
+        isOrderInvalid: action.payload,
       };
     case GET_ORDER_REQUEST:
       return {
@@ -62,7 +75,7 @@ const Order = (state = initialState, action) => {
     case GET_ORDER_SUCCESS:
       return {
         ...state,
-        currentOrder: payload,
+        currentOrder: action.payload,
         orderRequest: false,
         orderFailure: false,
       };
@@ -72,24 +85,6 @@ const Order = (state = initialState, action) => {
         orderRequest: false,
         orderFailure: true,
       };
-    // case GET_USER_ORDER_REQUEST:
-    //   return {
-    //     ...state,
-    //     orderRequest: true,
-    //   };
-    // case GET_USER_ORDER_SUCCESS:
-    //   return {
-    //     ...state,
-    //     currentOrder: payload,
-    //     orderRequest: false,
-    //     orderFailure: false,
-    //   };
-    // case GET_USER_ORDER_FAILURE:
-    //   return {
-    //     ...state,
-    //     orderRequest: false,
-    //     orderFailure: true,
-    //   };
     default:
       return state;
   }

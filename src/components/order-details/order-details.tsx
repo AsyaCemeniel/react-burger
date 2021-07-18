@@ -1,15 +1,11 @@
 import React from "react";
 import Done from "../../images/done.png";
 import styles from "./order-details.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks";
 
 const OrderDetails = () => {
-  const { orderNumber, isOrderInvalid } = useSelector(
-    (store: any) => store.order
-  );
-  const { burgerStuffing } = useSelector(
-    (store: any) => store.burgerConstructor
-  );
+  const { orderNumber, isOrderInvalid } = useSelector((store) => store.order);
+  const { burgerStuffing } = useSelector((store) => store.burgerConstructor);
 
   if (burgerStuffing.length === 0) {
     return (

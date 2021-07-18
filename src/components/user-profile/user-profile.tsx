@@ -3,15 +3,15 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { SyntheticEvent, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../hooks";
 import { updateUserData } from "../../services/user-actions";
 import styles from "./user-profile.module.css";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
 
-  const currentName = useSelector((store: any) => store.user.name);
-  const currentEmail = useSelector((store: any) => store.user.email);
+  const currentName = useSelector((store) => store.user.name);
+  const currentEmail = useSelector((store) => store.user.email);
 
   const [emailValue, setEmailValue] = useState(currentEmail);
   const [passwordValue, setPasswordValue] = useState("");

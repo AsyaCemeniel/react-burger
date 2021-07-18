@@ -5,7 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useCallback } from "react";
 import styles from "./burger-constructor.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../hooks";
 import {
   ADD_CONSTRUCTOR_ITEM,
   DELETE_ORDER_DETAILS,
@@ -28,16 +28,17 @@ const BurgerConstructor = () => {
   const isToken = localStorage.getItem("refreshToken");
 
   const { bun, burgerStuffing } = useSelector(
-    (store: any) => store.burgerConstructor
+    (store) => store.burgerConstructor
   );
 
   const stuffingIngredients = burgerStuffing.map(
     (ingredient: IngredientWithKeyType) => ingredient.item
   );
   const totalPrice = calculateTotalPrice(stuffingIngredients, bun);
-
-  stuffingIngredients.unshift(bun);
-  stuffingIngredients.push(bun);
+  if (bun) {
+    stuffingIngredients.unshift(bun);
+    stuffingIngredients.push(bun);
+  }
 
   //======================== * functions for constructor elements * =======================
 
@@ -50,7 +51,7 @@ const BurgerConstructor = () => {
 
   const openModal = () => {
     if (isToken) {
-      const isOrderValid = !!Object.keys(bun).length;
+      const isOrderValid = !!bun;
       const stuffingIds = stuffingIngredients.map(
         (item: IngredientType) => item._id
       );
@@ -156,7 +157,7 @@ const BurgerConstructor = () => {
       id="container"
     >
       <div className={styles.main}>
-        {Object.keys(bun).length ? (
+        {bun ? (
           <ConstructorElement
             text={`${bun.name} (верх)`}
             type="top"
@@ -183,7 +184,7 @@ const BurgerConstructor = () => {
         ) : (
           stuffing
         )}
-        {Object.keys(bun).length ? (
+        {bun ? (
           <ConstructorElement
             text={`${bun?.name} (низ)`}
             type="bottom"

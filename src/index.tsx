@@ -5,7 +5,8 @@ import { ConnectedRouter } from "connected-react-router";
 import "./index.css";
 import App from "./components/app";
 import reportWebVitals from "./reportWebVitals";
-import store, { history } from "./services/store";
+import store from "./services/store";
+import { history } from "./services/reducer";
 
 ReactDOM.render(
   <React.StrictMode>

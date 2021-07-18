@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../hooks";
 import { Link, Redirect } from "react-router-dom";
 import UserForm from "../../components/user-form";
 import { getUserData } from "../../services/user-actions";
@@ -7,8 +7,8 @@ import Loader from "../../components/loader";
 
 const ForgotPasswordPage = () => {
   const dispatch = useDispatch();
-  const userEmail = useSelector((store: any) => store.user.email);
-  const { getUserRequest } = useSelector((store: any) => store.user);
+  const userEmail = useSelector((store) => store.user.email);
+  const { getUserRequest } = useSelector((store) => store.user);
 
   useEffect(() => {
     dispatch(getUserData());

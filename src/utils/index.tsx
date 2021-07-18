@@ -101,7 +101,7 @@ export const getOrderDate = (date: string) => {
   }`;
 };
 
-export const sortByStatus = (orders: OrderType[]) => {
+export const sortByStatus = (orders: OrderType[] | undefined) => {
   if (!orders || orders.length === 0) return;
   return orders.reduce(
     (result: { [name: string]: number[] }, order) => {

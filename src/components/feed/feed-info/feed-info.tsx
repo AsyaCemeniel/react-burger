@@ -1,14 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../hooks";
 import { divideIntoColumns, sortByStatus } from "../../../utils";
 import styles from "./feed-info.module.css";
 
 const FeedInfo = () => {
-  const { orders, total, totalToday } = useSelector(
-    (store: any) => store.wsFeed.messages || {}
-  );
+  const messages = useSelector((store) => store.wsFeed.messages);
 
-  const statusColumns = sortByStatus(orders);
+  const statusColumns = sortByStatus(messages?.orders);
 
   const doneColumns = divideIntoColumns(statusColumns?.done);
   const pendingColumns = divideIntoColumns(statusColumns?.pending);
@@ -60,7 +58,7 @@ const FeedInfo = () => {
           Выполнено за все время:
         </span>
         <span className={`text text_type_digits-large ${styles.light}`}>
-          {total}
+          {messages?.total}
         </span>
       </div>
       <div className={`ml-4 mt-10 ${styles.total}`}>
@@ -68,7 +66,7 @@ const FeedInfo = () => {
           Выполнено за сегодня:
         </span>
         <span className={`text text_type_digits-large ${styles.light}`}>
-          {totalToday}
+          {messages?.totalToday}
         </span>
       </div>
     </div>

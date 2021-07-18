@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks";
 import { IngredientType } from "../../types";
 
 const IngredientDetails = () => {
   const { id } = useParams<{ id: string }>();
 
   const ingredients = useSelector(
-    (store: any) => store.burgerIngredients.ingredients
+    (store) => store.burgerIngredients.ingredients
   );
 
   const product = ingredients.find(

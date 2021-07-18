@@ -38,10 +38,7 @@ export const socketMiddleware = (wsUrl, wsActions) => {
 
           dispatch({
             type: onMessage,
-            payload: {
-              data: parsedData,
-              timestamp: new Date().getTime() / 100,
-            },
+            payload: parsedData,
           });
         };
 
