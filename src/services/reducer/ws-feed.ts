@@ -1,6 +1,14 @@
-import { wsFeedActions } from "../feed-actions";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { WSDataType } from "../../types";
+import { wsFeedActions, WSFeedActionsType } from "../feed-actions";
 
-const initialState = {
+type FeedState = {
+  wsConnected: boolean;
+  error: PayloadAction | null;
+  messages: WSDataType | null;
+};
+
+const initialState: FeedState = {
   wsConnected: false,
   error: null,
   messages: null,
@@ -8,10 +16,8 @@ const initialState = {
 
 const { onOpen, onClose, onError, onMessage } = wsFeedActions;
 
-const wsFeed = (state = initialState, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
+const wsFeed = (state = initialState, action: WSFeedActionsType): FeedState => {
+  switch (action.type) {
     case onOpen:
       return {
         ...state,
@@ -20,7 +26,7 @@ const wsFeed = (state = initialState, action) => {
     case onError:
       return {
         ...state,
-        error: payload,
+        error: action.payload,
         wsConnected: false,
       };
     case onClose:
@@ -31,7 +37,7 @@ const wsFeed = (state = initialState, action) => {
     case onMessage:
       return {
         ...state,
-        messages: payload.data,
+        messages: action.payload,
       };
     default:
       return state;

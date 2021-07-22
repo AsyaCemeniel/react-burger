@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { useEffect } from "react"; // eslint-disable-line
-import { useDispatch, useSelector } from "react-redux"; // eslint-disable-line
+import { useDispatch, useSelector } from "../../hooks"; // eslint-disable-line
 import { getUserData } from "../../services/user-actions"; // eslint-disable-line
 import Loader from "../loader";
 
@@ -10,10 +10,10 @@ const ProtectedRoute: FC<{
   exact?: boolean;
 }> = ({ children, ...rest }) => {
   const dispatch = useDispatch();
-  const userEmail = useSelector((store: any) => store.user.email);
+  const userEmail = useSelector((store) => store.user.email);
   const isToken = !!localStorage.getItem("refreshToken");
 
-  const getUserRequest = useSelector((store: any) => store.user.getUserRequest);
+  const getUserRequest = useSelector((store) => store.user.getUserRequest);
 
   useEffect(() => {
     if (isToken && !userEmail) {

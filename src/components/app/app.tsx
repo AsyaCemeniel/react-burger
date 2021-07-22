@@ -15,16 +15,17 @@ import ProfilePage from "../../pages/profile-page";
 import OrderPage from "../../pages/order-page";
 import ProtectedRoute from "../protected-route";
 import ingredientDetails from "../ingredient-details";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../hooks";
 import { getBurgerIngredients } from "../../services/actions";
+import { LocationType } from "../../types";
 
 function App() {
-  const location: any = useLocation();
+  const location = useLocation<LocationType>();
   const history = useHistory();
   const dispatch = useDispatch();
 
   const isIngredientsLoaded = useSelector(
-    (store: any) => store.burgerIngredients.isIngredientsLoaded
+    (store) => store.burgerIngredients.isIngredientsLoaded
   );
 
   useEffect(() => {

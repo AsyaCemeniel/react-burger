@@ -6,7 +6,7 @@ import {
   getOrderDate,
   getOrderIngredients,
 } from "../../../utils";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../hooks";
 import { FeedPropsType } from "./types";
 import { IngredientType } from "../../../types";
 
@@ -20,7 +20,7 @@ const FeedItem: FC<FeedPropsType> = ({ item, isStatus }) => {
   const { ingredients, status, name, createdAt, number } = item;
 
   const allIngredients = useSelector(
-    (store: any) => store.burgerIngredients.ingredients
+    (store) => store.burgerIngredients.ingredients
   );
 
   const itemIngredients = getOrderIngredients(allIngredients, ingredients);

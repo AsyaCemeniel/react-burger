@@ -4,18 +4,18 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { FC } from "react";
 import styles from "./menu-item.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../hooks";
 import { useDrag } from "react-dnd";
 import { IngredientType, IngredientWithKeyType } from "../../../types";
 
 const MenuItem: FC<IngredientType> = (menuItem) => {
   const { burgerStuffing, bun } = useSelector(
-    (store: any) => store.burgerConstructor
+    (store) => store.burgerConstructor
   );
 
   const getItemCount = () => {
     if (menuItem.type === "bun") {
-      return bun._id === menuItem._id ? 1 : 0;
+      return bun?._id === menuItem._id ? 1 : 0;
     }
     return burgerStuffing.reduce(
       (count: number, item: IngredientWithKeyType) => {

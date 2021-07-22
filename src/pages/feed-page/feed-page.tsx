@@ -2,16 +2,16 @@ import React, { useEffect } from "react";
 import styles from "./feed-page.module.css";
 import Feed from "../../components/feed";
 import FeedInfo from "../../components/feed/feed-info";
-import { useDispatch } from "react-redux";
-import { ActionTypes } from "../../services/feed-actions";
+import { useDispatch } from "../../hooks";
+import { wsFeedActions } from "../../services/feed-actions";
 
 const FeedPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: ActionTypes.INIT_CONNECTION });
+    dispatch({ type: wsFeedActions.wsInit });
     return () => {
-      dispatch({ type: ActionTypes.CLOSE_CONNECTION });
+      dispatch({ type: wsFeedActions.wsClose });
     };
   }, [dispatch]);
 

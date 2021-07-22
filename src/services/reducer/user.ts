@@ -23,9 +23,41 @@ import {
   UPDATE_USER_FAILURE,
   UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
+  UserActions,
 } from "../user-actions";
 
-const initialState = {
+type UserState = {
+  email: string;
+  name: string;
+
+  registrationRequest: boolean;
+  registrationFailure: boolean;
+
+  loginRequest: boolean;
+  loginFailure: boolean;
+
+  logoutRequest: boolean;
+  logoutFailure: boolean;
+
+  getUserRequest: boolean;
+  getUserFailure: boolean;
+
+  updateRequest: boolean;
+  updateFailure: boolean;
+
+  forgotRequest: boolean;
+  forgotSuccess: boolean;
+  forgotFailure: boolean;
+
+  resetRequest: boolean;
+  resetFailure: boolean;
+
+  tokenRefreshRequest: boolean;
+  tokenRefreshSuccess: boolean;
+  tokenRefreshFailure: boolean;
+};
+
+const initialState: UserState = {
   email: "",
   name: "",
 
@@ -56,9 +88,8 @@ const initialState = {
   tokenRefreshFailure: false,
 };
 
-const User = (state = initialState, action) => {
-  const { type, payload } = action;
-  switch (type) {
+const User = (state = initialState, action: UserActions): UserState => {
+  switch (action.type) {
     case REGISTER_REQUEST:
       return {
         ...state,
@@ -68,8 +99,8 @@ const User = (state = initialState, action) => {
     case REGISTER_SUCCESS:
       return {
         ...state,
-        name: payload.user.name,
-        email: payload.user.email,
+        name: action.payload.user.name,
+        email: action.payload.user.email,
         registrationRequest: false,
         registrationFailure: false,
       };
@@ -88,8 +119,8 @@ const User = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        name: payload.user.name,
-        email: payload.user.email,
+        name: action.payload.user.name,
+        email: action.payload.user.email,
         loginRequest: false,
         loginFailure: false,
       };
@@ -128,8 +159,8 @@ const User = (state = initialState, action) => {
     case GET_USER_SUCCESS:
       return {
         ...state,
-        name: payload.user.name,
-        email: payload.user.email,
+        name: action.payload.user.name,
+        email: action.payload.user.email,
         getUserRequest: false,
         getUserFailure: false,
       };
@@ -148,8 +179,8 @@ const User = (state = initialState, action) => {
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
-        name: payload.user.name,
-        email: payload.user.email,
+        name: action.payload.user.name,
+        email: action.payload.user.email,
         updateRequest: false,
         updateFailure: false,
       };

@@ -1,32 +1,40 @@
 import {
   ADD_CONSTRUCTOR_ITEM,
+  BurgerConstructorActions,
   DELETE_CONSTRUCTOR_ITEM,
   DELETE_ORDER,
   REORDER_CONSTRUCTOR_ITEMS,
 } from "../actions";
 import { v4 as uuidv4 } from "uuid";
+import { IngredientType, IngredientWithKeyType } from "../../types";
 
-const initialState = {
-  burgerStuffing: [],
-  bun: {},
+type ConstructorState = {
+  burgerStuffing: IngredientWithKeyType[];
+  bun: IngredientType | null;
 };
 
-const BurgerConstructor = (state = initialState, action) => {
-  const { type, payload } = action;
+const initialState: ConstructorState = {
+  burgerStuffing: [],
+  bun: null,
+};
 
-  switch (type) {
+const BurgerConstructor = (
+  state = initialState,
+  action: BurgerConstructorActions
+): ConstructorState => {
+  switch (action.type) {
     case ADD_CONSTRUCTOR_ITEM: {
-      if (payload.type === "bun") {
+      if (action.payload.type === "bun") {
         return {
           ...state,
-          bun: payload,
+          bun: action.payload,
         };
       }
       return {
         ...state,
         burgerStuffing: [
           ...state.burgerStuffing,
-          { key: uuidv4(), item: payload },
+          { key: uuidv4(), item: action.payload },
         ],
       };
     }
@@ -34,11 +42,11 @@ const BurgerConstructor = (state = initialState, action) => {
       return {
         ...state,
         burgerStuffing: [...state.burgerStuffing].filter((item) => {
-          return item.key !== payload.key;
+          return item.key !== action.payload.key;
         }),
       };
     case REORDER_CONSTRUCTOR_ITEMS: {
-      const { toIndex, fromIndex } = payload;
+      const { toIndex, fromIndex } = action.payload;
       const burgerStuffing = [...state.burgerStuffing];
       burgerStuffing.splice(toIndex, 0, burgerStuffing.splice(fromIndex, 1)[0]);
       return {
@@ -50,7 +58,7 @@ const BurgerConstructor = (state = initialState, action) => {
       return {
         ...state,
         burgerStuffing: [],
-        bun: {},
+        bun: null,
       };
     default:
       return state;

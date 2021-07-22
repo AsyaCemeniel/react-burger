@@ -1,20 +1,30 @@
+import { IngredientType } from "../../types";
 import {
+  GetIngredientsActions,
   GET_INGREDIENTS_FAILURE,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
 } from "../actions";
 
-const initialState = {
+type IngredientsState = {
+  ingredients: IngredientType[];
+  ingredientsRequest: boolean;
+  isIngredientsLoaded: boolean;
+  ingredientsFailure: boolean;
+};
+
+const initialState: IngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   isIngredientsLoaded: false,
   ingredientsFailure: false,
 };
 
-const BurgerIngredients = (state = initialState, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
+const BurgerIngredients = (
+  state = initialState,
+  action: GetIngredientsActions
+): IngredientsState => {
+  switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return {
         ...state,
@@ -23,7 +33,7 @@ const BurgerIngredients = (state = initialState, action) => {
     case GET_INGREDIENTS_SUCCESS:
       return {
         ...state,
-        ingredients: payload,
+        ingredients: action.payload,
         ingredientsRequest: false,
         isIngredientsLoaded: true,
         ingredientsFailure: false,

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../../hooks";
 import { Link, useLocation } from "react-router-dom";
-import { ActionTypes } from "../../../services/orders-actions";
+import { wsOrdersActions } from "../../../services/orders-actions";
 import { OrderType } from "../../../types";
 import FeedItem from "../feed-item";
 import styles from "./user-feed.module.css";
@@ -11,19 +11,19 @@ const UserFeed = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: ActionTypes.INIT_CONNECTION });
+    dispatch({ type: wsOrdersActions.wsInit });
     return () => {
-      dispatch({ type: ActionTypes.CLOSE_CONNECTION });
+      dispatch({ type: wsOrdersActions.wsClose });
     };
   }, [dispatch]);
 
-  const { orders } = useSelector((store: any) => store.wsOrders.messages || {});
+  const messages = useSelector((store) => store.wsOrders.messages);
 
   return (
     <section className={`${styles.main}`}>
       <ul className={`${styles.scroll}`}>
-        {orders &&
-          orders.map((item: OrderType, index: number) => (
+        {messages?.orders &&
+          messages?.orders.map((item: OrderType, index: number) => (
             <li key={index}>
               <Link
                 to={{

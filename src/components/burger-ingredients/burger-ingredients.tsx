@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MenuItem from "./menu-item";
 import Tabs from "../tabs";
 import styles from "./burger-ingredients.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks";
 import { useInView } from "react-intersection-observer";
 import { useLocation, Link } from "react-router-dom";
 import { IngredientType } from "../../types";
@@ -13,7 +13,7 @@ const BurgerIngredients = () => {
   const [current, setCurrent] = useState<string>("bun");
 
   const ingredients = useSelector(
-    (store: any) => store.burgerIngredients.ingredients
+    (store) => store.burgerIngredients.ingredients
   );
 
   const titles = [

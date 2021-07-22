@@ -1,6 +1,14 @@
-import { wsOrdersActions } from "../orders-actions";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { WSDataType } from "../../types";
+import { WSOrderActionsType, wsOrdersActions } from "../orders-actions";
 
-const initialState = {
+type OrdersState = {
+  wsConnected: boolean;
+  error: PayloadAction | null;
+  messages: WSDataType | null;
+};
+
+const initialState: OrdersState = {
   wsConnected: false,
   error: null,
   messages: null,
@@ -8,10 +16,11 @@ const initialState = {
 
 const { onOpen, onClose, onError, onMessage } = wsOrdersActions;
 
-const wsOrders = (state = initialState, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
+const wsOrders = (
+  state = initialState,
+  action: WSOrderActionsType
+): OrdersState => {
+  switch (action.type) {
     case onOpen:
       return {
         ...state,
@@ -20,7 +29,7 @@ const wsOrders = (state = initialState, action) => {
     case onError:
       return {
         ...state,
-        error: payload,
+        error: action.payload,
         wsConnected: false,
       };
     case onClose:
@@ -31,7 +40,7 @@ const wsOrders = (state = initialState, action) => {
     case onMessage:
       return {
         ...state,
-        messages: payload.data,
+        messages: action.payload,
       };
     default:
       return state;

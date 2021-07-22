@@ -1,12 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks";
 import { Link, Redirect } from "react-router-dom";
 import UserForm from "../../components/user-form";
 
 const ResetPasswordPage = () => {
-  const forgotSuccess = useSelector((store: any) => store.user.forgotSuccess);
+  const forgotSuccess = useSelector((store) => store.user.forgotSuccess);
   const userToken = localStorage.getItem("refreshToken");
-  const userEmail = useSelector((store: any) => store.user.email);
+  const userEmail = useSelector((store) => store.user.email);
 
   const title = "Восстановление пароля";
   const links = (

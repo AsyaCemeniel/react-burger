@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../hooks";
 import { IngredientType } from "../../types";
 
 const IngredientDetails = () => {
   const { id } = useParams<{ id: string }>();
 
   const ingredients = useSelector(
-    (store: any) => store.burgerIngredients.ingredients
+    (store) => store.burgerIngredients.ingredients
   );
 
   const product = ingredients.find(
@@ -22,8 +22,8 @@ const IngredientDetails = () => {
           <img src={product.image_large} alt={product.name} className="mb-4" />
           <p className="text text_type_main-medium">{product.name}</p>
           <p className="text text_type_main-default mt-8 mb-8">
-            Превосходные котлеты из марсианской Магнолии для фирменных
-            космических бургеров, набирающих популярность по всей вселенной.
+            Супер {product.name} для фирменных космических бургеров, набирающих
+            популярность по всей вселенной.
           </p>
           <div className={`text_color_inactive ${styles.nutrition}`}>
             <div className={`mr-5 ${styles.item}`}>
