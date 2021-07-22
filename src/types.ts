@@ -69,6 +69,16 @@ export type WSDataType = {
   totalToday: number;
 };
 
+export type WSActions = {
+  wsInit: string;
+  wsClose: string;
+  wsSendMessage: string;
+  onOpen: string;
+  onClose: string;
+  onError: string;
+  onMessage: string;
+};
+
 export type LocationType = {
   background?: any;
 };

@@ -1,9 +1,15 @@
-export const socketMiddleware = (wsUrl, wsActions) => {
-  return (store) => {
-    let socket = null;
+import { AnyAction, MiddlewareAPI } from "redux";
+import { WSActions } from "../../types";
 
-    return (next) => (action) => {
-      const { dispatch, getState } = store;
+export const socketMiddleware = (
+  wsUrl: string | (() => string),
+  wsActions: WSActions
+) => {
+  return (store: MiddlewareAPI) => {
+    let socket: WebSocket | null = null;
+
+    return (next: (i: AnyAction) => void) => (action: AnyAction) => {
+      const { dispatch } = store;
       const { type, payload } = action;
       const {
         wsInit,
@@ -19,20 +25,14 @@ export const socketMiddleware = (wsUrl, wsActions) => {
         socket = new WebSocket(typeof wsUrl === "function" ? wsUrl() : wsUrl);
 
         socket.onopen = (event) => {
-          console.log("open");
-          console.log(event);
           dispatch({ type: onOpen, payload: event });
         };
 
         socket.onerror = (event) => {
-          console.log("error");
-          console.log(event);
           dispatch({ type: onError, payload: event });
         };
 
         socket.onmessage = (event) => {
-          console.log("message");
-          console.log(event);
           const { data } = event;
           const parsedData = JSON.parse(data);
 
@@ -43,8 +43,6 @@ export const socketMiddleware = (wsUrl, wsActions) => {
         };
 
         socket.onclose = (event) => {
-          console.log("close");
-          console.log(event);
           dispatch({ type: onClose, payload: event });
         };
       }
