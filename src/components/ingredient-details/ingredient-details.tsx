@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./ingredient-details.module.css";
 import { useParams } from "react-router-dom";
 import { useSelector } from "../../hooks";

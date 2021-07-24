@@ -51,7 +51,7 @@ export type OrderType = {
   ingredients: Array<string>;
   name: string;
   number: number;
-  status: string;
+  status: "done" | "pending" | "cancel";
   updatedAt: string;
   _id: string;
 };

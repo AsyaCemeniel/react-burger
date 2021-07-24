@@ -4,7 +4,6 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { FC, SyntheticEvent } from "react";
-import PropTypes from "prop-types";
 import { useState } from "react";
 import { useDispatch } from "../../hooks";
 import {

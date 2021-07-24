@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import MenuItem from "./menu-item";
 import Tabs from "../tabs";
 import styles from "./burger-ingredients.module.css";

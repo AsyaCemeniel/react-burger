@@ -3,7 +3,6 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { FC } from "react";
-import PropTypes from "prop-types";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { DELETE_CONSTRUCTOR_ITEM } from "../../../services/actions";
