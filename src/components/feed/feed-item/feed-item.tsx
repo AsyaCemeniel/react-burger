@@ -43,7 +43,7 @@ const FeedItem: FC<FeedPropsType> = ({ item, isStatus }) => {
         {isStatus && (
           <span
             className="text text_type_main-default"
-            // style={{ color: textColor.status }}
+            style={{ color: textColor[status] }}
           >
             {status}
           </span>

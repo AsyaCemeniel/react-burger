@@ -13,8 +13,8 @@ import Loader from "../loader";
 import { OrderType } from "../../types";
 
 const textColor = {
-  done: "#F2F2F3",
-  pending: "#00CCCC",
+  done: "#00CCCC",
+  pending: "#F2F2F3",
   cancel: "#E52B1A",
 };
 
@@ -76,7 +76,7 @@ const Order: FC<{ orderNumber: string }> = ({ orderNumber }) => {
         <span className="text text_type_main-medium">{name}</span>
         <span
           className="text text_type_main-default mt-5"
-          // style={{ color: textColor[status] }}
+          style={{ color: textColor[status] }}
         >
           {status}
         </span>
