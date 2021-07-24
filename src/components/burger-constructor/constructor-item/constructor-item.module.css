@@ -3,4 +3,6 @@
   margin-right: 8px;
   display: flex;
   align-items: center;
+  cursor: move;
+  width: 100%;
 }
