@@ -61,6 +61,7 @@ const Order = (state = initialState, action: OrderActions): OrderState => {
       return {
         ...state,
         isOrdered: action.payload,
+        orderNumber: null,
       };
     case SET_ORDER_INVALID:
       return {

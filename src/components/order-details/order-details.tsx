@@ -2,6 +2,7 @@ import React from "react";
 import Done from "../../images/done.png";
 import styles from "./order-details.module.css";
 import { useSelector } from "../../hooks";
+import Loader from "../loader";
 
 const OrderDetails = () => {
   const { orderNumber, isOrderInvalid } = useSelector((store) => store.order);
@@ -21,6 +22,14 @@ const OrderDetails = () => {
       <div className={`text text_type_main-medium pb-6  ${styles.error_text}`}>
         <p> Ой! </p>
         <p> В бургере не хватает булки! </p>
+      </div>
+    );
+  }
+
+  if (!orderNumber) {
+    return (
+      <div className="m-10">
+        <Loader />
       </div>
     );
   }

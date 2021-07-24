@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { useEffect } from "react"; // eslint-disable-line
-import { useDispatch, useSelector } from "../../hooks"; // eslint-disable-line
-import { getUserData } from "../../services/user-actions"; // eslint-disable-line
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "../../hooks";
+import { getUserData } from "../../services/user-actions";
 import Loader from "../loader";
 
 const ProtectedRoute: FC<{
@@ -22,7 +22,19 @@ const ProtectedRoute: FC<{
   }, []);
 
   if (getUserRequest && isToken && !userEmail) {
-    return <Loader />;
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "80vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader />
+      </div>
+    );
   }
 
   return (

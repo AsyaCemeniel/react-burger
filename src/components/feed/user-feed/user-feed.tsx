@@ -5,6 +5,7 @@ import { wsOrdersActions } from "../../../services/orders-actions";
 import { OrderType } from "../../../types";
 import FeedItem from "../feed-item";
 import styles from "./user-feed.module.css";
+import Loader from "../../loader";
 
 const UserFeed = () => {
   const location = useLocation();
@@ -18,6 +19,14 @@ const UserFeed = () => {
   }, [dispatch]);
 
   const messages = useSelector((store) => store.wsOrders.messages);
+
+  if (!messages) {
+    return (
+      <div className={styles.loader}>
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <section className={`${styles.main}`}>
