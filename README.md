@@ -1,4 +1,4 @@
-This *Stellar Burger* application was written by Me on the Yandex Praktikum webprogramming course "React Developer".
+This *-Stellar Burgers-* application was written by Me on the Yandex Praktikum webprogramming course "React Developer".
 https://praktikum.yandex.ru
 
 The main page
