@@ -39,7 +39,7 @@
     "cyopen": "./node_modules/.bin/cypress open",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
