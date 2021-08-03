@@ -151,11 +151,7 @@ const BurgerConstructor = () => {
   );
 
   return (
-    <section
-      ref={dropTarget}
-      className={`ml-5  ${styles.section}`}
-      id="container"
-    >
+    <section ref={dropTarget} className={styles.section} id="container">
       <div className={styles.main}>
         {bun ? (
           <ConstructorElement

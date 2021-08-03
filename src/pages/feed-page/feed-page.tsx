@@ -26,10 +26,7 @@ const FeedPage = () => {
   }
 
   return (
-    <div>
-      <div className={`text text_type_main-large ${styles.name}`}>
-        Лента заказов
-      </div>
+    <div className={styles.main}>
       <div className={styles.container}>
         <Feed />
         <FeedInfo />

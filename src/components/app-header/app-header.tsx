@@ -14,7 +14,7 @@ const AppHeader = () => {
   const isProfile = !!useRouteMatch("/profile");
 
   return (
-    <header style={{ backgroundColor: "#1C1C21" }}>
+    <header className={styles.header} style={{ backgroundColor: "#1C1C21" }}>
       <nav className={styles.menu}>
         <div className={styles.nav_div}>
           <NavLink

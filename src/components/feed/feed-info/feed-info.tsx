@@ -12,7 +12,7 @@ const FeedInfo = () => {
   const pendingColumns = divideIntoColumns(statusColumns?.pending);
 
   return (
-    <div className={` mt-5 mr-5 mb-5 ml-10 ${styles.main}`}>
+    <div className={styles.main}>
       <div className={`ml-4 ${styles.info}`}>
         <div className={` ${styles.ready}`}>
           <span className="text text_type_main-medium">Готовы:</span>

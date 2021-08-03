@@ -33,7 +33,8 @@
 
 .section {
   display: inline-block;
-  flex: 50%;
+  flex: 0 0 600px;
+  padding: 0 20px;
 }
 
 .total_order {

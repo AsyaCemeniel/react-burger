@@ -12,6 +12,9 @@ const Feed = () => {
 
   return (
     <section className={`${styles.main}`}>
+      <div className={`text text_type_main-large ${styles.name}`}>
+        <span>Лента заказов</span>
+      </div>
       <ul className={`${styles.scroll}`}>
         {messages?.orders &&
           messages?.orders.map((item: OrderType, index: number) => (
