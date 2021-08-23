@@ -1,5 +1,6 @@
 This *-Stellar Burgers-* application was written by Me on the Yandex Praktikum webprogramming course "React Developer".
 https://practicum.yandex.ru
+
 Technology Stack: TypeScript, React, Redux, testing - Jest and Cypress.
 
 The main page
