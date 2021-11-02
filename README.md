@@ -3,9 +3,11 @@ https://practicum.yandex.ru
 
 **Technology Stack: TypeScript, React, Redux, testing - Jest and Cypress.**
 
+Deployment: https://asyacemeniel.github.io/react-burger
+
 This project is in Russian localisation but Google translate can easily do the trick.
 
-All starts with a 404 page because, otherwise you won't see it on github pages(routing is not working correctly).
+All starts with a 404 page because otherwise, you won't see it on github pages(routing is not working correctly).
 Press the button in the middle or use navigation bar in the Header.
 ![2021-11-02_11-18-46](https://user-images.githubusercontent.com/55439753/139824544-d048f52e-1a5b-4c1c-b539-26c9e2bd322f.png)
 ***
